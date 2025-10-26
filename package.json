@@ -1,6 +1,8 @@
 {
-  "name": "@google/gemini-cli",
-  "version": "0.12.0-nightly.20251022.0542de95",
+  "name": "@hivecode/cli",
+  "version": "0.1.0",
+  "description": "100% Free Agentic AI Development System",
+  "author": "A1xAI Team",
   "engines": {
     "node": ">=20.0.0"
   },
@@ -11,7 +13,7 @@
   "private": "true",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/google-gemini/gemini-cli.git"
+    "url": "git+https://github.com/A1cy/HiveCodeCli.git"
   },
   "config": {
     "sandboxImageUri": "us-docker.pkg.dev/gemini-code-dev/gemini-cli/sandbox:0.12.0-nightly.20251022.0542de95"
@@ -64,7 +66,7 @@
     }
   },
   "bin": {
-    "gemini": "bundle/gemini.js"
+    "hivecode": "bundle/hivecode.js"
   },
   "files": [
     "bundle/",

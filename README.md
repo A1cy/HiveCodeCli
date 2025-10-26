@@ -1,32 +1,47 @@
-# 🐝 HiveCode - 100% Free Agentic AI Development System
+<div align="center">
 
-**Revolutionary AI-powered development without subscription costs**
+```
+ _   _ _            ____          _      ____ _     ___
+| | | (_)_   _____ / ___|___   __| | ___|  _ \ |   |_ _|
+| |_| | \ \ / / _ \ |   / _ \ / _` |/ _ \ |_) | |    | |
+|  _  | |\ V /  __/ |__| (_) | (_| |  __/  _ <| |___ | |
+|_| |_|_| \_/ \___|\____\___/ \__,_|\___|_| \_\_____|___|
+
+         🐝 Where AI Agents Work Together for Free
+```
+
+**100% Free | 100% Open | 100% Local**
 
 [![Version](https://img.shields.io/badge/version-0.1.0--dev-orange.svg)](https://github.com/A1cy/HiveCodeCli)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Status](https://img.shields.io/badge/status-Phase%201%20Complete-blue.svg)](STATUS.md)
+[![Cost](https://img.shields.io/badge/cost-%240%2Fmonth-brightgreen.svg)](README.md)
+[![Status](https://img.shields.io/badge/status-Phase%202%20Complete-blue.svg)](STATUS.md)
 [![Powered by](https://img.shields.io/badge/powered%20by-Gemini%20CLI%20%2B%20Ollama-orange.svg)](https://ollama.ai)
+
+[🚀 Quick Start](#quick-start) • [📖 Documentation](#documentation) • [🤖 Meet the Agents](#planned-features) • [💰 Cost Comparison](#cost-comparison) • [🎯 Roadmap](#roadmap)
+
+</div>
 
 ---
 
-## 🚧 Development Status: Phase 1 Complete
+## 🚧 Development Status: Phase 2 Complete → Phase 3 In Progress
 
-**HiveCode** is currently under active development. We've completed Phase 1 (research and planning) and are preparing for Phase 2 (Gemini CLI fork).
+**HiveCode** is currently under active development. We've completed Phase 2 (fork and documentation) and are now in Phase 3 (renaming and branding).
 
-### Current Phase: Fork Preparation
+### Current Phase: Renaming & Branding
 
-**Phase 1 Complete ✅**:
-- ✅ Research and CLI selection (Gemini CLI chosen)
-- ✅ Python implementation built and archived (1,425 lines, working proof-of-concept)
-- ✅ Comprehensive documentation created
-- ✅ Repository cleaned and prepared for fork
+**Phase 2 Complete ✅**:
+- ✅ Gemini CLI forked to HiveCodeCli
+- ✅ PRP.md (project north star) integrated
+- ✅ Complete documentation migrated
+- ✅ Repository structure established
+- ✅ Branding assets and guidelines created
 
-**Phase 2 Next ⏳**:
-- Fork Gemini CLI repository
-- Rename project to HiveCode
-- Integrate custom agent orchestration
-- Add Ollama local model routing
-- Implement hook system and TTS integration
+**Phase 3 In Progress ⏳**:
+- ⏳ Rename binary (gemini → hivecode)
+- ⏳ Update package.json
+- ⏳ Change config paths (~/.gemini/ → ~/.hivecode/)
+- ⏳ Test build system with new names
 
 **See [STATUS.md](STATUS.md) for complete development journey and roadmap.**
 
