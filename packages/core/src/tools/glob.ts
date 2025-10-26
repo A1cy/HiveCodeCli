@@ -77,7 +77,7 @@ export interface GlobToolParams {
   respect_git_ignore?: boolean;
 
   /**
-   * Whether to respect .geminiignore patterns (optional, defaults to true)
+   * Whether to respect .hivecodeignore patterns (optional, defaults to true)
    */
   respect_gemini_ignore?: boolean;
 }
@@ -292,7 +292,7 @@ export class GlobTool extends BaseDeclarativeTool<GlobToolParams, ToolResult> {
           },
           respect_gemini_ignore: {
             description:
-              'Optional: Whether to respect .geminiignore patterns when finding files. Defaults to true.',
+              'Optional: Whether to respect .hivecodeignore patterns when finding files. Defaults to true.',
             type: 'boolean',
           },
         },

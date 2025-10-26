@@ -22,9 +22,9 @@ describe('crawler', () => {
     vi.restoreAllMocks();
   });
 
-  it('should use .geminiignore rules', async () => {
+  it('should use .hivecodeignore rules', async () => {
     tmpDir = await createTmpDir({
-      '.geminiignore': 'dist/',
+      '.hivecodeignore': 'dist/',
       dist: ['ignored.js'],
       src: ['not-ignored.js'],
     });
@@ -48,16 +48,16 @@ describe('crawler', () => {
       expect.arrayContaining([
         '.',
         'src/',
-        '.geminiignore',
+        '.hivecodeignore',
         'src/not-ignored.js',
       ]),
     );
   });
 
-  it('should combine .gitignore and .geminiignore rules', async () => {
+  it('should combine .gitignore and .hivecodeignore rules', async () => {
     tmpDir = await createTmpDir({
       '.gitignore': 'dist/',
-      '.geminiignore': 'build/',
+      '.hivecodeignore': 'build/',
       dist: ['ignored-by-git.js'],
       build: ['ignored-by-gemini.js'],
       src: ['not-ignored.js'],
@@ -82,7 +82,7 @@ describe('crawler', () => {
       expect.arrayContaining([
         '.',
         'src/',
-        '.geminiignore',
+        '.hivecodeignore',
         '.gitignore',
         'src/not-ignored.js',
       ]),

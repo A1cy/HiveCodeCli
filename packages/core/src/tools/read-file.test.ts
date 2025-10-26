@@ -452,15 +452,15 @@ describe('ReadFileTool', () => {
       expect(result.returnDisplay).toBe('');
     });
 
-    describe('with .geminiignore', () => {
+    describe('with .hivecodeignore', () => {
       beforeEach(async () => {
         await fsp.writeFile(
-          path.join(tempRootDir, '.geminiignore'),
+          path.join(tempRootDir, '.hivecodeignore'),
           ['foo.*', 'ignored/'].join('\n'),
         );
       });
 
-      it('should throw error if path is ignored by a .geminiignore pattern', async () => {
+      it('should throw error if path is ignored by a .hivecodeignore pattern', async () => {
         const ignoredFilePath = path.join(tempRootDir, 'foo.bar');
         await fsp.writeFile(ignoredFilePath, 'content', 'utf-8');
         const params: ReadFileToolParams = {

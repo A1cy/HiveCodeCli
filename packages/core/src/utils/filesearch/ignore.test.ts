@@ -89,9 +89,9 @@ describe('loadIgnoreRules', () => {
     expect(fileFilter('test.txt')).toBe(false);
   });
 
-  it('should load rules from .geminiignore', async () => {
+  it('should load rules from .hivecodeignore', async () => {
     tmpDir = await createTmpDir({
-      '.geminiignore': '*.log',
+      '.hivecodeignore': '*.log',
     });
     const ignore = loadIgnoreRules({
       projectRoot: tmpDir,
@@ -104,10 +104,10 @@ describe('loadIgnoreRules', () => {
     expect(fileFilter('test.txt')).toBe(false);
   });
 
-  it('should combine rules from .gitignore and .geminiignore', async () => {
+  it('should combine rules from .gitignore and .hivecodeignore', async () => {
     tmpDir = await createTmpDir({
       '.gitignore': '*.log',
-      '.geminiignore': '*.txt',
+      '.hivecodeignore': '*.txt',
     });
     const ignore = loadIgnoreRules({
       projectRoot: tmpDir,

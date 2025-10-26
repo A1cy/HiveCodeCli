@@ -675,11 +675,11 @@ const SETTINGS_SCHEMA = {
           },
           respectGeminiIgnore: {
             type: 'boolean',
-            label: 'Respect .geminiignore',
+            label: 'Respect .hivecodeignore',
             category: 'Context',
             requiresRestart: true,
             default: true,
-            description: 'Respect .geminiignore files when searching',
+            description: 'Respect .hivecodeignore files when searching',
             showInDialog: true,
           },
           enableRecursiveFileSearch: {
