@@ -1,372 +1,267 @@
-# Gemini CLI
+# 🐝 HiveCode - 100% Free Agentic AI Development System
 
-[![Gemini CLI CI](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml)
-[![Gemini CLI E2E](https://github.com/google-gemini/gemini-cli/actions/workflows/e2e.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/e2e.yml)
-[![Version](https://img.shields.io/npm/v/@google/gemini-cli)](https://www.npmjs.com/package/@google/gemini-cli)
-[![License](https://img.shields.io/github/license/google-gemini/gemini-cli)](https://github.com/google-gemini/gemini-cli/blob/main/LICENSE)
+**Revolutionary AI-powered development without subscription costs**
 
-![Gemini CLI Screenshot](./docs/assets/gemini-screenshot.png)
-
-Gemini CLI is an open-source AI agent that brings the power of Gemini directly
-into your terminal. It provides lightweight access to Gemini, giving you the
-most direct path from your prompt to our model.
-
-Learn all about Gemini CLI in our [documentation](https://geminicli.com/docs/).
-
-## 🚀 Why Gemini CLI?
-
-- **🎯 Free tier**: 60 requests/min and 1,000 requests/day with personal Google
-  account.
-- **🧠 Powerful Gemini 2.5 Pro**: Access to 1M token context window.
-- **🔧 Built-in tools**: Google Search grounding, file operations, shell
-  commands, web fetching.
-- **🔌 Extensible**: MCP (Model Context Protocol) support for custom
-  integrations.
-- **💻 Terminal-first**: Designed for developers who live in the command line.
-- **🛡️ Open source**: Apache 2.0 licensed.
-
-## 📦 Installation
-
-### Quick Install
-
-#### Run instantly with npx
-
-```bash
-# Using npx (no installation required)
-npx https://github.com/google-gemini/gemini-cli
-```
-
-#### Install globally with npm
-
-```bash
-npm install -g @google/gemini-cli
-```
-
-#### Install globally with Homebrew (macOS/Linux)
-
-```bash
-brew install gemini-cli
-```
-
-#### System Requirements
-
-- Node.js version 20 or higher
-- macOS, Linux, or Windows
-
-## Release Cadence and Tags
-
-See [Releases](./docs/releases.md) for more details.
-
-### Preview
-
-New preview releases will be published each week at UTC 2359 on Tuesdays. These
-releases will not have been fully vetted and may contain regressions or other
-outstanding issues. Please help us test and install with `preview` tag.
-
-```bash
-npm install -g @google/gemini-cli@preview
-```
-
-### Stable
-
-- New stable releases will be published each week at UTC 2000 on Tuesdays, this
-  will be the full promotion of last week's `preview` release + any bug fixes
-  and validations. Use `latest` tag.
-
-```bash
-npm install -g @google/gemini-cli@latest
-```
-
-### Nightly
-
-- New releases will be published each week at UTC 0000 each day, This will be
-  all changes from the main branch as represented at time of release. It should
-  be assumed there are pending validations and issues. Use `nightly` tag.
-
-```bash
-npm install -g @google/gemini-cli@nightly
-```
-
-## 📋 Key Features
-
-### Code Understanding & Generation
-
-- Query and edit large codebases
-- Generate new apps from PDFs, images, or sketches using multimodal capabilities
-- Debug issues and troubleshoot with natural language
-
-### Automation & Integration
-
-- Automate operational tasks like querying pull requests or handling complex
-  rebases
-- Use MCP servers to connect new capabilities, including
-  [media generation with Imagen, Veo or Lyria](https://github.com/GoogleCloudPlatform/vertex-ai-creative-studio/tree/main/experiments/mcp-genmedia)
-- Run non-interactively in scripts for workflow automation
-
-### Advanced Capabilities
-
-- Ground your queries with built-in
-  [Google Search](https://ai.google.dev/gemini-api/docs/grounding) for real-time
-  information
-- Conversation checkpointing to save and resume complex sessions
-- Custom context files (GEMINI.md) to tailor behavior for your projects
-
-### GitHub Integration
-
-Integrate Gemini CLI directly into your GitHub workflows with
-[**Gemini CLI GitHub Action**](https://github.com/google-github-actions/run-gemini-cli):
-
-- **Pull Request Reviews**: Automated code review with contextual feedback and
-  suggestions
-- **Issue Triage**: Automated labeling and prioritization of GitHub issues based
-  on content analysis
-- **On-demand Assistance**: Mention `@gemini-cli` in issues and pull requests
-  for help with debugging, explanations, or task delegation
-- **Custom Workflows**: Build automated, scheduled and on-demand workflows
-  tailored to your team's needs
-
-## 🔐 Authentication Options
-
-Choose the authentication method that best fits your needs:
-
-### Option 1: Login with Google (OAuth login using your Google Account)
-
-**✨ Best for:** Individual developers as well as anyone who has a Gemini Code
-Assist License. (see
-[quota limits and terms of service](https://cloud.google.com/gemini/docs/quotas)
-for details)
-
-**Benefits:**
-
-- **Free tier**: 60 requests/min and 1,000 requests/day
-- **Gemini 2.5 Pro** with 1M token context window
-- **No API key management** - just sign in with your Google account
-- **Automatic updates** to latest models
-
-#### Start Gemini CLI, then choose _Login with Google_ and follow the browser authentication flow when prompted
-
-```bash
-gemini
-```
-
-#### If you are using a paid Code Assist License from your organization, remember to set the Google Cloud Project
-
-```bash
-# Set your Google Cloud Project
-export GOOGLE_CLOUD_PROJECT="YOUR_PROJECT_ID"
-gemini
-```
-
-### Option 2: Gemini API Key
-
-**✨ Best for:** Developers who need specific model control or paid tier access
-
-**Benefits:**
-
-- **Free tier**: 100 requests/day with Gemini 2.5 Pro
-- **Model selection**: Choose specific Gemini models
-- **Usage-based billing**: Upgrade for higher limits when needed
-
-```bash
-# Get your key from https://aistudio.google.com/apikey
-export GEMINI_API_KEY="YOUR_API_KEY"
-gemini
-```
-
-### Option 3: Vertex AI
-
-**✨ Best for:** Enterprise teams and production workloads
-
-**Benefits:**
-
-- **Enterprise features**: Advanced security and compliance
-- **Scalable**: Higher rate limits with billing account
-- **Integration**: Works with existing Google Cloud infrastructure
-
-```bash
-# Get your key from Google Cloud Console
-export GOOGLE_API_KEY="YOUR_API_KEY"
-export GOOGLE_GENAI_USE_VERTEXAI=true
-gemini
-```
-
-For Google Workspace accounts and other authentication methods, see the
-[authentication guide](./docs/get-started/authentication.md).
-
-## 🚀 Getting Started
-
-### Basic Usage
-
-#### Start in current directory
-
-```bash
-gemini
-```
-
-#### Include multiple directories
-
-```bash
-gemini --include-directories ../lib,../docs
-```
-
-#### Use specific model
-
-```bash
-gemini -m gemini-2.5-flash
-```
-
-#### Non-interactive mode for scripts
-
-Get a simple text response:
-
-```bash
-gemini -p "Explain the architecture of this codebase"
-```
-
-For more advanced scripting, including how to parse JSON and handle errors, use
-the `--output-format json` flag to get structured output:
-
-```bash
-gemini -p "Explain the architecture of this codebase" --output-format json
-```
-
-For real-time event streaming (useful for monitoring long-running operations),
-use `--output-format stream-json` to get newline-delimited JSON events:
-
-```bash
-gemini -p "Run tests and deploy" --output-format stream-json
-```
-
-### Quick Examples
-
-#### Start a new project
-
-```bash
-cd new-project/
-gemini
-> Write me a Discord bot that answers questions using a FAQ.md file I will provide
-```
-
-#### Analyze existing code
-
-```bash
-git clone https://github.com/google-gemini/gemini-cli
-cd gemini-cli
-gemini
-> Give me a summary of all of the changes that went in yesterday
-```
-
-## 📚 Documentation
-
-### Getting Started
-
-- [**Quickstart Guide**](./docs/get-started/index.md) - Get up and running
-  quickly.
-- [**Authentication Setup**](./docs/get-started/authentication.md) - Detailed
-  auth configuration.
-- [**Configuration Guide**](./docs/get-started/configuration.md) - Settings and
-  customization.
-- [**Keyboard Shortcuts**](./docs/cli/keyboard-shortcuts.md) - Productivity
-  tips.
-
-### Core Features
-
-- [**Commands Reference**](./docs/cli/commands.md) - All slash commands
-  (`/help`, `/chat`, etc).
-- [**Custom Commands**](./docs/cli/custom-commands.md) - Create your own
-  reusable commands.
-- [**Context Files (GEMINI.md)**](./docs/cli/gemini-md.md) - Provide persistent
-  context to Gemini CLI.
-- [**Checkpointing**](./docs/cli/checkpointing.md) - Save and resume
-  conversations.
-- [**Token Caching**](./docs/cli/token-caching.md) - Optimize token usage.
-
-### Tools & Extensions
-
-- [**Built-in Tools Overview**](./docs/tools/index.md)
-  - [File System Operations](./docs/tools/file-system.md)
-  - [Shell Commands](./docs/tools/shell.md)
-  - [Web Fetch & Search](./docs/tools/web-fetch.md)
-- [**MCP Server Integration**](./docs/tools/mcp-server.md) - Extend with custom
-  tools.
-- [**Custom Extensions**](./docs/extensions/index.md) - Build and share your own
-  commands.
-
-### Advanced Topics
-
-- [**Headless Mode (Scripting)**](./docs/cli/headless.md) - Use Gemini CLI in
-  automated workflows.
-- [**Architecture Overview**](./docs/architecture.md) - How Gemini CLI works.
-- [**IDE Integration**](./docs/ide-integration/index.md) - VS Code companion.
-- [**Sandboxing & Security**](./docs/cli/sandbox.md) - Safe execution
-  environments.
-- [**Trusted Folders**](./docs/cli/trusted-folders.md) - Control execution
-  policies by folder.
-- [**Enterprise Guide**](./docs/cli/enterprise.md) - Deploy and manage in a
-  corporate environment.
-- [**Telemetry & Monitoring**](./docs/cli/telemetry.md) - Usage tracking.
-- [**Tools API Development**](./docs/core/tools-api.md) - Create custom tools.
-
-### Troubleshooting & Support
-
-- [**Troubleshooting Guide**](./docs/troubleshooting.md) - Common issues and
-  solutions.
-- [**FAQ**](./docs/faq.md) - Frequently asked questions.
-- Use `/bug` command to report issues directly from the CLI.
-
-### Using MCP Servers
-
-Configure MCP servers in `~/.gemini/settings.json` to extend Gemini CLI with
-custom tools:
-
-```text
-> @github List my open pull requests
-> @slack Send a summary of today's commits to #dev channel
-> @database Run a query to find inactive users
-```
-
-See the [MCP Server Integration guide](./docs/tools/mcp-server.md) for setup
-instructions.
-
-## 🤝 Contributing
-
-We welcome contributions! Gemini CLI is fully open source (Apache 2.0), and we
-encourage the community to:
-
-- Report bugs and suggest features.
-- Improve documentation.
-- Submit code improvements.
-- Share your MCP servers and extensions.
-
-See our [Contributing Guide](./CONTRIBUTING.md) for development setup, coding
-standards, and how to submit pull requests.
-
-Check our [Official Roadmap](https://github.com/orgs/google-gemini/projects/11)
-for planned features and priorities.
-
-## 📖 Resources
-
-- **[Official Roadmap](./ROADMAP.md)** - See what's coming next.
-- **[Changelog](./docs/changelogs/index.md)** - See recent notable updates.
-- **[NPM Package](https://www.npmjs.com/package/@google/gemini-cli)** - Package
-  registry.
-- **[GitHub Issues](https://github.com/google-gemini/gemini-cli/issues)** -
-  Report bugs or request features.
-- **[Security Advisories](https://github.com/google-gemini/gemini-cli/security/advisories)** -
-  Security updates.
-
-### Uninstall
-
-See the [Uninstall Guide](docs/cli/uninstall.md) for removal instructions.
-
-## 📄 Legal
-
-- **License**: [Apache License 2.0](LICENSE)
-- **Terms of Service**: [Terms & Privacy](./docs/tos-privacy.md)
-- **Security**: [Security Policy](SECURITY.md)
+[![Version](https://img.shields.io/badge/version-0.1.0--dev-orange.svg)](https://github.com/A1cy/HiveCodeCli)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/status-Phase%201%20Complete-blue.svg)](STATUS.md)
+[![Powered by](https://img.shields.io/badge/powered%20by-Gemini%20CLI%20%2B%20Ollama-orange.svg)](https://ollama.ai)
 
 ---
 
-<p align="center">
-  Built with ❤️ by Google and the open source community
-</p>
+## 🚧 Development Status: Phase 1 Complete
+
+**HiveCode** is currently under active development. We've completed Phase 1 (research and planning) and are preparing for Phase 2 (Gemini CLI fork).
+
+### Current Phase: Fork Preparation
+
+**Phase 1 Complete ✅**:
+- ✅ Research and CLI selection (Gemini CLI chosen)
+- ✅ Python implementation built and archived (1,425 lines, working proof-of-concept)
+- ✅ Comprehensive documentation created
+- ✅ Repository cleaned and prepared for fork
+
+**Phase 2 Next ⏳**:
+- Fork Gemini CLI repository
+- Rename project to HiveCode
+- Integrate custom agent orchestration
+- Add Ollama local model routing
+- Implement hook system and TTS integration
+
+**See [STATUS.md](STATUS.md) for complete development journey and roadmap.**
+
+---
+
+## 🎯 What is HiveCode?
+
+**HiveCode** is a **100% free, open-source** alternative to Claude Code and GitHub Copilot, powered by **local AI models** (Ollama) and featuring **5 specialized agents** that work together to build complete applications.
+
+### Vision
+
+Build a production-ready agentic AI development system that:
+- Costs **$0/month forever** (100% free operation with local models)
+- Works **completely offline** (privacy-first, local Ollama primary)
+- Provides **multi-agent coordination** (5 specialized agents working in parallel)
+- Offers **easy installation** (one-command setup)
+- Maintains **full customizability** (open source, fork-friendly)
+
+### Foundation Strategy
+
+HiveCode is built by forking **Gemini CLI** (Google's official CLI tool) and adding:
+- **Agent Orchestration**: 5 specialized agents (orchestrator, frontend, backend, tester, refactor)
+- **SPARC Workflow**: Multi-agent coordination methodology
+- **Local-First Routing**: 80% Ollama (free) → 15% Gemini (free tier) → 5% Groq (optional)
+- **Hook System**: Pre-tool, post-tool, notification hooks
+- **TTS Integration**: Optional voice announcements
+- **Memory System**: Cross-session context persistence
+
+---
+
+## 🏗️ Architecture Overview
+
+```
+User Input
+    ↓
+hivecode [command] [args]
+    ↓
+HiveCode CLI (forked from Gemini CLI)
+├─ Custom commands (prime|sparc|ask)
+├─ Agent orchestration layer
+├─ Hook system (pre-tool, post-tool)
+├─ TTS announcements (optional)
+└─ Local-first routing strategy
+    ↓
+Model Routing
+├─ 80% → Ollama (qwen2.5-coder, free, 3-5s)
+├─ 15% → Gemini free tier (15 RPM, fast, free)
+└─ 5% → Optional Groq (complex tasks, free tier)
+    ↓
+Agent System (5 specialized)
+├─ Orchestrator (coordination)
+├─ Frontend (React/Vue/UI)
+├─ Backend (APIs/databases)
+├─ Tester (unit/integration tests)
+└─ Refactor (cleanup/optimization)
+    ↓
+Results synthesized
+    ↓
+Output to user
+```
+
+---
+
+## 💰 Cost Comparison
+
+| Feature | Claude Code | GitHub Copilot | **HiveCode** |
+|---------|-------------|----------------|--------------|
+| **Cost** | $20-100/month | $10-20/month | ✅ **$0/month** |
+| **AI Quality** | Best (Sonnet 4.5) | Good | ⚡ Good (qwen2.5-coder) |
+| **Agents** | Yes (56) | No | ✅ Yes (5 core) |
+| **Privacy** | Cloud | Cloud | ✅ **100% Local** |
+| **Customizable** | Limited | Limited | ✅ **Fully Open** |
+| **Offline** | No | No | ✅ **Yes** |
+
+---
+
+## 📚 Documentation
+
+### Essential Reading
+
+- **[STATUS.md](STATUS.md)** - Complete development journey and current status
+- **[PRP.md](PRP.md)** - Project Requirements Package (vision, architecture, roadmap)
+- **[ACCOMPLISHMENT.md](ACCOMPLISHMENT.md)** - Python implementation achievements (archived)
+- **[OPENCODE_FINDINGS.md](OPENCODE_FINDINGS.md)** - OpenCode research (why rejected)
+
+### Development Journey
+
+**Attempt 1: OpenCode Foundation** ❌
+- Selected for MCP native support and 29K stars
+- Rejected: Not 100% free (AWS Bedrock costs $12-15/month)
+- Lesson: "IM EXPECTING A CLI TO BE FULLY FREE!"
+
+**Attempt 2: Pure Python + Ollama** ⚠️
+- Built from scratch: 1,425 lines, 5 agents, working CLI
+- Tested successfully with Ollama qwen2.5-coder
+- Rejected: "thats was bad steps! we need to fork somthing not start from scartch"
+- Result: Archived to `archive/python-implementation` branch for reference
+
+**Attempt 3: Gemini CLI Fork** ✅ Current
+- Fork production-ready CLI (Google-maintained)
+- Customize with HiveCode features (agents, orchestration, hooks, TTS)
+- Keep 100% free with local Ollama primary
+- Benefit from existing architecture while maintaining full control
+
+---
+
+## 🤖 Planned Features
+
+### MVP (Phase 2-3)
+
+- ✅ **5 Specialized Agents**: Orchestrator, Frontend, Backend, Tester, Refactor
+- ✅ **3 Core Commands**: `hivecode prime`, `hivecode ask`, `hivecode sparc`
+- ✅ **Local-First Routing**: Ollama primary (80%), Gemini fallback (15%), optional Groq (5%)
+- ✅ **SPARC Workflow**: Multi-agent coordination methodology
+- ✅ **Parallel Execution**: 2-3 agents working simultaneously
+- ✅ **One-Command Install**: Automatic Ollama setup + model download
+
+### Phase 2+ Enhancements
+
+- ⏳ **MCP Integration**: 6 servers (memory, shadcn-ui, playwright, n8n, blender, clickup)
+- ⏳ **Hook System**: Pre-tool, post-tool, notification hooks
+- ⏳ **TTS Integration**: Voice announcements (Kokoro TTS)
+- ⏳ **Memory System**: 4-tier hierarchy (Global → Project → Session → Task)
+- ⏳ **Checkpoint/Rewind**: Safe operation suggestions
+- ⏳ **Web UI**: Optional browser interface
+
+---
+
+## 🚀 Roadmap
+
+### Phase 1: Cleanup & Archive ✅ COMPLETE
+
+- ✅ Archive Python implementation to `archive/python-implementation` branch
+- ✅ Clean master branch of Python code
+- ✅ Update documentation for Gemini CLI pivot
+
+### Phase 2: Fork & Setup ⏳ NEXT
+
+- ⏳ Fork Gemini CLI repository to A1cy/HiveCode
+- ⏳ Rename project (gemini → hivecode)
+- ⏳ Add HiveCode configuration structure (`.hivecode/` config)
+- ⏳ Verify base functionality and build system
+
+### Phase 3: Custom Features ⏳
+
+- ⏳ Integrate agent orchestration (5 agents)
+- ⏳ Implement model routing (Ollama, Gemini, Groq)
+- ⏳ Add custom commands (prime, ask, sparc)
+- ⏳ Implement parallel execution
+
+### Phase 4: Polish & Release ⏳
+
+- ⏳ One-command installation script
+- ⏳ Complete documentation rewrite
+- ⏳ Test on Ubuntu/WSL/macOS
+- ⏳ Release HiveCode v0.1.0
+
+**Target Release**: Week 4
+
+---
+
+## 🏆 Key Decisions
+
+### Why Gemini CLI?
+
+**Chosen for**:
+- ✅ 100% free with Ollama primary routing
+- ✅ Open source (full TypeScript source code)
+- ✅ Production-ready (Google-maintained)
+- ✅ Easy to customize (fork and modify)
+- ✅ Apache 2.0 license (permissive)
+
+**Alternative Rejected**: OpenCode.ai
+- ❌ Not 100% free (AWS Bedrock $12-15/month after free tier)
+- ❌ External binary (difficult to modify)
+
+### Why Fork (Not Build from Scratch)?
+
+**Lessons Learned**:
+- Building CLI framework from scratch is time-intensive
+- Production-ready foundation provides reliability and trust
+- Fork strategy: faster to market + battle-tested architecture
+- User feedback: "we need to fork somthing not start from scartch"
+
+**Result**: Python implementation archived as reference, fork strategy adopted
+
+### Why Ollama Primary?
+
+**Cost Priority**:
+- Ollama: $0/month, unlimited usage, 100% offline
+- Gemini free tier: 15 RPM limit (fallback for complex tasks)
+- Speed trade-off: 3-5s Ollama vs <1s cloud (acceptable for free operation)
+
+---
+
+## 🤝 Contributing
+
+HiveCode is currently in early development. Contributions will be welcome after v0.1.0 release.
+
+**Current Status**: Pre-fork preparation
+**Watch This Repo**: Get notified when Phase 2 fork begins
+
+---
+
+## 📄 License
+
+MIT License - See [LICENSE](LICENSE) for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- **Foundation**: [Gemini CLI](https://github.com/google-gemini/gemini-cli) by Google
+- **Inspired by**: A1xAI Framework and Claude Code
+- **Powered by**: [Ollama](https://ollama.ai) - Amazing local LLM engine
+- **Model**: qwen2.5-coder - Specialized coding model
+
+---
+
+## 📞 Status & Updates
+
+**Current Phase**: Phase 1 Complete → Phase 2 Fork Preparation
+**Last Updated**: 2025-10-26
+**Next Milestone**: Gemini CLI fork
+
+For detailed development status, see [STATUS.md](STATUS.md)
+
+---
+
+<div align="center">
+
+**🐝 HiveCode - 100% Free | 100% Open | 100% Local**
+
+**Phase 1 Complete** | **Phase 2 Next: Fork Gemini CLI**
+
+[📖 Development Status](STATUS.md) | [🎯 Project Plan](PRP.md) | [⭐ Star on GitHub](https://github.com/A1cy/HiveCodeCli)
+
+</div>
