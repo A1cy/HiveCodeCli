@@ -1,13 +1,14 @@
 <div align="center">
 
 ```
- _   _ _            ____          _      ____ _     ___
-| | | (_)_   _____ / ___|___   __| | ___|  _ \ |   |_ _|
-| |_| | \ \ / / _ \ |   / _ \ / _` |/ _ \ |_) | |    | |
-|  _  | |\ V /  __/ |__| (_) | (_| |  __/  _ <| |___ | |
-|_| |_|_| \_/ \___|\____\___/ \__,_|\___|_| \_\_____|___|
-
-         🐝 Where AI Agents Work Together for Free
+  ⬡⬡    ██╗  ██╗██╗██╗   ██╗███████╗ ██████╗ ██████╗ ██████╗ ███████╗    ⬡⬡
+ ⬡⬡     ██║  ██║██║██║   ██║██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔════╝   ⬡⬡
+⬡⬡      ███████║██║██║   ██║█████╗  ██║     ██║   ██║██║  ██║█████╗    ⬡⬡
+ ⬡⬡     ██╔══██║██║╚██╗ ██╔╝██╔══╝  ██║     ██║   ██║██║  ██║██╔══╝     ⬡⬡
+  ⬢⬢    ██║  ██║██║ ╚████╔╝ ███████╗╚██████╗╚██████╔╝██████╔╝███████╗    ⬢⬢
+   ⬢⬢   ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝     ⬢⬢
+    ⬢⬢                         by A1xAI                                    ⬢⬢
+                 🐝 Where AI Agents Work Together for Free 🐝
 ```
 
 **100% Free | 100% Open | 100% Local**
@@ -18,7 +19,9 @@
 [![Status](https://img.shields.io/badge/status-Phase%202%20Complete-blue.svg)](STATUS.md)
 [![Powered by](https://img.shields.io/badge/powered%20by-Gemini%20CLI%20%2B%20Ollama-orange.svg)](https://ollama.ai)
 
-[🚀 Quick Start](#quick-start) • [📖 Documentation](#documentation) • [🤖 Meet the Agents](#planned-features) • [💰 Cost Comparison](#cost-comparison) • [🎯 Roadmap](#roadmap)
+[🚀 Quick Start](#quick-start) • [📖 Documentation](#documentation) •
+[🤖 Meet the Agents](#planned-features) • [💰 Cost Comparison](#cost-comparison)
+• [🎯 Roadmap](#roadmap)
 
 </div>
 
@@ -26,11 +29,13 @@
 
 ## 🚧 Development Status: Phase 2 Complete → Phase 3 In Progress
 
-**HiveCode** is currently under active development. We've completed Phase 2 (fork and documentation) and are now in Phase 3 (renaming and branding).
+**HiveCode** is currently under active development. We've completed Phase 2
+(fork and documentation) and are now in Phase 3 (renaming and branding).
 
 ### Current Phase: Renaming & Branding
 
 **Phase 2 Complete ✅**:
+
 - ✅ Gemini CLI forked to HiveCodeCli
 - ✅ PRP.md (project north star) integrated
 - ✅ Complete documentation migrated
@@ -38,6 +43,7 @@
 - ✅ Branding assets and guidelines created
 
 **Phase 3 In Progress ⏳**:
+
 - ⏳ Rename binary (gemini → hivecode)
 - ⏳ Update package.json
 - ⏳ Change config paths (~/.gemini/ → ~/.hivecode/)
@@ -49,23 +55,31 @@
 
 ## 🎯 What is HiveCode?
 
-**HiveCode** is a **100% free, open-source** alternative to Claude Code and GitHub Copilot, powered by **local AI models** (Ollama) and featuring **5 specialized agents** that work together to build complete applications.
+**HiveCode** is a **100% free, open-source** alternative to Claude Code and
+GitHub Copilot, powered by **local AI models** (Ollama) and featuring **5
+specialized agents** that work together to build complete applications.
 
 ### Vision
 
 Build a production-ready agentic AI development system that:
+
 - Costs **$0/month forever** (100% free operation with local models)
 - Works **completely offline** (privacy-first, local Ollama primary)
-- Provides **multi-agent coordination** (5 specialized agents working in parallel)
+- Provides **multi-agent coordination** (5 specialized agents working in
+  parallel)
 - Offers **easy installation** (one-command setup)
 - Maintains **full customizability** (open source, fork-friendly)
 
 ### Foundation Strategy
 
-HiveCode is built by forking **Gemini CLI** (Google's official CLI tool) and adding:
-- **Agent Orchestration**: 5 specialized agents (orchestrator, frontend, backend, tester, refactor)
+HiveCode is built by forking **Gemini CLI** (Google's official CLI tool) and
+adding:
+
+- **Agent Orchestration**: 5 specialized agents (orchestrator, frontend,
+  backend, tester, refactor)
 - **SPARC Workflow**: Multi-agent coordination methodology
-- **Local-First Routing**: 80% Ollama (free) → 15% Gemini (free tier) → 5% Groq (optional)
+- **Local-First Routing**: 80% Ollama (free) → 15% Gemini (free tier) → 5% Groq
+  (optional)
 - **Hook System**: Pre-tool, post-tool, notification hooks
 - **TTS Integration**: Optional voice announcements
 - **Memory System**: Cross-session context persistence
@@ -107,14 +121,14 @@ Output to user
 
 ## 💰 Cost Comparison
 
-| Feature | Claude Code | GitHub Copilot | **HiveCode** |
-|---------|-------------|----------------|--------------|
-| **Cost** | $20-100/month | $10-20/month | ✅ **$0/month** |
-| **AI Quality** | Best (Sonnet 4.5) | Good | ⚡ Good (qwen2.5-coder) |
-| **Agents** | Yes (56) | No | ✅ Yes (5 core) |
-| **Privacy** | Cloud | Cloud | ✅ **100% Local** |
-| **Customizable** | Limited | Limited | ✅ **Fully Open** |
-| **Offline** | No | No | ✅ **Yes** |
+| Feature          | Claude Code       | GitHub Copilot | **HiveCode**            |
+| ---------------- | ----------------- | -------------- | ----------------------- |
+| **Cost**         | $20-100/month     | $10-20/month   | ✅ **$0/month**         |
+| **AI Quality**   | Best (Sonnet 4.5) | Good           | ⚡ Good (qwen2.5-coder) |
+| **Agents**       | Yes (56)          | No             | ✅ Yes (5 core)         |
+| **Privacy**      | Cloud             | Cloud          | ✅ **100% Local**       |
+| **Customizable** | Limited           | Limited        | ✅ **Fully Open**       |
+| **Offline**      | No                | No             | ✅ **Yes**              |
 
 ---
 
@@ -123,24 +137,31 @@ Output to user
 ### Essential Reading
 
 - **[STATUS.md](STATUS.md)** - Complete development journey and current status
-- **[PRP.md](PRP.md)** - Project Requirements Package (vision, architecture, roadmap)
-- **[ACCOMPLISHMENT.md](ACCOMPLISHMENT.md)** - Python implementation achievements (archived)
-- **[OPENCODE_FINDINGS.md](OPENCODE_FINDINGS.md)** - OpenCode research (why rejected)
+- **[PRP.md](PRP.md)** - Project Requirements Package (vision, architecture,
+  roadmap)
+- **[ACCOMPLISHMENT.md](ACCOMPLISHMENT.md)** - Python implementation
+  achievements (archived)
+- **[OPENCODE_FINDINGS.md](OPENCODE_FINDINGS.md)** - OpenCode research (why
+  rejected)
 
 ### Development Journey
 
 **Attempt 1: OpenCode Foundation** ❌
+
 - Selected for MCP native support and 29K stars
 - Rejected: Not 100% free (AWS Bedrock costs $12-15/month)
 - Lesson: "IM EXPECTING A CLI TO BE FULLY FREE!"
 
 **Attempt 2: Pure Python + Ollama** ⚠️
+
 - Built from scratch: 1,425 lines, 5 agents, working CLI
 - Tested successfully with Ollama qwen2.5-coder
-- Rejected: "thats was bad steps! we need to fork somthing not start from scartch"
+- Rejected: "thats was bad steps! we need to fork somthing not start from
+  scartch"
 - Result: Archived to `archive/python-implementation` branch for reference
 
 **Attempt 3: Gemini CLI Fork** ✅ Current
+
 - Fork production-ready CLI (Google-maintained)
 - Customize with HiveCode features (agents, orchestration, hooks, TTS)
 - Keep 100% free with local Ollama primary
@@ -154,14 +175,16 @@ Output to user
 
 - ✅ **5 Specialized Agents**: Orchestrator, Frontend, Backend, Tester, Refactor
 - ✅ **3 Core Commands**: `hivecode prime`, `hivecode ask`, `hivecode sparc`
-- ✅ **Local-First Routing**: Ollama primary (80%), Gemini fallback (15%), optional Groq (5%)
+- ✅ **Local-First Routing**: Ollama primary (80%), Gemini fallback (15%),
+  optional Groq (5%)
 - ✅ **SPARC Workflow**: Multi-agent coordination methodology
 - ✅ **Parallel Execution**: 2-3 agents working simultaneously
 - ✅ **One-Command Install**: Automatic Ollama setup + model download
 
 ### Phase 2+ Enhancements
 
-- ⏳ **MCP Integration**: 6 servers (memory, shadcn-ui, playwright, n8n, blender, clickup)
+- ⏳ **MCP Integration**: 6 servers (memory, shadcn-ui, playwright, n8n,
+  blender, clickup)
 - ⏳ **Hook System**: Pre-tool, post-tool, notification hooks
 - ⏳ **TTS Integration**: Voice announcements (Kokoro TTS)
 - ⏳ **Memory System**: 4-tier hierarchy (Global → Project → Session → Task)
@@ -208,6 +231,7 @@ Output to user
 ### Why Gemini CLI?
 
 **Chosen for**:
+
 - ✅ 100% free with Ollama primary routing
 - ✅ Open source (full TypeScript source code)
 - ✅ Production-ready (Google-maintained)
@@ -215,12 +239,14 @@ Output to user
 - ✅ Apache 2.0 license (permissive)
 
 **Alternative Rejected**: OpenCode.ai
+
 - ❌ Not 100% free (AWS Bedrock $12-15/month after free tier)
 - ❌ External binary (difficult to modify)
 
 ### Why Fork (Not Build from Scratch)?
 
 **Lessons Learned**:
+
 - Building CLI framework from scratch is time-intensive
 - Production-ready foundation provides reliability and trust
 - Fork strategy: faster to market + battle-tested architecture
@@ -231,6 +257,7 @@ Output to user
 ### Why Ollama Primary?
 
 **Cost Priority**:
+
 - Ollama: $0/month, unlimited usage, 100% offline
 - Gemini free tier: 15 RPM limit (fallback for complex tasks)
 - Speed trade-off: 3-5s Ollama vs <1s cloud (acceptable for free operation)
@@ -239,10 +266,11 @@ Output to user
 
 ## 🤝 Contributing
 
-HiveCode is currently in early development. Contributions will be welcome after v0.1.0 release.
+HiveCode is currently in early development. Contributions will be welcome after
+v0.1.0 release.
 
-**Current Status**: Pre-fork preparation
-**Watch This Repo**: Get notified when Phase 2 fork begins
+**Current Status**: Pre-fork preparation **Watch This Repo**: Get notified when
+Phase 2 fork begins
 
 ---
 
@@ -254,7 +282,8 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 ## 🙏 Acknowledgments
 
-- **Foundation**: [Gemini CLI](https://github.com/google-gemini/gemini-cli) by Google
+- **Foundation**: [Gemini CLI](https://github.com/google-gemini/gemini-cli) by
+  Google
 - **Inspired by**: A1xAI Framework and Claude Code
 - **Powered by**: [Ollama](https://ollama.ai) - Amazing local LLM engine
 - **Model**: qwen2.5-coder - Specialized coding model
@@ -263,9 +292,8 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 ## 📞 Status & Updates
 
-**Current Phase**: Phase 1 Complete → Phase 2 Fork Preparation
-**Last Updated**: 2025-10-26
-**Next Milestone**: Gemini CLI fork
+**Current Phase**: Phase 1 Complete → Phase 2 Fork Preparation **Last Updated**:
+2025-10-26 **Next Milestone**: Gemini CLI fork
 
 For detailed development status, see [STATUS.md](STATUS.md)
 
@@ -277,6 +305,7 @@ For detailed development status, see [STATUS.md](STATUS.md)
 
 **Phase 1 Complete** | **Phase 2 Next: Fork Gemini CLI**
 
-[📖 Development Status](STATUS.md) | [🎯 Project Plan](PRP.md) | [⭐ Star on GitHub](https://github.com/A1cy/HiveCodeCli)
+[📖 Development Status](STATUS.md) | [🎯 Project Plan](PRP.md) |
+[⭐ Star on GitHub](https://github.com/A1cy/HiveCodeCli)
 
 </div>
