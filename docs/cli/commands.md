@@ -1,6 +1,6 @@
 # CLI Commands
 
-Gemini CLI supports several built-in commands to help you manage your session,
+HiveCode supports several built-in commands to help you manage your session,
 customize the interface, and control its behavior. These commands are prefixed
 with a forward slash (`/`), an at symbol (`@`), or an exclamation mark (`!`).
 
@@ -11,11 +11,11 @@ Slash commands provide meta-level control over the CLI itself.
 ### Built-in Commands
 
 - **`/bug`**
-  - **Description:** File an issue about Gemini CLI. By default, the issue is
-    filed within the GitHub repository for Gemini CLI. The string you enter
-    after `/bug` will become the headline for the bug being filed. The default
-    `/bug` behavior can be modified using the `advanced.bugCommand` setting in
-    your `.gemini/settings.json` files.
+  - **Description:** File an issue about HiveCode. By default, the issue is
+    filed within the GitHub repository for HiveCode. The string you enter after
+    `/bug` will become the headline for the bug being filed. The default `/bug`
+    behavior can be modified using the `advanced.bugCommand` setting in your
+    `.gemini/settings.json` files.
 
 - **`/chat`**
   - **Description:** Save and resume conversation history for branching
@@ -64,7 +64,7 @@ Slash commands provide meta-level control over the CLI itself.
     has happened.
 
 - **`/copy`**
-  - **Description:** Copies the last output produced by Gemini CLI to your
+  - **Description:** Copies the last output produced by HiveCode to your
     clipboard, for easy sharing or reuse.
   - **Note:** This command requires platform-specific clipboard tools to be
     installed.
@@ -92,11 +92,11 @@ Slash commands provide meta-level control over the CLI itself.
   - **Description:** Open a dialog for selecting supported editors.
 
 - **`/extensions`**
-  - **Description:** Lists all active extensions in the current Gemini CLI
-    session. See [Gemini CLI Extensions](../extensions/index.md).
+  - **Description:** Lists all active extensions in the current HiveCode
+    session. See [HiveCode Extensions](../extensions/index.md).
 
 - **`/help`** (or **`/?`**)
-  - **Description:** Display help information about Gemini CLI, including
+  - **Description:** Display help information about HiveCode, including
     available commands and their usage.
 
 - **`/mcp`**
@@ -156,10 +156,10 @@ Slash commands provide meta-level control over the CLI itself.
     [Checkpointing documentation](../cli/checkpointing.md) for more details.
 
 - **`/settings`**
-  - **Description:** Open the settings editor to view and modify Gemini CLI
+  - **Description:** Open the settings editor to view and modify HiveCode
     settings.
   - **Details:** This command provides a user-friendly interface for changing
-    settings that control the behavior and appearance of Gemini CLI. It is
+    settings that control the behavior and appearance of HiveCode. It is
     equivalent to manually editing the `.gemini/settings.json` file, but with
     validation and guidance to prevent errors.
   - **Usage:** Simply run `/settings` and the editor will open. You can then
@@ -168,7 +168,7 @@ Slash commands provide meta-level control over the CLI itself.
     while others require a restart.
 
 - **`/stats`**
-  - **Description:** Display detailed statistics for the current Gemini CLI
+  - **Description:** Display detailed statistics for the current HiveCode
     session, including token usage, cached token savings (when available), and
     session duration. Note: Cached token information is only displayed when
     cached tokens are being used, which occurs with API key authentication but
@@ -176,7 +176,7 @@ Slash commands provide meta-level control over the CLI itself.
 
 - [**`/theme`**](./themes.md)
   - **Description:** Open a dialog that lets you change the visual theme of
-    Gemini CLI.
+    HiveCode.
 
 - **`/auth`**
   - **Description:** Open a dialog that lets you change the authentication
@@ -188,7 +188,7 @@ Slash commands provide meta-level control over the CLI itself.
 
 - [**`/tools`**](../tools/index.md)
   - **Description:** Display a list of tools that are currently available within
-    Gemini CLI.
+    HiveCode.
   - **Usage:** `/tools [desc]`
   - **Sub-commands:**
     - **`desc`** or **`descriptions`**:
@@ -203,7 +203,7 @@ Slash commands provide meta-level control over the CLI itself.
     purposes.
 
 - **`/quit`** (or **`/exit`**)
-  - **Description:** Exit Gemini CLI.
+  - **Description:** Exit HiveCode.
 
 - **`/vim`**
   - **Description:** Toggle vim mode on or off. When vim mode is enabled, the
@@ -296,7 +296,7 @@ your prompt to Gemini. These commands include git-aware filtering.
 ## Shell mode & passthrough commands (`!`)
 
 The `!` prefix lets you interact with your system's shell directly from within
-Gemini CLI.
+HiveCode.
 
 - **`!<shell_command>`**
   - **Description:** Execute the given `<shell_command>` using `bash` on
@@ -304,8 +304,8 @@ Gemini CLI.
     override `ComSpec`). Any output or errors from the command are displayed in
     the terminal.
   - **Examples:**
-    - `!ls -la` (executes `ls -la` and returns to Gemini CLI)
-    - `!git status` (executes `git status` and returns to Gemini CLI)
+    - `!ls -la` (executes `ls -la` and returns to HiveCode)
+    - `!git status` (executes `git status` and returns to HiveCode)
 
 - **`!` (Toggle shell mode)**
   - **Description:** Typing `!` on its own toggles shell mode.
@@ -324,4 +324,4 @@ Gemini CLI.
 - **Environment Variable:** When a command is executed via `!` or in shell mode,
   the `GEMINI_CLI=1` environment variable is set in the subprocess's
   environment. This allows scripts or tools to detect if they are being run from
-  within the Gemini CLI.
+  within the HiveCode.

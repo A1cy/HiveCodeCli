@@ -1,10 +1,10 @@
-# RFC: Gemini CLI A2A Development-Tool Extension
+# RFC: HiveCode A2A Development-Tool Extension
 
 ## 1. Introduction
 
 ### 1.1 Overview
 
-To standardize client integrations with the Gemini CLI agent, this document
+To standardize client integrations with the HiveCode agent, this document
 proposes the `development-tool` extension for the A2A protocol.
 
 Rather than creating a new protocol, this specification builds upon the existing
@@ -12,20 +12,20 @@ A2A protocol. As an open-source standard recently adopted by the Linux
 Foundation, A2A provides a robust foundation for core concepts like tasks,
 messages, and streaming events. This extension-based approach allows us to
 leverage A2A's proven architecture while defining the specific capabilities
-required for rich, interactive workflows with the Gemini CLI agent.
+required for rich, interactive workflows with the HiveCode agent.
 
 ### 1.2 Motivation
 
-Recent work integrating Gemini CLI with clients like Zed and Gemini Code
-Assist’s agent mode has highlighted the need for a robust, standard
-communication protocol. Standardizing on A2A provides several key advantages:
+Recent work integrating HiveCode with clients like Zed and Gemini Code Assist’s
+agent mode has highlighted the need for a robust, standard communication
+protocol. Standardizing on A2A provides several key advantages:
 
 - **Solid Foundation**: Provides a robust, open standard that ensures a stable,
   predictable, and consistent integration experience across different IDEs and
   client surfaces.
 - **Extensibility**: Creates a flexible foundation to support new tools and
   workflows as they emerge.
-- **Ecosystem Alignment**: Aligns Gemini CLI with a growing industry standard,
+- **Ecosystem Alignment**: Aligns HiveCode with a growing industry standard,
   fostering broader interoperability.
 
 ## 2. Communication Flow
@@ -49,23 +49,23 @@ agent can call back when updates are ready.
 ### 3.1 Overview
 
 The `development-tool` extension establishes a communication contract for
-workflows between a client and the Gemini CLI agent. It consists of a
-specialized set of schemas, embedded within core A2A data structures, that
-enable the agent to stream real-time updates on its state and thought process.
-These schemas also provide the mechanism for the agent to request user
-permission before executing tools.
+workflows between a client and the HiveCode agent. It consists of a specialized
+set of schemas, embedded within core A2A data structures, that enable the agent
+to stream real-time updates on its state and thought process. These schemas also
+provide the mechanism for the agent to request user permission before executing
+tools.
 
 **Sample Agent Card**
 
 ```json
 {
-  "name": "Gemini CLI Agent",
+  "name": "HiveCode Agent",
   "description": "An agent that generates code based on natural language instructions.",
   "capabilities": {
     "streaming": true,
     "extensions": [
       {
-        "uri": "https://github.com/google-gemini/gemini-cli/blob/main/docs/a2a/developer-profile/v0/spec.md",
+        "uri": "https://github.com/A1cy/HiveCodeCli/blob/main/docs/a2a/developer-profile/v0/spec.md",
         "description": "An extension for interactive development tasks, enabling features like code generation, tool usage, and real-time status updates.",
         "required": true
       }
@@ -100,7 +100,7 @@ MCP servers, allowed tools, etc.) can be added to this message.
 ```proto
 syntax = "proto3";
 
-// Configuration settings for the Gemini CLI agent.
+// Configuration settings for the HiveCode agent.
 message AgentSettings {
   // The absolute path to the workspace directory where the agent will execute.
   string workspace_path = 1;

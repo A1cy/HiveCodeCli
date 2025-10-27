@@ -84,7 +84,7 @@ describe('<HistoryItemDisplay />', () => {
     const { lastFrame } = renderWithProviders(
       <HistoryItemDisplay {...baseItem} item={item} />,
     );
-    expect(lastFrame()).toContain('About Gemini CLI');
+    expect(lastFrame()).toContain('About HiveCode');
   });
 
   it('renders ModelStatsDisplay for "model_stats" type', () => {

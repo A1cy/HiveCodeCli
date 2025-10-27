@@ -1,7 +1,7 @@
 # Release Confidence Strategy
 
 This document outlines the strategy for gaining confidence in every release of
-the Gemini CLI. It serves as a checklist and quality gate for release manager to
+the HiveCode. It serves as a checklist and quality gate for release manager to
 ensure we are shipping a high-quality product.
 
 ## The Goal

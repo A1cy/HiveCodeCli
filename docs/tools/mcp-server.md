@@ -1,7 +1,7 @@
-# MCP servers with the Gemini CLI
+# MCP servers with the HiveCode
 
 This document provides a guide to configuring and using Model Context Protocol
-(MCP) servers with the Gemini CLI.
+(MCP) servers with the HiveCode.
 
 ## What is an MCP server?
 
@@ -10,22 +10,22 @@ CLI through the Model Context Protocol, allowing it to interact with external
 systems and data sources. MCP servers act as a bridge between the Gemini model
 and your local environment or other services like APIs.
 
-An MCP server enables the Gemini CLI to:
+An MCP server enables the HiveCode to:
 
 - **Discover tools:** List available tools, their descriptions, and parameters
   through standardized schema definitions.
 - **Execute tools:** Call specific tools with defined arguments and receive
   structured responses.
-- **Access resources:** Read data from specific resources (though the Gemini CLI
+- **Access resources:** Read data from specific resources (though the HiveCode
   primarily focuses on tool execution).
 
-With an MCP server, you can extend the Gemini CLI's capabilities to perform
+With an MCP server, you can extend the HiveCode's capabilities to perform
 actions beyond its built-in features, such as interacting with databases, APIs,
 custom scripts, or specialized workflows.
 
 ## Core Integration Architecture
 
-The Gemini CLI integrates with MCP servers through a sophisticated discovery and
+The HiveCode integrates with MCP servers through a sophisticated discovery and
 execution system built into the core package (`packages/core/src/tools/`):
 
 ### Discovery Layer (`mcp-client.ts`)
@@ -53,7 +53,7 @@ Each discovered MCP tool is wrapped in a `DiscoveredMCPTool` instance that:
 
 ### Transport Mechanisms
 
-The Gemini CLI supports three MCP transport types:
+The HiveCode supports three MCP transport types:
 
 - **Stdio Transport:** Spawns a subprocess and communicates via stdin/stdout
 - **SSE Transport:** Connects to Server-Sent Events endpoints
@@ -61,9 +61,9 @@ The Gemini CLI supports three MCP transport types:
 
 ## How to set up your MCP server
 
-The Gemini CLI uses the `mcpServers` configuration in your `settings.json` file
-to locate and connect to MCP servers. This configuration supports multiple
-servers with different transport mechanisms.
+The HiveCode uses the `mcpServers` configuration in your `settings.json` file to
+locate and connect to MCP servers. This configuration supports multiple servers
+with different transport mechanisms.
 
 ### Configure the MCP server in settings.json
 
@@ -159,8 +159,8 @@ Each server configuration supports the following properties:
 
 ### OAuth Support for Remote MCP Servers
 
-The Gemini CLI supports OAuth 2.0 authentication for remote MCP servers using
-SSE or HTTP transports. This enables secure access to MCP servers that require
+The HiveCode supports OAuth 2.0 authentication for remote MCP servers using SSE
+or HTTP transports. This enables secure access to MCP servers that require
 authentication.
 
 #### Automatic OAuth Discovery
@@ -443,8 +443,8 @@ then be used to authenticate with the MCP server.
 
 ## Discovery Process Deep Dive
 
-When the Gemini CLI starts, it performs MCP server discovery through the
-following detailed process:
+When the HiveCode starts, it performs MCP server discovery through the following
+detailed process:
 
 ### 1. Server Iteration and Connection
 
@@ -737,7 +737,7 @@ The MCP integration tracks several states:
   through automatic prefixing
 
 This comprehensive integration makes MCP servers a powerful way to extend the
-Gemini CLI's capabilities while maintaining security, reliability, and ease of
+HiveCode's capabilities while maintaining security, reliability, and ease of
 use.
 
 ## Returning Rich Content from Tools
@@ -757,8 +757,8 @@ To return rich content, your tool's response must adhere to the MCP
 specification for a
 [`CallToolResult`](https://modelcontextprotocol.io/specification/2025-06-18/server/tools#tool-result).
 The `content` field of the result should be an array of `ContentBlock` objects.
-The Gemini CLI will correctly process this array, separating text from binary
-data and packaging it for the model.
+The HiveCode will correctly process this array, separating text from binary data
+and packaging it for the model.
 
 You can mix and match different content block types in the `content` array. The
 supported block types include:
@@ -794,7 +794,7 @@ text description and an image:
 }
 ```
 
-When the Gemini CLI receives this response, it will:
+When the HiveCode receives this response, it will:
 
 1.  Extract all the text and combine it into a single `functionResponse` part
     for the model.
@@ -808,7 +808,7 @@ context to the Gemini model.
 ## MCP Prompts as Slash Commands
 
 In addition to tools, MCP servers can expose predefined prompts that can be
-executed as slash commands within the Gemini CLI. This allows you to create
+executed as slash commands within the HiveCode. This allows you to create
 shortcuts for common or complex queries that can be easily invoked by name.
 
 ### Defining Prompts on the Server
@@ -868,17 +868,17 @@ Once a prompt is discovered, you can invoke it using its name as a slash
 command. The CLI will automatically handle parsing arguments.
 
 ```bash
-/poem-writer --title="Gemini CLI" --mood="reverent"
+/poem-writer --title="HiveCode" --mood="reverent"
 ```
 
 or, using positional arguments:
 
 ```bash
-/poem-writer "Gemini CLI" reverent
+/poem-writer "HiveCode" reverent
 ```
 
-When you run this command, the Gemini CLI executes the `prompts/get` method on
-the MCP server with the provided arguments. The server is responsible for
+When you run this command, the HiveCode executes the `prompts/get` method on the
+MCP server with the provided arguments. The server is responsible for
 substituting the arguments into the prompt template and returning the final
 prompt text. The CLI then sends this prompt to the model for execution. This
 provides a convenient way to automate and share common workflows.
@@ -886,7 +886,7 @@ provides a convenient way to automate and share common workflows.
 ## Managing MCP Servers with `gemini mcp`
 
 While you can always configure MCP servers by manually editing your
-`settings.json` file, the Gemini CLI provides a convenient set of commands to
+`settings.json` file, the HiveCode provides a convenient set of commands to
 manage your server configurations programmatically. These commands streamline
 the process of adding, listing, and removing MCP servers without needing to
 directly edit JSON files.

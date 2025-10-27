@@ -4,10 +4,32 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import * as Diff from 'diff';
+import * as crypto from 'node:crypto';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import * as crypto from 'node:crypto';
-import * as Diff from 'diff';
+import { ApprovalMode, type Config } from '../config/config.js';
+import type { MessageBus } from '../confirmation-bus/message-bus.js';
+import { IdeClient } from '../ide/ide-client.js';
+import {
+  logSmartEditCorrectionEvent,
+  logSmartEditStrategy,
+} from '../telemetry/loggers.js';
+import {
+  SmartEditCorrectionEvent,
+  SmartEditStrategyEvent,
+} from '../telemetry/types.js';
+import { isNodeError } from '../utils/errors.js';
+import { FixLLMEditWithInstruction } from '../utils/llm-edit-fixer.js';
+import { makeRelative, shortenPath } from '../utils/paths.js';
+import { safeLiteralReplace } from '../utils/textUtils.js';
+import { DEFAULT_DIFF_OPTIONS, getDiffStat } from './diffOptions.js';
+import { applyReplacement } from './edit.js';
+import {
+  type ModifiableDeclarativeTool,
+  type ModifyContext,
+} from './modifiable-tool.js';
+import { ToolErrorType } from './tool-error.js';
 import {
   BaseDeclarativeTool,
   BaseToolInvocation,
@@ -20,28 +42,10 @@ import {
   type ToolResult,
   type ToolResultDisplay,
 } from './tools.js';
-import type { MessageBus } from '../confirmation-bus/message-bus.js';
-import { ToolErrorType } from './tool-error.js';
-import { makeRelative, shortenPath } from '../utils/paths.js';
-import { isNodeError } from '../utils/errors.js';
-import { type Config, ApprovalMode } from '../config/config.js';
-import { DEFAULT_DIFF_OPTIONS, getDiffStat } from './diffOptions.js';
-import {
-  type ModifiableDeclarativeTool,
-  type ModifyContext,
-} from './modifiable-tool.js';
-import { IdeClient } from '../ide/ide-client.js';
-import { FixLLMEditWithInstruction } from '../utils/llm-edit-fixer.js';
-import { applyReplacement } from './edit.js';
-import { safeLiteralReplace } from '../utils/textUtils.js';
-import { SmartEditStrategyEvent } from '../telemetry/types.js';
-import { logSmartEditStrategy } from '../telemetry/loggers.js';
-import { SmartEditCorrectionEvent } from '../telemetry/types.js';
-import { logSmartEditCorrectionEvent } from '../telemetry/loggers.js';
 
+import { debugLogger } from '../utils/debugLogger.js';
 import { correctPath } from '../utils/pathCorrector.js';
 import { EDIT_TOOL_NAME, READ_FILE_TOOL_NAME } from './tool-names.js';
-import { debugLogger } from '../utils/debugLogger.js';
 interface ReplacementContext {
   params: EditToolParams;
   currentContent: string;
@@ -667,7 +671,7 @@ class EditToolInvocation
         if (ideConfirmation) {
           const result = await ideConfirmation;
           if (result.status === 'accepted' && result.content) {
-            // TODO(chrstn): See https://github.com/google-gemini/gemini-cli/pull/5618#discussion_r2255413084
+            // TODO(chrstn): See https://github.com/A1cy/HiveCodeCli/pull/5618#discussion_r2255413084
             // for info on a possible race condition where the file is modified on disk while being edited.
             this.params.old_string = editData.currentContent ?? '';
             this.params.new_string = result.content;
@@ -836,14 +840,14 @@ export class SmartEditTool
       SmartEditTool.Name,
       'Edit',
       `Replaces text within a file. Replaces a single occurrence. This tool requires providing significant context around the change to ensure precise targeting. Always use the ${READ_FILE_TOOL_NAME} tool to examine the file's current content before attempting a text replacement.
-      
+
       The user has the ability to modify the \`new_string\` content. If modified, this will be stated in the response.
-      
+
       Expectation for required parameters:
       1. \`file_path\` MUST be an absolute path; otherwise an error will be thrown.
       2. \`old_string\` MUST be the exact literal text to replace (including all whitespace, indentation, newlines, and surrounding code etc.).
       3. \`new_string\` MUST be the exact literal text to replace \`old_string\` with (also including all whitespace, indentation, newlines, and surrounding code etc.). Ensure the resulting code is correct and idiomatic and that \`old_string\` and \`new_string\` are different.
-      4. \`instruction\` is the detailed instruction of what needs to be changed. It is important to Make it specific and detailed so developers or large language models can understand what needs to be changed and perform the changes on their own if necessary. 
+      4. \`instruction\` is the detailed instruction of what needs to be changed. It is important to Make it specific and detailed so developers or large language models can understand what needs to be changed and perform the changes on their own if necessary.
       5. NEVER escape \`old_string\` or \`new_string\`, that would break the exact literal text requirement.
       **Important:** If ANY of the above are not satisfied, the tool will fail. CRITICAL for \`old_string\`: Must uniquely identify the single instance to change. Include at least 3 lines of context BEFORE and AFTER the target text, matching whitespace and indentation precisely. If this string matches multiple locations, or does not match exactly, the tool will fail.
       6. Prefer to break down complex and long changes into multiple smaller atomic calls to this tool. Always check the content of the file after changes or not finding a string to match.

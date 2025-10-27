@@ -1,13 +1,13 @@
-# Gemini CLI for the Enterprise
+# HiveCode for the Enterprise
 
 This document outlines configuration patterns and best practices for deploying
-and managing Gemini CLI in an enterprise environment. By leveraging system-level
+and managing HiveCode in an enterprise environment. By leveraging system-level
 settings, administrators can enforce security policies, manage tool access, and
 ensure a consistent experience for all users.
 
 > **A Note on Security:** The patterns described in this document are intended
 > to help administrators create a more controlled and secure environment for
-> using Gemini CLI. However, they should not be considered a foolproof security
+> using HiveCode. However, they should not be considered a foolproof security
 > boundary. A determined user with sufficient privileges on their local machine
 > may still be able to circumvent these configurations. These measures are
 > designed to prevent accidental misuse and enforce corporate policy in a
@@ -231,7 +231,7 @@ effectively.
 
 ### How MCP Server Configurations are Merged
 
-Gemini CLI loads `settings.json` files from three levels: System, Workspace, and
+HiveCode loads `settings.json` files from three levels: System, Workspace, and
 User. When it comes to the `mcpServers` object, these configurations are
 **merged**:
 
@@ -394,7 +394,7 @@ an environment variable, but it can also be enforced for custom tools via the
 
 ## Telemetry and Auditing
 
-For auditing and monitoring purposes, you can configure Gemini CLI to send
+For auditing and monitoring purposes, you can configure HiveCode to send
 telemetry data to a central location. This allows you to track tool usage and
 other events. For more information, see the
 [telemetry documentation](./telemetry.md).

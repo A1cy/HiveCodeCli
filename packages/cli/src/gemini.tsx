@@ -154,7 +154,7 @@ export async function startInteractiveUI(
   // Disabling line wrapping reduces Ink rendering artifacts particularly when
   // the terminal is resized on terminals that full respect this escape code
   // such as Ghostty. Some terminals such as Iterm2 only respect line wrapping
-  // when using the alternate buffer, which Gemini CLI does not use because we
+  // when using the alternate buffer, which HiveCode does not use because we
   // do not yet have support for scrolling in that mode.
   if (!config.getScreenReader()) {
     process.stdout.write('\x1b[?7l');
@@ -367,7 +367,7 @@ export async function main() {
   }
 
   // We are now past the logic handling potentially launching a child process
-  // to run Gemini CLI. It is now safe to perform expensive initialization that
+  // to run HiveCode. It is now safe to perform expensive initialization that
   // may have side effects.
   {
     // Eventually, `extensions` should move off of `config` entirely and into

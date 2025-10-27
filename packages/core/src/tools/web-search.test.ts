@@ -5,12 +5,12 @@
  */
 
 import type { Mock } from 'vitest';
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import type { WebSearchToolParams } from './web-search.js';
-import { WebSearchTool } from './web-search.js';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { Config } from '../config/config.js';
 import { GeminiClient } from '../core/client.js';
 import { ToolErrorType } from './tool-error.js';
+import type { WebSearchToolParams } from './web-search.js';
+import { WebSearchTool } from './web-search.js';
 
 // Mock GeminiClient and Config constructor
 vi.mock('../core/client.js');
@@ -183,7 +183,7 @@ Sources:
           {
             content: {
               role: 'model',
-              parts: [{ text: 'こんにちは! Gemini CLI✨️' }],
+              parts: [{ text: 'こんにちは! HiveCode✨️' }],
             },
             groundingMetadata: {
               groundingChunks: [
@@ -196,12 +196,12 @@ Sources:
                 {
                   web: {
                     title: 'google-gemini/gemini-cli',
-                    uri: 'https://github.com/google-gemini/gemini-cli',
+                    uri: 'https://github.com/A1cy/HiveCodeCli',
                   },
                 },
                 {
                   web: {
-                    title: 'Gemini CLI: your open-source AI agent',
+                    title: 'HiveCode: your open-source AI agent',
                     uri: 'https://blog.google/technology/developers/introducing-gemini-cli-open-source-ai-agent/',
                   },
                 },
@@ -217,7 +217,7 @@ Sources:
                 },
                 {
                   segment: {
-                    // Byte range of "Gemini CLI✨️" (utf-8 encoded)
+                    // Byte range of "HiveCode✨️" (utf-8 encoded)
                     startIndex: 17,
                     endIndex: 33,
                   },
@@ -234,12 +234,12 @@ Sources:
 
       const expectedLlmContent = `Web search results for "multibyte query":
 
-こんにちは![1] Gemini CLI✨️[2][3]
+こんにちは![1] HiveCode✨️[2][3]
 
 Sources:
 [1] Japanese Greeting (https://example.test/japanese-greeting)
-[2] google-gemini/gemini-cli (https://github.com/google-gemini/gemini-cli)
-[3] Gemini CLI: your open-source AI agent (https://blog.google/technology/developers/introducing-gemini-cli-open-source-ai-agent/)`;
+[2] google-gemini/gemini-cli (https://github.com/A1cy/HiveCodeCli)
+[3] HiveCode: your open-source AI agent (https://blog.google/technology/developers/introducing-gemini-cli-open-source-ai-agent/)`;
 
       expect(result.llmContent).toBe(expectedLlmContent);
       expect(result.returnDisplay).toBe(

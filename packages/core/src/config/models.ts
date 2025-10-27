@@ -43,6 +43,6 @@ export function getEffectiveModel(
     return requestedModel;
   }
 
-  // Default fallback for Gemini CLI.
+  // Default fallback for HiveCode.
   return DEFAULT_GEMINI_FLASH_MODEL;
 }

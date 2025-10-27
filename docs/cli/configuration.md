@@ -1,6 +1,6 @@
-# Gemini CLI Configuration
+# HiveCode Configuration
 
-Gemini CLI offers several ways to configure its behavior, including environment
+HiveCode offers several ways to configure its behavior, including environment
 variables, command-line arguments, and settings files. This document outlines
 the different configuration methods and available settings.
 
@@ -19,15 +19,15 @@ overridden by higher numbers):
 
 ## Settings files
 
-Gemini CLI uses `settings.json` files for persistent configuration. There are
+HiveCode uses `settings.json` files for persistent configuration. There are
 three locations for these files:
 
 - **User settings file:**
   - **Location:** `~/.gemini/settings.json` (where `~` is your home directory).
-  - **Scope:** Applies to all Gemini CLI sessions for the current user.
+  - **Scope:** Applies to all HiveCode sessions for the current user.
 - **Project settings file:**
   - **Location:** `.gemini/settings.json` within your project's root directory.
-  - **Scope:** Applies only when running Gemini CLI from that specific project.
+  - **Scope:** Applies only when running HiveCode from that specific project.
     Project settings override user settings.
 - **System settings file:**
   - **Location:** `/etc/gemini-cli/settings.json` (Linux),
@@ -35,10 +35,9 @@ three locations for these files:
     `/Library/Application Support/GeminiCli/settings.json` (macOS). The path can
     be overridden using the `GEMINI_CLI_SYSTEM_SETTINGS_PATH` environment
     variable.
-  - **Scope:** Applies to all Gemini CLI sessions on the system, for all users.
+  - **Scope:** Applies to all HiveCode sessions on the system, for all users.
     System settings override user and project settings. May be useful for system
-    administrators at enterprises to have controls over users' Gemini CLI
-    setups.
+    administrators at enterprises to have controls over users' HiveCode setups.
 
 **Note on environment variables in settings:** String values within your
 `settings.json` files can reference environment variables using either
@@ -50,7 +49,7 @@ variable `MY_API_TOKEN`, you could use it in `settings.json` like this:
 ### The `.gemini` directory in your project
 
 In addition to a project settings file, a project's `.gemini` directory can
-contain other project-specific files related to Gemini CLI's operation, such as:
+contain other project-specific files related to HiveCode's operation, such as:
 
 - [Custom sandbox profiles](#sandboxing) (e.g.,
   `.gemini/sandbox-macos-custom.sb`, `.gemini/sandbox.Dockerfile`).
@@ -67,7 +66,7 @@ contain other project-specific files related to Gemini CLI's operation, such as:
 - **`bugCommand`** (object):
   - **Description:** Overrides the default URL for the `/bug` command.
   - **Default:**
-    `"urlTemplate": "https://github.com/google-gemini/gemini-cli/issues/new?template=bug_report.yml&title={title}&info={info}"`
+    `"urlTemplate": "https://github.com/A1cy/HiveCodeCli/issues/new?template=bug_report.yml&title={title}&info={info}"`
   - **Properties:**
     - **`urlTemplate`** (string): A URL that can contain `{title}` and `{info}`
       placeholders.
@@ -160,7 +159,7 @@ contain other project-specific files related to Gemini CLI's operation, such as:
   - **Example:** `"autoAccept": true`
 
 - **`theme`** (string):
-  - **Description:** Sets the visual [theme](./themes.md) for Gemini CLI.
+  - **Description:** Sets the visual [theme](./themes.md) for HiveCode.
   - **Default:** `"Default"`
   - **Example:** `"theme": "GitHub"`
 
@@ -174,9 +173,8 @@ contain other project-specific files related to Gemini CLI's operation, such as:
 
 - **`sandbox`** (boolean or string):
   - **Description:** Controls whether and how to use sandboxing for tool
-    execution. If set to `true`, Gemini CLI uses a pre-built
-    `gemini-cli-sandbox` Docker image. For more information, see
-    [Sandboxing](#sandboxing).
+    execution. If set to `true`, HiveCode uses a pre-built `gemini-cli-sandbox`
+    Docker image. For more information, see [Sandboxing](#sandboxing).
   - **Default:** `false`
   - **Example:** `"sandbox": "docker"`
 
@@ -204,7 +202,7 @@ contain other project-specific files related to Gemini CLI's operation, such as:
 
 - **`mcpServers`** (object):
   - **Description:** Configures connections to one or more Model-Context
-    Protocol (MCP) servers for discovering and using custom tools. Gemini CLI
+    Protocol (MCP) servers for discovering and using custom tools. HiveCode
     attempts to connect to each configured MCP server to discover available
     tools. If multiple MCP servers expose a tool with the same name, the tool
     names will be prefixed with the server alias you defined in the
@@ -274,8 +272,8 @@ contain other project-specific files related to Gemini CLI's operation, such as:
   - **Example:** `"preferredEditor": "vscode"`
 
 - **`telemetry`** (object)
-  - **Description:** Configures logging and metrics collection for Gemini CLI.
-    For more information, see [Telemetry](./telemetry.md).
+  - **Description:** Configures logging and metrics collection for HiveCode. For
+    more information, see [Telemetry](./telemetry.md).
   - **Default:**
     `{"enabled": false, "target": "local", "otlpEndpoint": "http://localhost:4317", "logPrompts": true}`
   - **Properties:**
@@ -541,7 +539,7 @@ for that specific session.
   - Specifies the Gemini model to use for this session.
   - Example: `npm start -- --model gemini-1.5-pro-latest`
 - **`--prompt <your_prompt>`** (**`-p <your_prompt>`**):
-  - Used to pass a prompt directly to the command. This invokes Gemini CLI in a
+  - Used to pass a prompt directly to the command. This invokes HiveCode in a
     non-interactive mode.
 - **`--prompt-interactive <your_prompt>`** (**`-i <your_prompt>`**):
   - Starts an interactive session with the provided prompt as the initial input.
@@ -696,12 +694,12 @@ conventions and context.
 
 By understanding and utilizing these configuration layers and the hierarchical
 nature of context files, you can effectively manage the AI's memory and tailor
-the Gemini CLI's responses to your specific needs and projects.
+the HiveCode's responses to your specific needs and projects.
 
 ## Sandboxing
 
-The Gemini CLI can execute potentially unsafe operations (like shell commands
-and file modifications) within a sandboxed environment to protect your system.
+The HiveCode can execute potentially unsafe operations (like shell commands and
+file modifications) within a sandboxed environment to protect your system.
 
 Sandboxing is disabled by default, but you can enable it in a few ways:
 
@@ -725,7 +723,7 @@ FROM gemini-cli-sandbox
 ```
 
 When `.gemini/sandbox.Dockerfile` exists, you can use `BUILD_SANDBOX`
-environment variable when running Gemini CLI to automatically build the custom
+environment variable when running HiveCode to automatically build the custom
 sandbox image:
 
 ```bash
@@ -734,7 +732,7 @@ BUILD_SANDBOX=1 gemini -s
 
 ## Usage Statistics
 
-To help us improve the Gemini CLI, we collect anonymized usage statistics. This
+To help us improve the HiveCode, we collect anonymized usage statistics. This
 data helps us understand how the CLI is used, identify common issues, and
 prioritize new features.
 

@@ -1,0 +1,29 @@
+[
+  {
+    "session_id": "f4bcab11-e5a6-440a-819f-c330a1a764bf",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/f4bcab11-e5a6-440a-819f-c330a1a764bf.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "default",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-10-27T12:05:31.136401"
+  },
+  {
+    "session_id": "00f015d6-31e8-4811-96b8-4cae8c3e3269",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/00f015d6-31e8-4811-96b8-4cae8c3e3269.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "default",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-10-27T12:05:31.943593"
+  },
+  {
+    "session_id": "ae1dd1cd-3503-47a7-a3e2-a0c7ca52e3fe",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/ae1dd1cd-3503-47a7-a3e2-a0c7ca52e3fe.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "default",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-10-27T12:05:38.957544"
+  }
+]

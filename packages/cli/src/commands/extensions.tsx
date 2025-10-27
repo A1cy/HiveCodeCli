@@ -17,7 +17,7 @@ import { newCommand } from './extensions/new.js';
 export const extensionsCommand: CommandModule = {
   command: 'extensions <command>',
   aliases: ['extension'],
-  describe: 'Manage Gemini CLI extensions.',
+  describe: 'Manage HiveCode extensions.',
   builder: (yargs) =>
     yargs
       .command(installCommand)

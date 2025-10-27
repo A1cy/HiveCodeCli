@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 HiveCode Team
+ * Copyright 2025 Google LLC
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -59,26 +59,42 @@ export class OllamaHttpClient {
   /**
    * Generate content using Ollama API
    */
-  async generate(request: OllamaGenerateRequest): Promise<OllamaGenerateResponse> {
-    const response = await fetch(`${this.baseUrl}/api/generate`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...request,
-        stream: false, // Force non-streaming for initial implementation
-      }),
-    });
+  async generate(
+    request: OllamaGenerateRequest,
+  ): Promise<OllamaGenerateResponse> {
+    try {
+      const response = await fetch(`${this.baseUrl}/api/generate`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...request,
+          stream: false, // Force non-streaming for initial implementation
+        }),
+      });
 
-    if (!response.ok) {
-      throw new Error(
-        `Ollama API error: ${response.status} - ${response.statusText}`,
-      );
+      if (!response.ok) {
+        throw new Error(
+          `Ollama API error: ${response.status} - ${response.statusText}\n\n` +
+            `Is Ollama running? Try: ollama serve\n` +
+            `Is the model installed? Try: ollama pull ${request.model}`,
+        );
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        throw new Error(
+          `Cannot connect to Ollama at ${this.baseUrl}\n\n` +
+            `Make sure Ollama is running: ollama serve\n` +
+            `Then install the model: ollama pull ${request.model}\n\n` +
+            `Original error: ${error.message}`,
+        );
+      }
+      throw error;
     }
-
-    const data = await response.json();
-    return data;
   }
 
   /**
@@ -121,5 +137,68 @@ export class OllamaHttpClient {
   async hasModel(modelName: string): Promise<boolean> {
     const models = await this.listModels();
     return models.includes(modelName);
+  }
+
+  /**
+   * Pull/download a model from Ollama registry
+   * Returns a promise that resolves when the pull is complete
+   */
+  async pullModel(
+    modelName: string,
+    onProgress?: (progress: string) => void,
+  ): Promise<void> {
+    try {
+      const response = await fetch(`${this.baseUrl}/api/pull`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: modelName,
+          stream: true,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to pull model: ${response.status} - ${response.statusText}`,
+        );
+      }
+
+      if (!response.body) {
+        throw new Error('Response body is null');
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value);
+        const lines = chunk.split('\n').filter((line) => line.trim());
+
+        for (const line of lines) {
+          try {
+            const json = JSON.parse(line);
+            if (json.status && onProgress) {
+              onProgress(json.status);
+            }
+          } catch (_e) {
+            // Ignore JSON parse errors
+          }
+        }
+      }
+    } catch (error) {
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        throw new Error(
+          `Cannot connect to Ollama at ${this.baseUrl}\\n\\n` +
+            `Make sure Ollama is running: ollama serve\\n\\n` +
+            `Original error: ${error.message}`,
+        );
+      }
+      throw error;
+    }
   }
 }

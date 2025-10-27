@@ -4,18 +4,18 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import open from 'open';
+import { IdeClient, sessionId } from '@google/gemini-cli-core';
 import process from 'node:process';
+import open from 'open';
+import { GIT_COMMIT_INFO } from '../../generated/git-commit.js';
+import { getCliVersion } from '../../utils/version.js';
+import { MessageType } from '../types.js';
+import { formatMemoryUsage } from '../utils/formatters.js';
 import {
   type CommandContext,
   type SlashCommand,
   CommandKind,
 } from './types.js';
-import { MessageType } from '../types.js';
-import { GIT_COMMIT_INFO } from '../../generated/git-commit.js';
-import { formatMemoryUsage } from '../utils/formatters.js';
-import { getCliVersion } from '../../utils/version.js';
-import { IdeClient, sessionId } from '@google/gemini-cli-core';
 
 export const bugCommand: SlashCommand = {
   name: 'bug',
@@ -53,7 +53,7 @@ export const bugCommand: SlashCommand = {
     }
 
     let bugReportUrl =
-      'https://github.com/google-gemini/gemini-cli/issues/new?template=bug_report.yml&title={title}&info={info}';
+      'https://github.com/A1cy/HiveCodeCli/issues/new?template=bug_report.yml&title={title}&info={info}';
 
     const bugCommandSettings = config?.getBugCommand();
     if (bugCommandSettings?.urlTemplate) {

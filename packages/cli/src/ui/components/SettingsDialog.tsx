@@ -897,7 +897,7 @@ export function SettingsDialog({
         </Text>
         {showRestartPrompt && (
           <Text color={theme.status.warning}>
-            To see changes, Gemini CLI must be restarted. Press r to exit and
+            To see changes, HiveCode must be restarted. Press r to exit and
             apply changes now.
           </Text>
         )}

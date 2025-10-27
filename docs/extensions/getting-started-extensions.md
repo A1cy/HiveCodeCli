@@ -1,13 +1,12 @@
-# Getting Started with Gemini CLI Extensions
+# Getting Started with HiveCode Extensions
 
-This guide will walk you through creating your first Gemini CLI extension.
-You'll learn how to set up a new extension, add a custom tool via an MCP server,
-create a custom command, and provide context to the model with a `GEMINI.md`
-file.
+This guide will walk you through creating your first HiveCode extension. You'll
+learn how to set up a new extension, add a custom tool via an MCP server, create
+a custom command, and provide context to the model with a `GEMINI.md` file.
 
 ## Prerequisites
 
-Before you start, make sure you have the Gemini CLI installed and a basic
+Before you start, make sure you have the HiveCode installed and a basic
 understanding of Node.js and TypeScript.
 
 ## Step 1: Create a New Extension
@@ -38,8 +37,8 @@ Let's look at the key files in your new extension.
 
 ### `gemini-extension.json`
 
-This is the manifest file for your extension. It tells Gemini CLI how to load
-and use your extension.
+This is the manifest file for your extension. It tells HiveCode how to load and
+use your extension.
 
 ```json
 {
@@ -60,7 +59,7 @@ and use your extension.
 - `mcpServers`: This section defines one or more Model Context Protocol (MCP)
   servers. MCP servers are how you can add new tools for the model to use.
   - `command`, `args`, `cwd`: These fields specify how to start your server.
-    Notice the use of the `${extensionPath}` variable, which Gemini CLI replaces
+    Notice the use of the `${extensionPath}` variable, which HiveCode replaces
     with the absolute path to your extension's installation directory. This
     allows your extension to work regardless of where it's installed.
 
@@ -127,7 +126,7 @@ These are standard configuration files for a TypeScript project. The
 ## Step 3: Build and Link Your Extension
 
 Before you can use the extension, you need to compile the TypeScript code and
-link the extension to your Gemini CLI installation for local development.
+link the extension to your HiveCode installation for local development.
 
 1.  **Install dependencies:**
 
@@ -147,7 +146,7 @@ link the extension to your Gemini CLI installation for local development.
 
 3.  **Link the extension:**
 
-    The `link` command creates a symbolic link from the Gemini CLI extensions
+    The `link` command creates a symbolic link from the HiveCode extensions
     directory to your development directory. This means any changes you make
     will be reflected immediately without needing to reinstall.
 
@@ -155,7 +154,7 @@ link the extension to your Gemini CLI installation for local development.
     gemini extensions link .
     ```
 
-Now, restart your Gemini CLI session. The new `fetch_posts` tool will be
+Now, restart your HiveCode session. The new `fetch_posts` tool will be
 available. You can test it by asking: "fetch posts".
 
 ## Step 4: Add a Custom Command
@@ -183,7 +182,7 @@ a command that searches for a pattern in your code.
     This command, `/fs:grep-code`, will take an argument, run the `grep` shell
     command with it, and pipe the results into a prompt for summarization.
 
-After saving the file, restart the Gemini CLI. You can now run
+After saving the file, restart the HiveCode. You can now run
 `/fs:grep-code "some pattern"` to use your new command.
 
 ## Step 5: Add a Custom `GEMINI.md`
@@ -233,7 +232,7 @@ For detailed instructions on both methods, please refer to the
 
 ## Conclusion
 
-You've successfully created a Gemini CLI extension! You learned how to:
+You've successfully created a HiveCode extension! You learned how to:
 
 - Bootstrap a new extension from a template.
 - Add custom tools with an MCP server.
@@ -242,4 +241,4 @@ You've successfully created a Gemini CLI extension! You learned how to:
 - Link your extension for local development.
 
 From here, you can explore more advanced features and build powerful new
-capabilities into the Gemini CLI.
+capabilities into the HiveCode.

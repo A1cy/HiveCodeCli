@@ -4,22 +4,22 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import type React from 'react';
-import { useCallback } from 'react';
-import { Box, Text } from 'ink';
-import { theme } from '../semantic-colors.js';
-import { RadioButtonSelect } from '../components/shared/RadioButtonSelect.js';
-import type { LoadedSettings } from '../../config/settings.js';
-import { SettingScope } from '../../config/settings.js';
 import {
   AuthType,
   clearCachedCredentialFile,
   debugLogger,
   type Config,
 } from '@google/gemini-cli-core';
-import { useKeypress } from '../hooks/useKeypress.js';
-import { AuthState } from '../types.js';
+import { Box, Text } from 'ink';
+import type React from 'react';
+import { useCallback } from 'react';
+import type { LoadedSettings } from '../../config/settings.js';
+import { SettingScope } from '../../config/settings.js';
 import { runExitCleanup } from '../../utils/cleanup.js';
+import { RadioButtonSelect } from '../components/shared/RadioButtonSelect.js';
+import { useKeypress } from '../hooks/useKeypress.js';
+import { theme } from '../semantic-colors.js';
+import { AuthState } from '../types.js';
 import { validateAuthMethodWithSettings } from './useAuth.js';
 
 interface AuthDialogProps {
@@ -121,7 +121,7 @@ export function AuthDialog({
           debugLogger.log(
             `
 ----------------------------------------------------------------
-Logging in with Google... Please restart Gemini CLI to continue.
+Logging in with Google... Please restart HiveCode to continue.
 ----------------------------------------------------------------
             `,
           );
@@ -201,14 +201,12 @@ Logging in with Google... Please restart Gemini CLI to continue.
       </Box>
       <Box marginTop={1}>
         <Text color={theme.text.primary}>
-          Terms of Services and Privacy Notice for Gemini CLI
+          Terms of Services and Privacy Notice for HiveCode
         </Text>
       </Box>
       <Box marginTop={1}>
         <Text color={theme.text.link}>
-          {
-            'https://github.com/google-gemini/gemini-cli/blob/main/docs/tos-privacy.md'
-          }
+          {'https://github.com/A1cy/HiveCodeCli/blob/main/docs/tos-privacy.md'}
         </Text>
       </Box>
     </Box>

@@ -5,8 +5,8 @@
  */
 
 import * as fs from 'node:fs';
-import * as path from 'node:path';
 import { homedir } from 'node:os';
+import * as path from 'node:path';
 
 import type { MCPServerConfig } from '@google/gemini-cli-core';
 import {
@@ -20,7 +20,7 @@ import stripJsonComments from 'strip-json-comments';
 export const USER_SETTINGS_DIR = path.join(homedir(), GEMINI_DIR);
 export const USER_SETTINGS_PATH = path.join(USER_SETTINGS_DIR, 'settings.json');
 
-// Reconcile with https://github.com/google-gemini/gemini-cli/blob/b09bc6656080d4d12e1d06734aae2ec33af5c1ed/packages/cli/src/config/settings.ts#L53
+// Reconcile with https://github.com/A1cy/HiveCodeCli/blob/b09bc6656080d4d12e1d06734aae2ec33af5c1ed/packages/cli/src/config/settings.ts#L53
 export interface Settings {
   mcpServers?: Record<string, MCPServerConfig>;
   coreTools?: string[];

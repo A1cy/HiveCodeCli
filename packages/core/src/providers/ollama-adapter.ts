@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 HiveCode Team
+ * Copyright 2025 Google LLC
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -28,7 +28,7 @@ export class OllamaAdapter {
   private client: OllamaHttpClient;
   private model: string;
 
-  constructor(model: string = 'qwen2.5-coder', baseUrl?: string) {
+  constructor(model: string = 'llama3.2:1b', baseUrl?: string) {
     this.client = new OllamaHttpClient(baseUrl);
     this.model = model;
   }
@@ -157,6 +157,7 @@ export class OllamaAdapter {
       },
     ];
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const response: any = {
       candidates: [
         {

@@ -1,6 +1,6 @@
 /**
  * @license
- * Copyright 2025 HiveCode Team
+ * Copyright 2025 Google LLC
  * SPDX-License-Identifier: Apache-2.0
  */
 
@@ -29,7 +29,7 @@ import { debugLogger } from '../utils/debugLogger.js';
 export class OllamaContentGenerator implements ContentGenerator {
   private adapter: OllamaAdapter;
 
-  constructor(model: string = 'qwen2.5-coder', baseUrl?: string) {
+  constructor(model: string = 'llama3.2:1b', baseUrl?: string) {
     this.adapter = new OllamaAdapter(model, baseUrl);
     debugLogger.debug(
       `Initialized OllamaContentGenerator with model: ${model}`,
@@ -43,7 +43,8 @@ export class OllamaContentGenerator implements ContentGenerator {
     // Convert contents to proper Content array
     const contents: Content[] = Array.isArray(request.contents)
       ? (request.contents as Content[])
-      : [createUserContent(request.contents as any)];
+      : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        [createUserContent(request.contents as any)];
     return this.adapter.generateContent(contents, request.config);
   }
 
@@ -54,7 +55,8 @@ export class OllamaContentGenerator implements ContentGenerator {
     // Convert contents to proper Content array
     const contents: Content[] = Array.isArray(request.contents)
       ? (request.contents as Content[])
-      : [createUserContent(request.contents as any)];
+      : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        [createUserContent(request.contents as any)];
     return this.adapter.generateContentStream(contents, request.config);
   }
 

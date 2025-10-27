@@ -1,6 +1,6 @@
 # Observability with OpenTelemetry
 
-Learn how to enable and setup OpenTelemetry for Gemini CLI.
+Learn how to enable and setup OpenTelemetry for HiveCode.
 
 - [Observability with OpenTelemetry](#observability-with-opentelemetry)
   - [Key Benefits](#key-benefits)
@@ -56,7 +56,7 @@ Learn how to enable and setup OpenTelemetry for Gemini CLI.
 ## OpenTelemetry Integration
 
 Built on **[OpenTelemetry]** — the vendor-neutral, industry-standard
-observability framework — Gemini CLI's observability system provides:
+observability framework — HiveCode's observability system provides:
 
 - **Universal Compatibility**: Export to any OpenTelemetry backend (Google
   Cloud, Jaeger, Prometheus, Datadog, etc.)
@@ -143,7 +143,7 @@ Sends telemetry directly to Google Cloud services. No collector needed.
      }
    }
    ```
-2. Run Gemini CLI and send prompts.
+2. Run HiveCode and send prompts.
 3. View logs and metrics:
    - Open the Google Cloud Console in your browser after sending prompts:
      - Logs: https://console.cloud.google.com/logs/
@@ -175,7 +175,7 @@ forward data to Google Cloud.
    - Provide links to view traces, metrics, and logs in Google Cloud Console
    - Save collector logs to `~/.gemini/tmp/<projectHash>/otel/collector-gcp.log`
    - Stop collector on exit (e.g. `Ctrl+C`)
-3. Run Gemini CLI and send prompts.
+3. Run HiveCode and send prompts.
 4. View logs and metrics:
    - Open the Google Cloud Console in your browser after sending prompts:
      - Logs: https://console.cloud.google.com/logs/
@@ -201,7 +201,7 @@ For local development and debugging, you can capture telemetry data locally:
      }
    }
    ```
-2. Run Gemini CLI and send prompts.
+2. Run HiveCode and send prompts.
 3. View logs and metrics in the specified file (e.g., `.gemini/telemetry.log`).
 
 ### Collector-Based Export (Advanced)
@@ -216,14 +216,14 @@ For local development and debugging, you can capture telemetry data locally:
    - Provide a Jaeger UI at http://localhost:16686
    - Save logs/metrics to `~/.gemini/tmp/<projectHash>/otel/collector.log`
    - Stop collector on exit (e.g. `Ctrl+C`)
-2. Run Gemini CLI and send prompts.
+2. Run HiveCode and send prompts.
 3. View traces at http://localhost:16686 and logs/metrics in the collector log
    file.
 
 ## Logs and Metrics
 
 The following section describes the structure of logs and metrics generated for
-Gemini CLI.
+HiveCode.
 
 The `session.id`, `installation.id`, and `user.email` are included as common
 attributes on all logs and metrics.
@@ -231,7 +231,7 @@ attributes on all logs and metrics.
 ### Logs
 
 Logs are timestamped records of specific events. The following events are logged
-for Gemini CLI, grouped by category.
+for HiveCode, grouped by category.
 
 #### Sessions
 

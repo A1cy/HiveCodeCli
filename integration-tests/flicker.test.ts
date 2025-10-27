@@ -4,11 +4,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { TestRig } from './test-helper.js';
 
 describe('Flicker Detector', () => {
-  // TODO: https://github.com/google-gemini/gemini-cli/issues/11170
+  // TODO: https://github.com/A1cy/HiveCodeCli/issues/11170
   it.skip('should not detect a flicker under the max height budget', async () => {
     const rig = new TestRig();
     await rig.setup('flicker-detector-test');

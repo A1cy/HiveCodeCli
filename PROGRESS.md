@@ -19,7 +19,7 @@ HiveCode CLI with 100% free Ollama integration
 
 2. **Master Branch Cleaned** ✅
    - Removed all Python code (12 files)
-   - Clean slate for Gemini CLI fork
+   - Clean slate for HiveCode fork
 
 3. **Documentation Created** ✅
    - PRP.md (37KB) - Project north star
@@ -38,7 +38,7 @@ HiveCode CLI with 100% free Ollama integration
 
 ### Accomplishments
 
-1. **Gemini CLI Forked** ✅
+1. **HiveCode Forked** ✅
    - Repository: https://github.com/A1cy/HiveCodeCli
    - Source: google-gemini/gemini-cli (Apache 2.0)
    - Full TypeScript/Node.js codebase (80K+ stars)
@@ -133,7 +133,7 @@ node bundle/hivecode.js --help      # → Shows commands ✅
 ├── PRP.md ⭐ (project north star)
 ├── STATUS.md (development journey)
 ├── MIGRATION_PLAN.md (8-phase guide)
-└── [Full Gemini CLI codebase - TypeScript]
+└── [Full HiveCode codebase - TypeScript]
 ```
 
 ### Git History
@@ -253,7 +253,7 @@ b562bf58 Phase 2: Integrate HiveCodeCli documentation
 
 ### Phase 1-3 Metrics ✅
 
-- ✅ Gemini CLI forked successfully
+- ✅ HiveCode forked successfully
 - ✅ All documentation integrated
 - ✅ Config directory renamed (.gemini → .hivecode)
 - ✅ Binary renamed and building (hivecode)
@@ -305,7 +305,7 @@ node bundle/hivecode.js -p "what is 2+2?"
 
 ### 1. Fork Strategy ✅
 
-**Decision**: Fork Gemini CLI (not build from scratch) **Reason**:
+**Decision**: Fork HiveCode (not build from scratch) **Reason**:
 Production-ready foundation + full customization **Result**: 80K stars repo +
 TypeScript codebase + Active Google maintenance
 

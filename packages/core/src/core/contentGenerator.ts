@@ -74,8 +74,9 @@ export function createContentGeneratorConfig(
 
   // Ollama configuration
   const useOllama = process.env['HIVECODE_USE_OLLAMA'] === 'true';
-  const ollamaModel = process.env['OLLAMA_MODEL'] || 'qwen2.5-coder';
-  const ollamaBaseUrl = process.env['OLLAMA_BASE_URL'] || 'http://localhost:11434';
+  const ollamaModel = process.env['OLLAMA_MODEL'] || 'llama3.2:1b';
+  const ollamaBaseUrl =
+    process.env['OLLAMA_BASE_URL'] || 'http://localhost:11434';
 
   const contentGeneratorConfig: ContentGeneratorConfig = {
     authType,
@@ -129,7 +130,7 @@ export async function createContentGenerator(
 
   // Ollama integration
   if (config.authType === AuthType.USE_OLLAMA) {
-    const model = config.ollamaModel || 'qwen2.5-coder';
+    const model = config.ollamaModel || 'llama3.2:1b';
     const baseUrl = config.ollamaBaseUrl || 'http://localhost:11434';
 
     console.log(`🐝 HiveCode: Using Ollama (${model}) - 100% Free`);
@@ -137,12 +138,58 @@ export async function createContentGenerator(
     const ollamaGenerator = new OllamaContentGenerator(model, baseUrl);
 
     // Check health on initialization
-    const isHealthy = await ollamaGenerator.checkHealth();
+    let isHealthy = await ollamaGenerator.checkHealth();
+
     if (!isHealthy) {
-      console.warn(
-        `⚠️  Warning: Ollama is not accessible at ${baseUrl}. Ensure Ollama is running with: ollama serve`,
-      );
-      console.warn(`⚠️  Model ${model} may not be available. Install with: ollama pull ${model}`);
+      console.log('🔄 Ollama is not running. Starting Ollama server...');
+
+      try {
+        // Try to start Ollama in the background
+        const { spawn } = await import('node:child_process');
+        const ollamaProcess = spawn('ollama', ['serve'], {
+          detached: true,
+          stdio: 'ignore',
+        });
+        ollamaProcess.unref();
+
+        // Wait for Ollama to start (up to 5 seconds)
+        console.log('⏳ Waiting for Ollama to start...');
+        for (let i = 0; i < 10; i++) {
+          await new Promise((resolve) => setTimeout(resolve, 500));
+          isHealthy = await ollamaGenerator.checkHealth();
+          if (isHealthy) {
+            console.log('✅ Ollama server started successfully!');
+            break;
+          }
+        }
+
+        if (!isHealthy) {
+          console.error('');
+          console.error('❌ Failed to start Ollama server automatically.');
+          console.error('');
+          console.error('Please start Ollama manually:');
+          console.error('  ollama serve');
+          console.error('');
+          console.error(`Then install the model if needed:`);
+          console.error(`  ollama pull ${model}`);
+          console.error('');
+          process.exit(1);
+        }
+      } catch (error) {
+        console.error('');
+        console.error(
+          '❌ Error starting Ollama server:',
+          error instanceof Error ? error.message : String(error),
+        );
+        console.error('');
+        console.error('Please start Ollama manually:');
+        console.error('  ollama serve');
+        console.error('');
+        console.error(`Then install the model if needed:`);
+        console.error(`  ollama pull ${model}`);
+        console.error('');
+        process.exit(1);
+      }
     }
 
     return new LoggingContentGenerator(ollamaGenerator, gcConfig);

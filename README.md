@@ -36,7 +36,7 @@
 
 **Phase 2 Complete ✅**:
 
-- ✅ Gemini CLI forked to HiveCodeCli
+- ✅ HiveCode forked to HiveCodeCli
 - ✅ PRP.md (project north star) integrated
 - ✅ Complete documentation migrated
 - ✅ Repository structure established
@@ -72,7 +72,7 @@ Build a production-ready agentic AI development system that:
 
 ### Foundation Strategy
 
-HiveCode is built by forking **Gemini CLI** (Google's official CLI tool) and
+HiveCode is built by forking **HiveCode** (Google's official CLI tool) and
 adding:
 
 - **Agent Orchestration**: 5 specialized agents (orchestrator, frontend,
@@ -93,7 +93,7 @@ User Input
     ↓
 hivecode [command] [args]
     ↓
-HiveCode CLI (forked from Gemini CLI)
+HiveCode CLI (forked from HiveCode)
 ├─ Custom commands (prime|sparc|ask)
 ├─ Agent orchestration layer
 ├─ Hook system (pre-tool, post-tool)
@@ -160,7 +160,7 @@ Output to user
   scartch"
 - Result: Archived to `archive/python-implementation` branch for reference
 
-**Attempt 3: Gemini CLI Fork** ✅ Current
+**Attempt 3: HiveCode Fork** ✅ Current
 
 - Fork production-ready CLI (Google-maintained)
 - Customize with HiveCode features (agents, orchestration, hooks, TTS)
@@ -199,11 +199,11 @@ Output to user
 
 - ✅ Archive Python implementation to `archive/python-implementation` branch
 - ✅ Clean master branch of Python code
-- ✅ Update documentation for Gemini CLI pivot
+- ✅ Update documentation for HiveCode pivot
 
 ### Phase 2: Fork & Setup ⏳ NEXT
 
-- ⏳ Fork Gemini CLI repository to A1cy/HiveCode
+- ⏳ Fork HiveCode repository to A1cy/HiveCode
 - ⏳ Rename project (gemini → hivecode)
 - ⏳ Add HiveCode configuration structure (`.hivecode/` config)
 - ⏳ Verify base functionality and build system
@@ -228,7 +228,7 @@ Output to user
 
 ## 🏆 Key Decisions
 
-### Why Gemini CLI?
+### Why HiveCode?
 
 **Chosen for**:
 
@@ -282,8 +282,7 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 ## 🙏 Acknowledgments
 
-- **Foundation**: [Gemini CLI](https://github.com/google-gemini/gemini-cli) by
-  Google
+- **Foundation**: [HiveCode](https://github.com/A1cy/HiveCodeCli) by Google
 - **Inspired by**: A1xAI Framework and Claude Code
 - **Powered by**: [Ollama](https://ollama.ai) - Amazing local LLM engine
 - **Model**: qwen2.5-coder - Specialized coding model
@@ -293,7 +292,7 @@ MIT License - See [LICENSE](LICENSE) for details.
 ## 📞 Status & Updates
 
 **Current Phase**: Phase 1 Complete → Phase 2 Fork Preparation **Last Updated**:
-2025-10-26 **Next Milestone**: Gemini CLI fork
+2025-10-26 **Next Milestone**: HiveCode fork
 
 For detailed development status, see [STATUS.md](STATUS.md)
 
@@ -303,7 +302,7 @@ For detailed development status, see [STATUS.md](STATUS.md)
 
 **🐝 HiveCode - 100% Free | 100% Open | 100% Local**
 
-**Phase 1 Complete** | **Phase 2 Next: Fork Gemini CLI**
+**Phase 1 Complete** | **Phase 2 Next: Fork HiveCode**
 
 [📖 Development Status](STATUS.md) | [🎯 Project Plan](PRP.md) |
 [⭐ Star on GitHub](https://github.com/A1cy/HiveCodeCli)

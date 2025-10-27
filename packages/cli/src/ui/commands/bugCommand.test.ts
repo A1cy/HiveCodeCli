@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import open from 'open';
-import { bugCommand } from './bugCommand.js';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { GIT_COMMIT_INFO } from '../../generated/git-commit.js';
 import { createMockCommandContext } from '../../test-utils/mockCommandContext.js';
 import { getCliVersion } from '../../utils/version.js';
-import { GIT_COMMIT_INFO } from '../../generated/git-commit.js';
 import { formatMemoryUsage } from '../utils/formatters.js';
+import { bugCommand } from './bugCommand.js';
 
 // Mock dependencies
 vi.mock('open');
@@ -76,7 +76,7 @@ describe('bugCommand', () => {
 * **IDE Client:** VSCode
 `;
     const expectedUrl =
-      'https://github.com/google-gemini/gemini-cli/issues/new?template=bug_report.yml&title=A%20test%20bug&info=' +
+      'https://github.com/A1cy/HiveCodeCli/issues/new?template=bug_report.yml&title=A%20test%20bug&info=' +
       encodeURIComponent(expectedInfo);
 
     expect(open).toHaveBeenCalledWith(expectedUrl);

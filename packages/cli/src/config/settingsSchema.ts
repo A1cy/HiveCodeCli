@@ -321,7 +321,7 @@ const SETTINGS_SCHEMA = {
         requiresRestart: false,
         default: false,
         description:
-          'Show Gemini CLI status and thoughts in the terminal window title',
+          'Show HiveCode status and thoughts in the terminal window title',
         showInDialog: true,
       },
       hideTips: {
@@ -1001,6 +1001,16 @@ const SETTINGS_SCHEMA = {
             requiresRestart: true,
             default: undefined as boolean | undefined,
             description: 'Whether to use an external authentication flow.',
+            showInDialog: false,
+          },
+          ollamaModel: {
+            type: 'string',
+            label: 'Ollama Model',
+            category: 'Security',
+            requiresRestart: true,
+            default: undefined as string | undefined,
+            description:
+              'The selected Ollama model name (e.g., llama3.2:1b, qwen3:4b, qwen2.5-coder).',
             showInDialog: false,
           },
         },

@@ -4,9 +4,30 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import * as Diff from 'diff';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import * as Diff from 'diff';
+import type { Config } from '../config/config.js';
+import { ApprovalMode } from '../config/config.js';
+import type { MessageBus } from '../confirmation-bus/message-bus.js';
+import { IdeClient } from '../ide/ide-client.js';
+import { logFileOperation } from '../telemetry/loggers.js';
+import { FileOperation } from '../telemetry/metrics.js';
+import { FileOperationEvent } from '../telemetry/types.js';
+import { debugLogger } from '../utils/debugLogger.js';
+import { ensureCorrectEdit } from '../utils/editCorrector.js';
+import { isNodeError } from '../utils/errors.js';
+import { getSpecificMimeType } from '../utils/fileUtils.js';
+import { getLanguageFromFilePath } from '../utils/language-detection.js';
+import { makeRelative, shortenPath } from '../utils/paths.js';
+import { safeLiteralReplace } from '../utils/textUtils.js';
+import { DEFAULT_DIFF_OPTIONS, getDiffStat } from './diffOptions.js';
+import type {
+  ModifiableDeclarativeTool,
+  ModifyContext,
+} from './modifiable-tool.js';
+import { ToolErrorType } from './tool-error.js';
+import { EDIT_TOOL_NAME, READ_FILE_TOOL_NAME } from './tool-names.js';
 import type {
   ToolCallConfirmationDetails,
   ToolEditConfirmationDetails,
@@ -20,27 +41,6 @@ import {
   Kind,
   ToolConfirmationOutcome,
 } from './tools.js';
-import type { MessageBus } from '../confirmation-bus/message-bus.js';
-import { ToolErrorType } from './tool-error.js';
-import { makeRelative, shortenPath } from '../utils/paths.js';
-import { isNodeError } from '../utils/errors.js';
-import type { Config } from '../config/config.js';
-import { ApprovalMode } from '../config/config.js';
-import { ensureCorrectEdit } from '../utils/editCorrector.js';
-import { DEFAULT_DIFF_OPTIONS, getDiffStat } from './diffOptions.js';
-import { logFileOperation } from '../telemetry/loggers.js';
-import { FileOperationEvent } from '../telemetry/types.js';
-import { FileOperation } from '../telemetry/metrics.js';
-import { getSpecificMimeType } from '../utils/fileUtils.js';
-import { getLanguageFromFilePath } from '../utils/language-detection.js';
-import type {
-  ModifiableDeclarativeTool,
-  ModifyContext,
-} from './modifiable-tool.js';
-import { IdeClient } from '../ide/ide-client.js';
-import { safeLiteralReplace } from '../utils/textUtils.js';
-import { EDIT_TOOL_NAME, READ_FILE_TOOL_NAME } from './tool-names.js';
-import { debugLogger } from '../utils/debugLogger.js';
 
 export function applyReplacement(
   currentContent: string | null,
@@ -310,7 +310,7 @@ class EditToolInvocation
         if (ideConfirmation) {
           const result = await ideConfirmation;
           if (result.status === 'accepted' && result.content) {
-            // TODO(chrstn): See https://github.com/google-gemini/gemini-cli/pull/5618#discussion_r2255413084
+            // TODO(chrstn): See https://github.com/A1cy/HiveCodeCli/pull/5618#discussion_r2255413084
             // for info on a possible race condition where the file is modified on disk while being edited.
             this.params.old_string = editData.currentContent ?? '';
             this.params.new_string = result.content;

@@ -1,14 +1,14 @@
-# Gemini CLI tools
+# HiveCode tools
 
-The Gemini CLI includes built-in tools that the Gemini model uses to interact
-with your local environment, access information, and perform actions. These
-tools enhance the CLI's capabilities, enabling it to go beyond text generation
-and assist with a wide range of tasks.
+The HiveCode includes built-in tools that the Gemini model uses to interact with
+your local environment, access information, and perform actions. These tools
+enhance the CLI's capabilities, enabling it to go beyond text generation and
+assist with a wide range of tasks.
 
-## Overview of Gemini CLI tools
+## Overview of HiveCode tools
 
-In the context of the Gemini CLI, tools are specific functions or modules that
-the Gemini model can request to be executed. For example, if you ask Gemini to
+In the context of the HiveCode, tools are specific functions or modules that the
+Gemini model can request to be executed. For example, if you ask Gemini to
 "Summarize the contents of `my_document.txt`," the model will likely identify
 the need to read that file and will request the execution of the `read_file`
 tool.
@@ -31,12 +31,12 @@ These tools provide the following capabilities:
   data, Gemini's responses can be more accurate, relevant, and grounded in your
   actual context.
 
-## How to use Gemini CLI tools
+## How to use HiveCode tools
 
-To use Gemini CLI tools, provide a prompt to the Gemini CLI. The process works
-as follows:
+To use HiveCode tools, provide a prompt to the HiveCode. The process works as
+follows:
 
-1.  You provide a prompt to the Gemini CLI.
+1.  You provide a prompt to the HiveCode.
 2.  The CLI sends the prompt to the core.
 3.  The core, along with your prompt and conversation history, sends a list of
     available tools and their descriptions/schemas to the Gemini API.
@@ -56,12 +56,12 @@ called and whether it succeeded or failed.
 
 Many tools, especially those that can modify your file system or execute
 commands (`write_file`, `edit`, `run_shell_command`), are designed with safety
-in mind. The Gemini CLI will typically:
+in mind. The HiveCode will typically:
 
 - **Require confirmation:** Prompt you before executing potentially sensitive
   operations, showing you what action is about to be taken.
 - **Utilize sandboxing:** All tools are subject to restrictions enforced by
-  sandboxing (see [Sandboxing in the Gemini CLI](../cli/sandbox.md)). This means
+  sandboxing (see [Sandboxing in the HiveCode](../cli/sandbox.md)). This means
   that when operating in a sandbox, any tools (including MCP servers) you wish
   to use must be available _inside_ the sandbox environment. For example, to run
   an MCP server through `npx`, the `npx` executable must be installed within the
@@ -70,9 +70,9 @@ in mind. The Gemini CLI will typically:
 It's important to always review confirmation prompts carefully before allowing a
 tool to proceed.
 
-## Learn more about Gemini CLI's tools
+## Learn more about HiveCode's tools
 
-Gemini CLI's built-in tools can be broadly categorized as follows:
+HiveCode's built-in tools can be broadly categorized as follows:
 
 - **[File System Tools](./file-system.md):** For interacting with files and
   directories (reading, writing, listing, searching, etc.).

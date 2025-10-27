@@ -1,24 +1,26 @@
-# 🔄 HiveCode Migration Plan - Gemini CLI Fork
+# 🔄 HiveCode Migration Plan - HiveCode Fork
 
-**Date**: 2025-10-26
-**Phase**: Phase 2 - Fork & Setup
-**Objective**: Fork Gemini CLI and customize for HiveCode
+**Date**: 2025-10-26 **Phase**: Phase 2 - Fork & Setup **Objective**: Fork
+HiveCode and customize for HiveCode
 
 ---
 
 ## 📋 Overview
 
-This document outlines the complete migration plan from Phase 1 (cleanup) to a working HiveCode v0.1.0 based on forked Gemini CLI.
+This document outlines the complete migration plan from Phase 1 (cleanup) to a
+working HiveCode v0.1.0 based on forked HiveCode.
 
 ### Migration Strategy
 
-**Source**: [google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli)
+**Source**: [google-gemini/gemini-cli](https://github.com/A1cy/HiveCodeCli)
+
 - Version: v0.12.0-nightly
 - License: Apache 2.0 (permissive, fork-friendly)
 - Language: TypeScript/Node.js
 - Structure: Monorepo with `packages/*` workspaces
 
 **Target**: [A1cy/HiveCode](https://github.com/A1cy/HiveCodeCli)
+
 - Binary: `gemini` → `hivecode`
 - Package: `@google/gemini-cli` → `@hivecode/cli`
 - Config: `~/.gemini/` → `~/.hivecode/`
@@ -33,15 +35,17 @@ This document outlines the complete migration plan from Phase 1 (cleanup) to a w
 Since GitHub CLI (`gh`) is not installed, fork manually via web interface:
 
 **Instructions**:
-1. Open browser and navigate to: https://github.com/google-gemini/gemini-cli
+
+1. Open browser and navigate to: https://github.com/A1cy/HiveCodeCli
 2. Click "Fork" button (top-right corner)
 3. Select owner: **A1cy** (or your GitHub username)
 4. Repository name: **HiveCode**
-5. Description: "100% Free Agentic AI Development System (forked from Gemini CLI)"
+5. Description: "100% Free Agentic AI Development System (forked from HiveCode)"
 6. Keep "Copy the main branch only" checked (we don't need all branches)
 7. Click "Create fork"
 
 **Expected Result**:
+
 - New repository at `https://github.com/A1cy/HiveCodeCli`
 - Fork relationship maintained (can sync updates from upstream)
 
@@ -57,6 +61,7 @@ echo "Documentation backed up to ../HiveCode-backup/"
 ```
 
 **Backup includes**:
+
 - ACCOMPLISHMENT.md
 - OPENCODE_FINDINGS.md
 - PRP.md
@@ -76,7 +81,8 @@ cd HiveCode
 ```
 
 **Expected Result**:
-- Full Gemini CLI codebase in `/home/a1xai/HiveCode/`
+
+- Full HiveCode codebase in `/home/a1xai/HiveCode/`
 - Original docs preserved in `/home/a1xai/HiveCode-docs-only/`
 
 ### Step 4: Restore Documentation
@@ -91,12 +97,12 @@ cp ../HiveCode-docs-only/PRP.md .
 cp ../HiveCode-docs-only/STATUS.md .
 cp ../HiveCode-docs-only/MIGRATION_PLAN.md .
 
-# Gemini CLI's README will be replaced in Phase 3
+# HiveCode's README will be replaced in Phase 3
 mv README.md README-GEMINI-ORIGINAL.md
 cp ../HiveCode-docs-only/README.md .
 
 git add .
-git commit -m "Phase 2: Add HiveCode documentation to forked Gemini CLI
+git commit -m "Phase 2: Add HiveCode documentation to forked HiveCode
 
 Preserved documentation:
 - ACCOMPLISHMENT.md (Python implementation achievements)
@@ -106,12 +112,12 @@ Preserved documentation:
 - MIGRATION_PLAN.md (this migration plan)
 - README.md (HiveCode introduction)
 
-Original Gemini CLI README → README-GEMINI-ORIGINAL.md"
+Original HiveCode README → README-GEMINI-ORIGINAL.md"
 ```
 
 ### Step 5: Verify Base Functionality
 
-Test that Gemini CLI works before modifications:
+Test that HiveCode works before modifications:
 
 ```bash
 # Install dependencies
@@ -128,6 +134,7 @@ npm start -- --help
 ```
 
 **Expected Result**:
+
 - Dependencies installed successfully
 - Build completes without errors
 - Original `gemini` command works
@@ -156,6 +163,7 @@ npm start -- --help
 ```
 
 **Changes**:
+
 - Name: `@google/gemini-cli` → `@hivecode/cli`
 - Version: Reset to `0.1.0`
 - Repository: Point to A1cy/HiveCode
@@ -181,11 +189,13 @@ grep -r "gemini" packages/ --include="*.ts" --include="*.js" | head -20
 Update code to use `~/.hivecode/` instead of `~/.gemini/`:
 
 **Files to modify** (find with):
+
 ```bash
 grep -r "\.gemini" packages/ --include="*.ts" | head -20
 ```
 
 **Replace**:
+
 - `~/.gemini/settings.json` → `~/.hivecode/settings.json`
 - `~/.gemini/` → `~/.hivecode/`
 - `.gemini/` → `.hivecode/`
@@ -196,6 +206,7 @@ grep -r "\.gemini" packages/ --include="*.ts" | head -20
 Create default config template:
 
 **File**: `~/.hivecode/default-config.json`
+
 ```json
 {
   "models": {
@@ -282,6 +293,7 @@ EOF
 Reference: `archive/python-implementation` branch
 
 **Agents to port**:
+
 1. **Orchestrator Agent** (`orchestrator_agent.py`)
    - Task decomposition
    - Agent selection
@@ -350,7 +362,7 @@ export async function sparcCommand(task: string) {
 export async function primeCommand() {
   // Load project context
   const context = await loadProjectContext(process.cwd());
-  console.log("✅ Context loaded:", context.summary);
+  console.log('✅ Context loaded:', context.summary);
 }
 ```
 
@@ -360,7 +372,7 @@ export async function primeCommand() {
 export async function askCommand(question: string) {
   // Q&A with project context
   const answer = await queryWithContext(question);
-  console.log("✅ Answer:", answer);
+  console.log('✅ Answer:', answer);
 }
 ```
 
@@ -378,7 +390,7 @@ import axios from 'axios';
 export class OllamaProvider {
   constructor(
     private baseUrl: string = 'http://localhost:11434',
-    private model: string = 'qwen2.5-coder'
+    private model: string = 'qwen2.5-coder',
   ) {}
 
   async generate(prompt: string, options?: GenerateOptions): Promise<string> {
@@ -388,8 +400,8 @@ export class OllamaProvider {
       stream: false,
       options: {
         temperature: options?.temperature ?? 0.7,
-        num_predict: options?.maxTokens ?? 4096
-      }
+        num_predict: options?.maxTokens ?? 4096,
+      },
     });
 
     return response.data.response;
@@ -440,7 +452,7 @@ export enum HookType {
   PreTool = 'pre-tool',
   PostTool = 'post-tool',
   Notification = 'notification',
-  Error = 'error'
+  Error = 'error',
 }
 
 export class HookManager {
@@ -469,7 +481,7 @@ export class TTSHook {
 
     await axios.post('http://localhost:8880/synthesize', {
       text: message,
-      voice: 'af_sarah'
+      voice: 'af_sarah',
     });
   }
 }
@@ -482,8 +494,9 @@ export class TTSHook {
 ### Step 1: Rewrite README.md
 
 Update README.md with:
+
 - HiveCode introduction
-- Fork acknowledgment (Gemini CLI)
+- Fork acknowledgment (HiveCode)
 - Installation instructions (with Ollama)
 - Command reference (prime, ask, sparc)
 - Cost comparison ($0/month)
@@ -492,6 +505,7 @@ Update README.md with:
 ### Step 2: Create ARCHITECTURE.md
 
 Document:
+
 - System architecture (4 layers)
 - Agent system design
 - Model routing strategy
@@ -501,6 +515,7 @@ Document:
 ### Step 3: Create QUICKSTART.md
 
 5-minute getting started guide:
+
 1. Prerequisites (Node.js 20+, Ollama)
 2. Installation
 3. First commands
@@ -509,6 +524,7 @@ Document:
 ### Step 4: Update CONTRIBUTING.md
 
 Fork-specific contribution guidelines:
+
 - Building from source
 - Running tests
 - Creating agents
@@ -591,12 +607,14 @@ echo "  hivecode sparc \"task\"    # Multi-agent workflow"
 ## ✅ Success Criteria
 
 ### Phase 2 Complete When:
-- ✅ Gemini CLI forked to A1cy/HiveCode
+
+- ✅ HiveCode forked to A1cy/HiveCode
 - ✅ Forked repo cloned locally
 - ✅ HiveCode documentation restored
 - ✅ Base build system working
 
 ### Phase 3 Complete When:
+
 - ✅ Binary renamed: `gemini` → `hivecode`
 - ✅ Package renamed: `@google/gemini-cli` → `@hivecode/cli`
 - ✅ Config directory: `~/.gemini/` → `~/.hivecode/`
@@ -604,23 +622,27 @@ echo "  hivecode sparc \"task\"    # Multi-agent workflow"
 - ✅ System builds and runs with new name
 
 ### Phase 4 Complete When:
+
 - ✅ 5 agents ported from Python implementation
 - ✅ SPARC workflow implemented
 - ✅ Custom commands added (prime, ask, sparc)
 - ✅ Parallel execution working
 
 ### Phase 5 Complete When:
+
 - ✅ Ollama provider integrated
 - ✅ Model routing logic implemented
 - ✅ Local-first strategy working (80% Ollama)
 - ✅ Fallback to Gemini functional
 
 ### Phase 6 Complete When:
+
 - ✅ Hook system infrastructure created
 - ✅ Pre-tool and post-tool hooks working
 - ✅ (Optional) TTS integration functional
 
 ### Phase 7-8 Complete When:
+
 - ✅ All documentation updated
 - ✅ Installation script working
 - ✅ Tested on Ubuntu/WSL
@@ -631,30 +653,36 @@ echo "  hivecode sparc \"task\"    # Multi-agent workflow"
 ## 🎯 Timeline Estimate
 
 **Phase 2 (Fork & Setup)**: 1-2 hours
+
 - Fork: 5 minutes (manual)
 - Clone and restore: 15 minutes
 - Base verification: 30-60 minutes
 
 **Phase 3 (Renaming)**: 2-3 hours
+
 - Package.json updates: 30 minutes
 - Binary renaming: 30 minutes
 - Config changes: 1-2 hours
 - Testing: 30 minutes
 
 **Phase 4 (Agents)**: 4-6 hours
+
 - Port agent logic: 2-3 hours
 - SPARC workflow: 1-2 hours
 - Custom commands: 1 hour
 
 **Phase 5 (Ollama)**: 2-3 hours
+
 - Provider implementation: 1 hour
 - Routing logic: 1-2 hours
 
 **Phase 6 (Hooks)**: 2-3 hours
+
 - Hook infrastructure: 1-2 hours
 - TTS integration: 1 hour
 
 **Phase 7-8 (Polish)**: 2-3 hours
+
 - Documentation: 1-2 hours
 - Installation script: 1 hour
 
@@ -664,13 +692,12 @@ echo "  hivecode sparc \"task\"    # Multi-agent workflow"
 
 ## 📞 Current Status
 
-**Phase**: Phase 2 - Step 1 (Fork Repository)
-**Action Required**: Manual fork via GitHub web interface
-**Next**: Clone forked repo and restore documentation
+**Phase**: Phase 2 - Step 1 (Fork Repository) **Action Required**: Manual fork
+via GitHub web interface **Next**: Clone forked repo and restore documentation
 
 **See [STATUS.md](STATUS.md) for complete development journey.**
 
 ---
 
-**Last Updated**: 2025-10-26
-**Next Review**: After fork is created and repo is cloned
+**Last Updated**: 2025-10-26 **Next Review**: After fork is created and repo is
+cloned

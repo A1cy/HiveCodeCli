@@ -1,8 +1,8 @@
-# Gemini CLI
+# HiveCode
 
-Within Gemini CLI, `packages/cli` is the frontend for users to send and receive
+Within HiveCode, `packages/cli` is the frontend for users to send and receive
 prompts with the Gemini AI model and its associated tools. For a general
-overview of Gemini CLI, see the [main documentation page](../index.md).
+overview of HiveCode, see the [main documentation page](../index.md).
 
 ## Basic features
 
@@ -10,7 +10,7 @@ overview of Gemini CLI, see the [main documentation page](../index.md).
   (e.g., `/help`, `/chat`, `/tools`).
 - **[Custom Commands](./custom-commands.md):** Create your own commands and
   shortcuts for frequently used prompts.
-- **[Headless Mode](./headless.md):** Use Gemini CLI programmatically for
+- **[Headless Mode](./headless.md):** Use HiveCode programmatically for
   scripting and automation.
 - **[Themes](./themes.md):** Customizing the CLI's appearance with different
   themes.
@@ -38,11 +38,11 @@ overview of Gemini CLI, see the [main documentation page](../index.md).
 
 ## Non-interactive mode
 
-Gemini CLI can be run in a non-interactive mode, which is useful for scripting
-and automation. In this mode, you pipe input to the CLI, it executes the
-command, and then it exits.
+HiveCode can be run in a non-interactive mode, which is useful for scripting and
+automation. In this mode, you pipe input to the CLI, it executes the command,
+and then it exits.
 
-The following example pipes a command to Gemini CLI from your terminal:
+The following example pipes a command to HiveCode from your terminal:
 
 ```bash
 echo "What is fine tuning?" | gemini

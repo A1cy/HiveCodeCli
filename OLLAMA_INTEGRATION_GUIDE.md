@@ -1,8 +1,8 @@
 # 🐝 Ollama Integration Guide for HiveCode
 
-**Status**: Phase 4 - Technical Analysis Complete
-**Estimated Effort**: 4-6 hours of focused development
-**Goal**: Replace Google Genai SDK with Ollama for 100% free operation
+**Status**: Phase 4 - Technical Analysis Complete **Estimated Effort**: 4-6
+hours of focused development **Goal**: Replace Google Genai SDK with Ollama for
+100% free operation
 
 ---
 
@@ -10,9 +10,11 @@
 
 ### Dependencies on `@google/genai` SDK
 
-The HiveCode codebase (forked from Gemini CLI) uses `@google/genai` SDK extensively:
+The HiveCode codebase (forked from HiveCode) uses `@google/genai` SDK
+extensively:
 
 **Key Files Using @google/genai**:
+
 ```
 packages/core/src/core/geminiChat.ts           - Main chat handler
 packages/core/src/core/geminiRequest.ts        - Request formatting
@@ -22,6 +24,7 @@ packages/core/src/tools/*.ts                   - Tool calling (20+ files)
 ```
 
 **Core Types from SDK**:
+
 - `GenerateContentResponse` - API response format
 - `Content` - Message content structure
 - `Part` - Message parts (text, function calls, etc.)
@@ -42,18 +45,15 @@ packages/core/src/tools/*.ts                   - Tool calling (20+ files)
 **Key Components**:
 
 1. **OllamaClient Class**
+
 ```typescript
 import axios from 'axios';
-import type {
-  GenerateContentResponse,
-  Content,
-  Part,
-} from '@google/genai';
+import type { GenerateContentResponse, Content, Part } from '@google/genai';
 
 export class OllamaClient {
   constructor(
     private baseUrl: string = 'http://localhost:11434',
-    private model: string = 'qwen2.5-coder'
+    private model: string = 'qwen2.5-coder',
   ) {}
 
   async generateContent(request: Content[]): Promise<GenerateContentResponse> {
@@ -63,7 +63,7 @@ export class OllamaClient {
     // Call Ollama API
     const response = await axios.post(
       `${this.baseUrl}/api/generate`,
-      ollamaRequest
+      ollamaRequest,
     );
 
     // Convert Ollama response → Google Genai format
@@ -71,7 +71,7 @@ export class OllamaClient {
   }
 
   async generateContentStream(
-    request: Content[]
+    request: Content[],
   ): AsyncGenerator<GenerateContentResponse> {
     // Similar conversion for streaming
   }
@@ -81,28 +81,33 @@ export class OllamaClient {
     // Convert to Ollama's {prompt, system} format
   }
 
-  private convertFromOllamaFormat(ollamaResponse: any): GenerateContentResponse {
+  private convertFromOllamaFormat(
+    ollamaResponse: any,
+  ): GenerateContentResponse {
     // Map Ollama response to Google Genai format
     return {
-      candidates: [{
-        content: {
-          parts: [{ text: ollamaResponse.response }],
-          role: 'model'
+      candidates: [
+        {
+          content: {
+            parts: [{ text: ollamaResponse.response }],
+            role: 'model',
+          },
+          finishReason: 'STOP',
+          index: 0,
         },
-        finishReason: 'STOP',
-        index: 0
-      }],
+      ],
       usageMetadata: {
         promptTokenCount: 0, // Ollama doesn't provide this
         candidatesTokenCount: 0,
-        totalTokenCount: 0
-      }
+        totalTokenCount: 0,
+      },
     };
   }
 }
 ```
 
 2. **Configuration Switch**
+
 ```typescript
 // packages/core/src/config/config.ts
 
@@ -115,8 +120,9 @@ export class Config {
 
   constructor() {
     // Check environment or config
-    this.useOllama = process.env.HIVECODE_USE_OLLAMA === 'true' ||
-                     process.env.GEMINI_API_KEY === undefined;
+    this.useOllama =
+      process.env.HIVECODE_USE_OLLAMA === 'true' ||
+      process.env.GEMINI_API_KEY === undefined;
 
     if (this.useOllama) {
       this.ollamaClient = new OllamaClient();
@@ -130,19 +136,20 @@ export class Config {
 ```
 
 3. **Model Name Mapping**
+
 ```typescript
 // packages/core/src/config/models.ts
 
 export const OLLAMA_MODEL_MAP = {
-  'gemini-2.5-pro': 'qwen2.5-coder',        // 4.7GB, best coding
-  'gemini-2.5-flash': 'llama3.2:3b',        // 2GB, faster
-  'gemini-2.5-flash-lite': 'llama3.2:1b',   // 1.3GB, fastest
+  'gemini-2.5-pro': 'qwen2.5-coder', // 4.7GB, best coding
+  'gemini-2.5-flash': 'llama3.2:3b', // 2GB, faster
+  'gemini-2.5-flash-lite': 'llama3.2:1b', // 1.3GB, fastest
 };
 
 export function getEffectiveModel(
   isInFallbackMode: boolean,
   requestedModel: string,
-  useOllama: boolean = false
+  useOllama: boolean = false,
 ): string {
   if (useOllama && OLLAMA_MODEL_MAP[requestedModel]) {
     return OLLAMA_MODEL_MAP[requestedModel];
@@ -196,7 +203,9 @@ export class OllamaHttpClient {
     this.client = axios.create({ baseUrl, timeout: 120000 });
   }
 
-  async generate(request: OllamaGenerateRequest): Promise<OllamaGenerateResponse> {
+  async generate(
+    request: OllamaGenerateRequest,
+  ): Promise<OllamaGenerateResponse> {
     const response = await this.client.post('/api/generate', request);
     return response.data;
   }
@@ -242,7 +251,7 @@ export class OllamaAdapter {
 
   async generateContent(
     request: Content[],
-    config?: GenerateContentConfig
+    config?: GenerateContentConfig,
   ): Promise<GenerateContentResponse> {
     // 1. Convert Content[] to Ollama format
     const ollamaRequest = this.convertRequest(request, config);
@@ -256,22 +265,23 @@ export class OllamaAdapter {
 
   private convertRequest(
     contents: Content[],
-    config?: GenerateContentConfig
+    config?: GenerateContentConfig,
   ): OllamaGenerateRequest {
     // Extract system prompt if any
-    const systemContent = contents.find(c => c.role === 'system');
+    const systemContent = contents.find((c) => c.role === 'system');
     const systemPrompt = systemContent?.parts
-      .filter(p => 'text' in p)
-      .map(p => (p as any).text)
+      .filter((p) => 'text' in p)
+      .map((p) => (p as any).text)
       .join('\n');
 
     // Extract user messages
     const userMessages = contents
-      .filter(c => c.role === 'user')
-      .map(c => c.parts
-        .filter(p => 'text' in p)
-        .map(p => (p as any).text)
-        .join('\n')
+      .filter((c) => c.role === 'user')
+      .map((c) =>
+        c.parts
+          .filter((p) => 'text' in p)
+          .map((p) => (p as any).text)
+          .join('\n'),
       );
 
     const prompt = userMessages.join('\n');
@@ -303,7 +313,9 @@ export class OllamaAdapter {
       usageMetadata: {
         promptTokenCount: ollamaResponse.prompt_eval_count || 0,
         candidatesTokenCount: ollamaResponse.eval_count || 0,
-        totalTokenCount: (ollamaResponse.prompt_eval_count || 0) + (ollamaResponse.eval_count || 0),
+        totalTokenCount:
+          (ollamaResponse.prompt_eval_count || 0) +
+          (ollamaResponse.eval_count || 0),
       },
     };
   }
@@ -333,10 +345,12 @@ export class Config {
       !process.env.GEMINI_API_KEY;
 
     if (this.useOllama) {
-      const ollamaModel = this.getOllamaModel(params.model || DEFAULT_GEMINI_MODEL);
+      const ollamaModel = this.getOllamaModel(
+        params.model || DEFAULT_GEMINI_MODEL,
+      );
       this.ollamaAdapter = new OllamaAdapter(
         ollamaModel,
-        params.settings?.ollamaBaseUrl || 'http://localhost:11434'
+        params.settings?.ollamaBaseUrl || 'http://localhost:11434',
       );
 
       console.log(`🐝 HiveCode: Using Ollama (${ollamaModel}) - 100% Free`);
@@ -358,7 +372,7 @@ export class Config {
 
   async generateContent(
     request: Content[],
-    config?: GenerateContentConfig
+    config?: GenerateContentConfig,
   ): Promise<GenerateContentResponse> {
     if (this.useOllama && this.ollamaAdapter) {
       return this.ollamaAdapter.generateContent(request, config);
@@ -375,13 +389,14 @@ export class Config {
 **File**: `packages/cli/src/config/settingsSchema.ts`
 
 Add Ollama settings:
+
 ```typescript
 export const settingsSchema = {
   // ... existing settings
 
   useOllama: {
     type: 'boolean',
-    default: true,  // Default to free tier
+    default: true, // Default to free tier
     description: 'Use local Ollama models (100% free)',
   },
 
@@ -429,20 +444,24 @@ node bundle/hivecode.js -p "What is 2+2?"
 ## ⚠️ Challenges & Limitations
 
 ### 1. Tool Calling
+
 **Challenge**: Ollama's function calling is different from Google's
 **Solution**: Map tool definitions or disable tools for Ollama
 
 ### 2. Streaming
-**Challenge**: Ollama streams differently
-**Solution**: Implement separate streaming handler
+
+**Challenge**: Ollama streams differently **Solution**: Implement separate
+streaming handler
 
 ### 3. Response Format
-**Challenge**: Ollama responses are simpler
-**Solution**: Adapter converts to expected format
+
+**Challenge**: Ollama responses are simpler **Solution**: Adapter converts to
+expected format
 
 ### 4. Context Window
-**Challenge**: Different models have different limits
-**Solution**: Configure per-model limits
+
+**Challenge**: Different models have different limits **Solution**: Configure
+per-model limits
 
 ---
 
@@ -451,11 +470,13 @@ node bundle/hivecode.js -p "What is 2+2?"
 **For immediate testing without full adapter**:
 
 1. **Install Ollama SDK**:
+
 ```bash
 npm install ollama --save
 ```
 
 2. **Create Simple Test**:
+
 ```typescript
 // test-ollama.ts
 import { Ollama } from 'ollama';
@@ -471,6 +492,7 @@ console.log(response.response);
 ```
 
 3. **Run**:
+
 ```bash
 npx tsx test-ollama.ts
 ```
@@ -479,14 +501,14 @@ npx tsx test-ollama.ts
 
 ## 📊 Estimated Timeline
 
-| Task | Time | Complexity |
-|------|------|------------|
-| Ollama HTTP Client | 1 hour | Low |
-| Adapter Implementation | 2-3 hours | Medium |
-| Config Integration | 30 min | Low |
-| Settings Schema | 15 min | Low |
-| Testing & Debugging | 1 hour | Medium |
-| **Total** | **4-6 hours** | **Medium** |
+| Task                   | Time          | Complexity |
+| ---------------------- | ------------- | ---------- |
+| Ollama HTTP Client     | 1 hour        | Low        |
+| Adapter Implementation | 2-3 hours     | Medium     |
+| Config Integration     | 30 min        | Low        |
+| Settings Schema        | 15 min        | Low        |
+| Testing & Debugging    | 1 hour        | Medium     |
+| **Total**              | **4-6 hours** | **Medium** |
 
 ---
 
@@ -499,26 +521,28 @@ npx tsx test-ollama.ts
 3. Rewrite geminiChat.ts as ollamaChat.ts
 4. Update 20+ tool files
 
-**Pros**: Cleaner architecture
-**Cons**: 8-10 hours work, loses Gemini fallback
+**Pros**: Cleaner architecture **Cons**: 8-10 hours work, loses Gemini fallback
 
 ---
 
 ## 📝 Next Steps
 
 ### Option A: Full Adapter (Recommended)
+
 - Implement adapter pattern
 - Maintain Google compatibility
 - Keep optional Gemini fallback
 - **Time**: 4-6 hours
 
 ### Option B: Quick Prototype
+
 - Test Ollama connectivity
 - Create proof-of-concept
 - Document full integration path
 - **Time**: 1 hour
 
 ### Option C: Community Contribution
+
 - Document integration needs
 - Create GitHub issue
 - Tag as "help wanted"
@@ -528,15 +552,13 @@ npx tsx test-ollama.ts
 
 ## 🐝 Status
 
-**Current**: Technical analysis complete
-**Ready**: Architecture defined, path forward clear
-**Next**: Implement OllamaAdapter or wait for community
+**Current**: Technical analysis complete **Ready**: Architecture defined, path
+forward clear **Next**: Implement OllamaAdapter or wait for community
 
-**Priority**: Medium (CLI works with Gemini free tier for now)
-**Impact**: High (enables 100% free operation)
+**Priority**: Medium (CLI works with Gemini free tier for now) **Impact**: High
+(enables 100% free operation)
 
 ---
 
-**Last Updated**: 2025-10-26
-**Phase**: 4 (Ollama Integration)
-**Status**: Analysis Complete → Implementation Pending
+**Last Updated**: 2025-10-26 **Phase**: 4 (Ollama Integration) **Status**:
+Analysis Complete → Implementation Pending

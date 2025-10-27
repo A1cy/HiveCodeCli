@@ -1,31 +1,36 @@
 # 🐝 HiveCode Branding Assets
 
-**Version**: 0.1.0
-**Last Updated**: 2025-10-26
+**Version**: 0.1.0 **Last Updated**: 2025-10-26
 
 ---
 
 ## 🎨 Brand Identity
 
 ### Logo Concept
-**Symbol**: 🐝 Honeybee (represents collaboration, efficiency, and collective intelligence)
-- **Meaning**: Like bees working together in a hive, HiveCode's agents collaborate to build software
+
+**Symbol**: 🐝 Honeybee (represents collaboration, efficiency, and collective
+intelligence)
+
+- **Meaning**: Like bees working together in a hive, HiveCode's agents
+  collaborate to build software
 - **Colors**:
   - Primary: Orange/Gold (#FFA500) - Energy, creativity, coding
   - Secondary: Black (#000000) - Professionalism, stability
   - Accent: White (#FFFFFF) - Clarity, simplicity
 
 ### Tagline
+
 **"Where AI Agents Work Together for Free"**
 
 Alternative taglines:
+
 - "100% Free | 100% Open | 100% Local"
 - "Build Together, Deploy Free"
 - "Agentic Development Without the Cost"
 
 ---
 
-## 📸 Terminal Screenshot Banner (Like Gemini CLI)
+## 📸 Terminal Screenshot Banner (Like HiveCode)
 
 ### ASCII Art Banner
 
@@ -75,6 +80,7 @@ $ _
 ```
 
 ### Terminal Color Scheme
+
 - **Prompt**: Green (#00FF00) - user input
 - **Success**: Bright Green (#00FF00) - checkmarks, success messages
 - **Info**: Cyan (#00FFFF) - informational messages
@@ -88,13 +94,16 @@ $ _
 ## 🖼️ Banner Options
 
 ### Option 1: Terminal Screenshot Style (Recommended)
+
 Create an animated GIF or PNG showing:
+
 1. User typing `hivecode sparc "build user auth"`
 2. Agents working in parallel (animated dots)
 3. Success output with file tree
 4. Cost: $0.00 displayed prominently
 
 ### Option 2: Logo + Tagline Header
+
 ```
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ┃                                               ┃
@@ -108,6 +117,7 @@ Create an animated GIF or PNG showing:
 ```
 
 ### Option 3: Feature Grid
+
 ```
 ╔═══════════════╦═══════════════╦═══════════════╗
 ║  💰 FREE      ║  🤖 AGENTS    ║  🏠 LOCAL     ║
@@ -140,7 +150,8 @@ Use this header format in README.md:
 [![Cost](https://img.shields.io/badge/cost-%240%2Fmonth-brightgreen.svg)](README.md)
 [![Powered by](https://img.shields.io/badge/powered%20by-Ollama-orange.svg)](https://ollama.ai)
 
-[🚀 Quick Start](#quick-start) • [📖 Documentation](#documentation) • [🤖 Agents](#agents) • [💰 Why Free?](#why-free)
+[🚀 Quick Start](#quick-start) • [📖 Documentation](#documentation) •
+[🤖 Agents](#agents) • [💰 Why Free?](#why-free)
 
 </div>
 
@@ -149,13 +160,15 @@ Use this header format in README.md:
 ## ⚡ Quick Start
 
 \`\`\`bash
+
 # One command installation
-curl -fsSL https://raw.githubusercontent.com/A1cy/HiveCodeCli/main/install.sh | bash
+
+curl -fsSL https://raw.githubusercontent.com/A1cy/HiveCodeCli/main/install.sh |
+bash
 
 # Your first command
-hivecode prime
-hivecode sparc "build todo app with tests"
-\`\`\`
+
+hivecode prime hivecode sparc "build todo app with tests" \`\`\`
 
 **Result**: Complete todo app in 30 seconds, $0 cost
 ```
@@ -165,6 +178,7 @@ hivecode sparc "build todo app with tests"
 ## 🎬 Demo Screenshot Guidelines
 
 ### Scene 1: Installation
+
 ```
 $ curl -fsSL https://hivecode.dev/install.sh | bash
 🐝 HiveCode Installation
@@ -179,6 +193,7 @@ Try: hivecode prime
 ```
 
 ### Scene 2: First Command (Prime)
+
 ```
 $ hivecode prime
 🐝 HiveCode v0.1.0 - Loading context...
@@ -199,6 +214,7 @@ Available agents:
 ```
 
 ### Scene 3: SPARC Workflow (Main Feature)
+
 ```
 $ hivecode sparc "add dark mode toggle"
 
@@ -261,11 +277,13 @@ Time: 5.2s
 ## 🎨 Color Palette
 
 ### Primary Colors
+
 - **HiveCode Orange**: `#FFA500` - Main brand color
 - **Success Green**: `#00FF00` - Success states, checkmarks
 - **Agent Yellow**: `#FFFF00` - Agent names, highlights
 
 ### Secondary Colors
+
 - **Deep Black**: `#000000` - Background, text
 - **Pure White**: `#FFFFFF` - Contrast, clarity
 - **Info Cyan**: `#00FFFF` - Informational messages
@@ -273,7 +291,9 @@ Time: 5.2s
 - **Error Red**: `#FF0000` - Errors, warnings
 
 ### Terminal Theme
+
 Based on classic terminal aesthetics with modern touches:
+
 - Background: `#000000` (black)
 - Text: `#00FF00` (green) for prompt
 - Success: `#00FF00` (bright green)
@@ -284,11 +304,13 @@ Based on classic terminal aesthetics with modern touches:
 ## 📐 Logo Specifications
 
 ### ASCII Logo (Small)
+
 ```
  🐝 HiveCode
 ```
 
 ### ASCII Logo (Medium)
+
 ```
   _   _ _            ____          _
  | | | (_)_   _____ / ___|___   __| | ___
@@ -300,6 +322,7 @@ Based on classic terminal aesthetics with modern touches:
 ```
 
 ### ASCII Logo (Large - Banner)
+
 ```
 ╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
@@ -321,6 +344,7 @@ Based on classic terminal aesthetics with modern touches:
 ## 🖼️ Asset Checklist
 
 ### Required Assets
+
 - [ ] `hivecode-banner.png` (1200x400) - Main README banner
 - [ ] `hivecode-logo.png` (512x512) - Square logo for icons
 - [ ] `terminal-screenshot.png` (800x600) - Terminal demo
@@ -328,6 +352,7 @@ Based on classic terminal aesthetics with modern touches:
 - [ ] `favicon.ico` (16x16, 32x32) - Website favicon
 
 ### Optional Assets
+
 - [ ] `comparison-table.png` (1000x500) - Feature comparison
 - [ ] `architecture-diagram.png` (1200x800) - System architecture
 - [ ] `cost-graph.png` (800x400) - Cost comparison graph
@@ -359,5 +384,5 @@ Based on classic terminal aesthetics with modern touches:
 
 ---
 
-**Status**: Branding guidelines defined
-**Next**: Create actual PNG/GIF assets for docs/assets/
+**Status**: Branding guidelines defined **Next**: Create actual PNG/GIF assets
+for docs/assets/

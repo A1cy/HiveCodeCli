@@ -407,7 +407,7 @@ export const AppContainer = (props: AppContainerProps) => {
           await runExitCleanup();
           debugLogger.log(`
 ----------------------------------------------------------------
-Logging in with Google... Please restart Gemini CLI to continue.
+Logging in with Google... Please restart HiveCode to continue.
 ----------------------------------------------------------------
           `);
           process.exit(0);
@@ -1044,7 +1044,7 @@ Logging in with Google... Please restart Gemini CLI to continue.
 
   useKeypress(handleGlobalKeypress, { isActive: true });
 
-  // Update terminal title with Gemini CLI status and thoughts
+  // Update terminal title with HiveCode status and thoughts
   useEffect(() => {
     // Respect both showStatusInTitle and hideWindowTitle settings
     if (
@@ -1071,7 +1071,7 @@ Logging in with Google... Please restart Gemini CLI to continue.
       lastTitleRef.current = paddedTitle;
       stdout.write(`\x1b]2;${paddedTitle}\x07`);
     }
-    // Note: We don't need to reset the window title on exit because Gemini CLI is already doing that elsewhere
+    // Note: We don't need to reset the window title on exit because HiveCode is already doing that elsewhere
   }, [
     streamingState,
     thought,

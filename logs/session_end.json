@@ -1,0 +1,20 @@
+[
+  {
+    "session_id": "f4bcab11-e5a6-440a-819f-c330a1a764bf",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/f4bcab11-e5a6-440a-819f-c330a1a764bf.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "hook_event_name": "SessionEnd",
+    "reason": "other",
+    "execution_mode": "NORMAL",
+    "logged_at": "2025-10-27T12:05:32.044217"
+  },
+  {
+    "session_id": "c39105e6-8148-4d28-ba13-5707428d9a1b",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/c39105e6-8148-4d28-ba13-5707428d9a1b.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "hook_event_name": "SessionEnd",
+    "reason": "other",
+    "execution_mode": "NORMAL",
+    "logged_at": "2025-10-27T12:05:37.986612"
+  }
+]

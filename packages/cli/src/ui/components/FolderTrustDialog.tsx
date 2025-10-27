@@ -105,7 +105,7 @@ export const FolderTrustDialog: React.FC<FolderTrustDialogProps> = ({
       {isRestarting && (
         <Box marginLeft={1} marginTop={1}>
           <Text color={theme.status.warning}>
-            Gemini CLI is restarting to apply the trust changes...
+            HiveCode is restarting to apply the trust changes...
           </Text>
         </Box>
       )}
