@@ -171,10 +171,17 @@ export class OllamaHttpClient {
 
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
+      let lastStatus = '';
 
       while (true) {
         const { done, value } = await reader.read();
-        if (done) break;
+        if (done) {
+          // Stream completed successfully
+          if (onProgress && lastStatus !== 'success') {
+            onProgress('Pull complete');
+          }
+          break;
+        }
 
         const chunk = decoder.decode(value);
         const lines = chunk.split('\n').filter((line) => line.trim());
@@ -183,13 +190,21 @@ export class OllamaHttpClient {
           try {
             const json = JSON.parse(line);
             if (json.status && onProgress) {
+              lastStatus = json.status;
               onProgress(json.status);
+            }
+            // Check for completion markers
+            if (json.status === 'success' && onProgress) {
+              onProgress('Download successful');
             }
           } catch (_e) {
             // Ignore JSON parse errors
           }
         }
       }
+
+      // Ensure the reader is released
+      reader.releaseLock();
     } catch (error) {
       if (error instanceof TypeError && error.message.includes('fetch')) {
         throw new Error(

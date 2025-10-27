@@ -146,10 +146,21 @@ export const DialogManager = ({
     return (
       <OllamaModelSelector
         onSelect={async (modelName: string) => {
-          // Save the selected model to settings
-          settings.setValue('user', 'security.auth.ollamaModel', modelName);
-          // Close the dialog
-          uiActions.closeOllamaModelDialog();
+          try {
+            // Save the selected model to settings
+            await settings.setValue(
+              'user',
+              'security.auth.ollamaModel',
+              modelName,
+            );
+
+            // Close the dialog after saving
+            uiActions.closeOllamaModelDialog();
+          } catch (err) {
+            console.error('Failed to save Ollama model setting:', err);
+            // Still close the dialog even if settings save fails
+            uiActions.closeOllamaModelDialog();
+          }
         }}
         onCancel={uiActions.closeOllamaModelDialog}
       />

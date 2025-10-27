@@ -107,10 +107,17 @@ export function OllamaModelSelector({
           setDownloadProgress(progress);
         });
 
-        setDownloadProgress('Download complete!');
-        setTimeout(() => {
-          onSelect(modelName);
-        }, 500);
+        setDownloadProgress('Download complete! Configuring...');
+
+        // Wait a moment for UI update, then proceed
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
+        // Call onSelect and handle any errors
+        try {
+          await Promise.resolve(onSelect(modelName));
+        } catch (selectErr) {
+          console.error('Error in onSelect:', selectErr);
+        }
       } catch (err) {
         setError(
           `Failed to download model: ${err instanceof Error ? err.message : 'Unknown error'}`,
