@@ -43,5 +43,11 @@ export function validateAuthMethod(authMethod: string): string | null {
     return null;
   }
 
+  if (authMethod === AuthType.USE_OLLAMA) {
+    // Ollama runs locally - no API key required
+    // The health check will be performed when creating the content generator
+    return null;
+  }
+
   return 'Invalid auth method selected.';
 }
