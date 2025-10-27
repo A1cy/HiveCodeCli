@@ -30,6 +30,11 @@ export * from './core/geminiRequest.js';
 export * from './core/coreToolScheduler.js';
 export * from './core/nonInteractiveToolExecutor.js';
 
+// Export Ollama providers
+export * from './providers/ollama-client.js';
+export * from './providers/ollama-adapter.js';
+export * from './providers/ollama-content-generator.js';
+
 export * from './fallback/types.js';
 
 export * from './code_assist/codeAssist.js';
