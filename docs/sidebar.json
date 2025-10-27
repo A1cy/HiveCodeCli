@@ -16,7 +16,7 @@
     "label": "Get Started",
     "items": [
       {
-        "label": "Gemini CLI Quickstart",
+        "label": "HiveCode Quickstart",
         "slug": "docs/get-started"
       },
       {

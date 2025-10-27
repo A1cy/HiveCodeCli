@@ -167,7 +167,7 @@ describe('extension tests', () => {
       expect(extensions[0].name).toBe('test-extension');
     });
 
-    it('should load context file path when GEMINI.md is present', () => {
+    it('should load context file path when HIVECODE.md is present', () => {
       createExtension({
         extensionsDir: userExtensionsDir,
         name: 'ext1',
@@ -186,7 +186,7 @@ describe('extension tests', () => {
       const ext1 = extensions.find((e) => e.name === 'ext1');
       const ext2 = extensions.find((e) => e.name === 'ext2');
       expect(ext1?.contextFiles).toEqual([
-        path.join(userExtensionsDir, 'ext1', 'GEMINI.md'),
+        path.join(userExtensionsDir, 'ext1', 'HIVECODE.md'),
       ]);
       expect(ext2?.contextFiles).toEqual([]);
     });

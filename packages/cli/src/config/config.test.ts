@@ -619,7 +619,7 @@ describe('Hierarchical Memory Loading (config.ts) - Placeholder Suite', () => {
         name: 'ext1',
         id: 'ext1-id',
         version: '1.0.0',
-        contextFiles: ['/path/to/ext1/GEMINI.md'],
+        contextFiles: ['/path/to/ext1/HIVECODE.md'],
         isActive: true,
       },
       {
@@ -678,7 +678,7 @@ describe('Hierarchical Memory Loading (config.ts) - Placeholder Suite', () => {
     );
     const MOCK_GLOBAL_PATH_LOCAL = path.join(
       MOCK_GEMINI_DIR_LOCAL,
-      'GEMINI.md',
+      'HIVECODE.md',
     );
     mockFs({
       [MOCK_GLOBAL_PATH_LOCAL]: { type: 'file', content: 'GlobalContentOnly' },

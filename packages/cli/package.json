@@ -1,7 +1,7 @@
 {
   "name": "@google/gemini-cli",
   "version": "0.12.0-nightly.20251022.0542de95",
-  "description": "Gemini CLI",
+  "description": "HiveCode",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/A1cy/HiveCodeCli.git"

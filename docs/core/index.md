@@ -1,6 +1,6 @@
 # HiveCode Core
 
-HiveCode's core package (`packages/core`) is the backend portion of Gemini CLI,
+HiveCode's core package (`packages/core`) is the backend portion of HiveCode,
 handling communication with the Gemini API, managing tools, and processing
 requests sent from `packages/cli`. For a general overview of HiveCode, see the
 [main documentation page](../index.md).

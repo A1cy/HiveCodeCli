@@ -548,7 +548,7 @@ Logging in with Google... Please restart HiveCode to continue.
     historyManager.addItem(
       {
         type: MessageType.INFO,
-        text: 'Refreshing hierarchical memory (GEMINI.md or other context files)...',
+        text: 'Refreshing hierarchical memory (HIVECODE.md or other context files)...',
       },
       Date.now(),
     );
