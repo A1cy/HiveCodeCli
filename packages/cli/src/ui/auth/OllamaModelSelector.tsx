@@ -316,6 +316,8 @@ export function OllamaModelSelector({
   const [downloadProgress, setDownloadProgress] = useState('');
   const [selectedModel, setSelectedModel] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [showRestartMessage, setShowRestartMessage] = useState(false);
+  const [savedModelName, setSavedModelName] = useState<string>('');
 
   const ollamaClient = useMemo(() => new OllamaHttpClient(), []);
 
@@ -343,7 +345,15 @@ export function OllamaModelSelector({
 
       if (isInstalled) {
         // Model already installed, proceed
-        onSelect(modelName);
+        try {
+          await Promise.resolve(onSelect(modelName));
+          // Show restart message after successful save
+          setSavedModelName(modelName);
+          setShowRestartMessage(true);
+        } catch (selectErr) {
+          console.error('Error in onSelect:', selectErr);
+          setError('Failed to save model settings');
+        }
         return;
       }
 
@@ -356,7 +366,7 @@ export function OllamaModelSelector({
           setDownloadProgress(progress);
         });
 
-        setDownloadProgress('Download complete! Configuring...');
+        setDownloadProgress('Download complete! Saving settings...');
 
         // Wait a moment for UI update, then proceed
         await new Promise((resolve) => setTimeout(resolve, 500));
@@ -364,8 +374,14 @@ export function OllamaModelSelector({
         // Call onSelect and handle any errors
         try {
           await Promise.resolve(onSelect(modelName));
+          // Show restart message after successful save
+          setSavedModelName(modelName);
+          setShowRestartMessage(true);
+          setIsDownloading(false);
         } catch (selectErr) {
           console.error('Error in onSelect:', selectErr);
+          setError('Failed to save model settings');
+          setIsDownloading(false);
         }
       } catch (err) {
         setError(
@@ -382,7 +398,12 @@ export function OllamaModelSelector({
   useKeypress(
     (key) => {
       if (key.name === 'escape' && !isDownloading) {
-        onCancel();
+        if (showRestartMessage) {
+          // Close restart message and the dialog
+          onCancel();
+        } else {
+          onCancel();
+        }
       }
     },
     { isActive: true },
@@ -442,6 +463,72 @@ export function OllamaModelSelector({
         <Box marginTop={1}>
           <Text color={theme.text.secondary}>
             Please wait, do not interrupt the download
+          </Text>
+        </Box>
+      </Box>
+    );
+  }
+
+  if (showRestartMessage) {
+    const modelInfo = RECOMMENDED_MODELS.find((m) => m.name === savedModelName);
+    return (
+      <Box
+        borderStyle="round"
+        borderColor={theme.border.default}
+        flexDirection="column"
+        padding={1}
+      >
+        <Text bold color={theme.status.success}>
+          ✓ Model saved successfully!
+        </Text>
+        <Box marginTop={1}>
+          <Text color={theme.text.accent}>
+            {modelInfo?.displayName} is now configured
+          </Text>
+        </Box>
+        <Box marginTop={1} paddingX={1}>
+          <Text bold color={theme.status.warning}>
+            ⚠️ RESTART REQUIRED
+          </Text>
+        </Box>
+        <Box marginTop={1}>
+          <Text color={theme.text.secondary}>
+            Please restart HiveCode for the Ollama model to activate:
+          </Text>
+        </Box>
+        <Box marginTop={1} paddingLeft={2}>
+          <Text color={theme.text.secondary}>
+            1. Type{' '}
+            <Text bold color={theme.text.accent}>
+              /quit
+            </Text>{' '}
+            or press{' '}
+            <Text bold color={theme.text.accent}>
+              Ctrl+C
+            </Text>
+          </Text>
+        </Box>
+        <Box paddingLeft={2}>
+          <Text color={theme.text.secondary}>
+            2. Run{' '}
+            <Text bold color={theme.text.accent}>
+              hivecode
+            </Text>{' '}
+            again
+          </Text>
+        </Box>
+        <Box marginTop={1}>
+          <Text color={theme.text.secondary}>
+            After restart, you&apos;ll see{' '}
+            <Text bold color={theme.text.accent}>
+              Using Ollama ({savedModelName})
+            </Text>{' '}
+            on startup
+          </Text>
+        </Box>
+        <Box marginTop={1}>
+          <Text color={theme.text.secondary}>
+            Press Esc to close this dialog
           </Text>
         </Box>
       </Box>
