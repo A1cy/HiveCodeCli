@@ -28,6 +28,7 @@ import { useSettings } from '../contexts/SettingsContext.js';
 import process from 'node:process';
 import { type UseHistoryManagerReturn } from '../hooks/useHistoryManager.js';
 import { IdeTrustChangeDialog } from './IdeTrustChangeDialog.js';
+import { SettingScope } from '../../config/settings.js';
 
 interface DialogManagerProps {
   addItem: UseHistoryManagerReturn['addItem'];
@@ -149,7 +150,7 @@ export const DialogManager = ({
           try {
             // Save the selected model to settings
             await settings.setValue(
-              'user',
+              SettingScope.User,
               'security.auth.ollamaModel',
               modelName,
             );
