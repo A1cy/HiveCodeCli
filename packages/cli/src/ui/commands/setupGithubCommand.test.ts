@@ -112,7 +112,7 @@ describe('setupGithubCommand', async () => {
 
     if (gitignoreExists) {
       const gitignoreContent = await fs.readFile(gitignorePath, 'utf8');
-      expect(gitignoreContent).toContain('.hivecode/);
+      expect(gitignoreContent).toContain('.hivecode/');
       expect(gitignoreContent).toContain('gha-creds-*.json');
     }
   });
@@ -196,7 +196,7 @@ describe('updateGitignore', () => {
     const content = await fs.readFile(gitignorePath, 'utf8');
 
     // Should add both entries since they don't actually exist as gitignore rules
-    expect(content).toContain('.hivecode/);
+    expect(content).toContain('.hivecode/');
     expect(content).toContain('gha-creds-*.json');
 
     // Verify the entries were added (not just mentioned in comments)
@@ -204,7 +204,7 @@ describe('updateGitignore', () => {
       .split('\n')
       .map((line) => line.split('#')[0].trim())
       .filter((line) => line);
-    expect(lines).toContain('.hivecode/);
+    expect(lines).toContain('.hivecode/');
     expect(lines).toContain('gha-creds-*.json');
     expect(lines).toContain('my-app.hivecode/config');
     expect(lines).toContain('some-other-gha-creds-file.json');

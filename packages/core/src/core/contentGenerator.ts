@@ -20,6 +20,7 @@ import type { UserTierId } from '../code_assist/types.js';
 import { LoggingContentGenerator } from './loggingContentGenerator.js';
 import { InstallationManager } from '../utils/installationManager.js';
 import { FakeContentGenerator } from './fakeContentGenerator.js';
+import { OllamaContentGenerator } from '../providers/ollama-content-generator.js';
 
 /**
  * Interface abstracting the core functionalities for generating content and counting tokens.
@@ -47,6 +48,7 @@ export enum AuthType {
   USE_GEMINI = 'gemini-api-key',
   USE_VERTEX_AI = 'vertex-ai',
   CLOUD_SHELL = 'cloud-shell',
+  USE_OLLAMA = 'ollama',
 }
 
 export type ContentGeneratorConfig = {
@@ -54,6 +56,8 @@ export type ContentGeneratorConfig = {
   vertexai?: boolean;
   authType?: AuthType;
   proxy?: string;
+  ollamaModel?: string;
+  ollamaBaseUrl?: string;
 };
 
 export function createContentGeneratorConfig(
@@ -68,10 +72,23 @@ export function createContentGeneratorConfig(
     undefined;
   const googleCloudLocation = process.env['GOOGLE_CLOUD_LOCATION'] || undefined;
 
+  // Ollama configuration
+  const useOllama = process.env['HIVECODE_USE_OLLAMA'] === 'true';
+  const ollamaModel = process.env['OLLAMA_MODEL'] || 'qwen2.5-coder';
+  const ollamaBaseUrl = process.env['OLLAMA_BASE_URL'] || 'http://localhost:11434';
+
   const contentGeneratorConfig: ContentGeneratorConfig = {
     authType,
     proxy: config?.getProxy(),
   };
+
+  // If Ollama is explicitly enabled, use it
+  if (useOllama || authType === AuthType.USE_OLLAMA) {
+    contentGeneratorConfig.authType = AuthType.USE_OLLAMA;
+    contentGeneratorConfig.ollamaModel = ollamaModel;
+    contentGeneratorConfig.ollamaBaseUrl = ollamaBaseUrl;
+    return contentGeneratorConfig;
+  }
 
   // If we are using Google auth or we are in Cloud Shell, there is nothing else to validate for now
   if (
@@ -108,6 +125,27 @@ export async function createContentGenerator(
 ): Promise<ContentGenerator> {
   if (gcConfig.fakeResponses) {
     return FakeContentGenerator.fromFile(gcConfig.fakeResponses);
+  }
+
+  // Ollama integration
+  if (config.authType === AuthType.USE_OLLAMA) {
+    const model = config.ollamaModel || 'qwen2.5-coder';
+    const baseUrl = config.ollamaBaseUrl || 'http://localhost:11434';
+
+    console.log(`🐝 HiveCode: Using Ollama (${model}) - 100% Free`);
+
+    const ollamaGenerator = new OllamaContentGenerator(model, baseUrl);
+
+    // Check health on initialization
+    const isHealthy = await ollamaGenerator.checkHealth();
+    if (!isHealthy) {
+      console.warn(
+        `⚠️  Warning: Ollama is not accessible at ${baseUrl}. Ensure Ollama is running with: ollama serve`,
+      );
+      console.warn(`⚠️  Model ${model} may not be available. Install with: ollama pull ${model}`);
+    }
+
+    return new LoggingContentGenerator(ollamaGenerator, gcConfig);
   }
 
   const version = process.env['CLI_VERSION'] || process.version;
