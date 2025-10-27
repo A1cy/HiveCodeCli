@@ -41,11 +41,11 @@ export const Tips: React.FC<TipsProps> = ({ config }) => {
         for more information.
       </Text>
       <Text color={theme.text.primary}>
-        {geminiMdFileCount === 0 ? '5.' : '4.'} Use{' '}
+        {geminiMdFileCount === 0 ? '5.' : '4.'} Type{' '}
         <Text bold color={theme.text.accent}>
-          /settings
+          /ollamaModelSelector
         </Text>{' '}
-        to configure Ollama models (llama3.2:1b, qwen3:4b, qwen2.5-coder).
+        to select and download Ollama models interactively.
       </Text>
     </Box>
   );

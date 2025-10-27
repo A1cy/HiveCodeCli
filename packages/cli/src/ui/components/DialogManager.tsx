@@ -19,6 +19,7 @@ import { PrivacyNotice } from '../privacy/PrivacyNotice.js';
 import { ProQuotaDialog } from './ProQuotaDialog.js';
 import { PermissionsModifyTrustDialog } from './PermissionsModifyTrustDialog.js';
 import { ModelDialog } from './ModelDialog.js';
+import { OllamaModelSelector } from './OllamaModelSelector.js';
 import { theme } from '../semantic-colors.js';
 import { useUIState } from '../contexts/UIStateContext.js';
 import { useUIActions } from '../contexts/UIActionsContext.js';
@@ -140,6 +141,14 @@ export const DialogManager = ({
   }
   if (uiState.isModelDialogOpen) {
     return <ModelDialog onClose={uiActions.closeModelDialog} />;
+  }
+  if (uiState.isOllamaModelDialogOpen) {
+    return (
+      <OllamaModelSelector
+        onClose={uiActions.closeOllamaModelDialog}
+        settings={settings}
+      />
+    );
   }
   if (uiState.isAuthenticating) {
     return (

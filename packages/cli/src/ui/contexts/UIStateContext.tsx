@@ -55,6 +55,7 @@ export interface UIState {
   quittingMessages: HistoryItem[] | null;
   isSettingsDialogOpen: boolean;
   isModelDialogOpen: boolean;
+  isOllamaModelDialogOpen: boolean;
   isPermissionsDialogOpen: boolean;
   slashCommands: readonly SlashCommand[] | undefined;
   pendingSlashCommandHistoryItems: HistoryItemWithoutId[];

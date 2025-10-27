@@ -469,6 +469,16 @@ Logging in with Google... Please restart HiveCode to continue.
   const { isModelDialogOpen, openModelDialog, closeModelDialog } =
     useModelCommand();
 
+  const [isOllamaModelDialogOpen, setOllamaModelDialogOpen] = useState(false);
+  const openOllamaModelDialog = useCallback(
+    () => setOllamaModelDialogOpen(true),
+    [],
+  );
+  const closeOllamaModelDialog = useCallback(
+    () => setOllamaModelDialogOpen(false),
+    [],
+  );
+
   const { toggleVimEnabled } = useVimMode();
 
   const slashCommandActions = useMemo(
@@ -480,6 +490,7 @@ Logging in with Google... Please restart HiveCode to continue.
       openSettingsDialog,
       openModelDialog,
       openPermissionsDialog,
+      openOllamaModelDialog,
       quit: (messages: HistoryItem[]) => {
         setQuittingMessages(messages);
         setTimeout(async () => {
@@ -499,6 +510,7 @@ Logging in with Google... Please restart HiveCode to continue.
       openEditorDialog,
       openSettingsDialog,
       openModelDialog,
+      openOllamaModelDialog,
       setQuittingMessages,
       setDebugMessage,
       setShowPrivacyNotice,
@@ -1155,6 +1167,7 @@ Logging in with Google... Please restart HiveCode to continue.
     isThemeDialogOpen ||
     isSettingsDialogOpen ||
     isModelDialogOpen ||
+    isOllamaModelDialogOpen ||
     isPermissionsDialogOpen ||
     isAuthenticating ||
     isAuthDialogOpen ||
@@ -1186,6 +1199,7 @@ Logging in with Google... Please restart HiveCode to continue.
       quittingMessages,
       isSettingsDialogOpen,
       isModelDialogOpen,
+      isOllamaModelDialogOpen,
       isPermissionsDialogOpen,
       slashCommands,
       pendingSlashCommandHistoryItems,
@@ -1267,6 +1281,7 @@ Logging in with Google... Please restart HiveCode to continue.
       quittingMessages,
       isSettingsDialogOpen,
       isModelDialogOpen,
+      isOllamaModelDialogOpen,
       isPermissionsDialogOpen,
       slashCommands,
       pendingSlashCommandHistoryItems,
@@ -1354,6 +1369,7 @@ Logging in with Google... Please restart HiveCode to continue.
       exitPrivacyNotice,
       closeSettingsDialog,
       closeModelDialog,
+      closeOllamaModelDialog,
       closePermissionsDialog,
       setShellModeActive,
       vimHandleInput,
@@ -1380,6 +1396,7 @@ Logging in with Google... Please restart HiveCode to continue.
       exitPrivacyNotice,
       closeSettingsDialog,
       closeModelDialog,
+      closeOllamaModelDialog,
       closePermissionsDialog,
       setShellModeActive,
       vimHandleInput,
