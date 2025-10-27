@@ -22,32 +22,125 @@ interface OllamaModelInfo {
 }
 
 const RECOMMENDED_MODELS: OllamaModelInfo[] = [
+  // ===== LIGHTWEIGHT MODELS (< 2GB) - Best for slow PCs =====
   {
     name: 'llama3.2:1b',
-    displayName: 'Llama 3.2 1B (Recommended)',
-    description: 'Smallest & fastest - Great for basic tasks, works on any PC',
+    displayName: '⚡ Llama 3.2 1B (Fastest)',
+    description: 'Smallest & fastest - Works on any PC, great for basic tasks',
     size: '1.3GB',
     tier: 'lightweight',
   },
   {
+    name: 'phi3:mini',
+    displayName: '⚡ Phi 3 Mini',
+    description: 'Microsoft AI - Very efficient, good reasoning for its size',
+    size: '2.3GB',
+    tier: 'lightweight',
+  },
+  {
+    name: 'gemma:2b',
+    displayName: '⚡ Gemma 2B',
+    description: 'Google AI - Fast and lightweight, good for chat',
+    size: '1.7GB',
+    tier: 'lightweight',
+  },
+
+  // ===== MID-TIER MODELS (2-5GB) - Balanced =====
+  {
     name: 'qwen2.5:3b',
-    displayName: 'Qwen 2.5 3B',
-    description: 'Balanced performance - Good for general coding tasks',
+    displayName: '🎯 Qwen 2.5 3B (Recommended)',
+    description: 'Balanced performance - Best overall for most users',
     size: '2.1GB',
     tier: 'midtier',
   },
   {
+    name: 'llama3.2:3b',
+    displayName: '🎯 Llama 3.2 3B',
+    description: 'Meta AI - Great all-rounder, good for conversations',
+    size: '2.0GB',
+    tier: 'midtier',
+  },
+  {
+    name: 'mistral:7b',
+    displayName: '🎯 Mistral 7B',
+    description: 'Popular & powerful - Excellent instruction following',
+    size: '4.1GB',
+    tier: 'midtier',
+  },
+  {
+    name: 'phi3:medium',
+    displayName: '🎯 Phi 3 Medium',
+    description: 'Microsoft AI - Strong reasoning, good for complex tasks',
+    size: '7.9GB',
+    tier: 'midtier',
+  },
+
+  // ===== CODING SPECIALISTS (3-8GB) - Best for coding =====
+  {
     name: 'qwen2.5-coder:7b',
-    displayName: 'Qwen 2.5 Coder 7B',
-    description: 'Best coding quality - Requires good PC with 8GB+ RAM',
+    displayName: '💻 Qwen 2.5 Coder 7B',
+    description: 'Top coding model - Excellent for code generation & debugging',
     size: '4.7GB',
     tier: 'large',
   },
   {
     name: 'deepseek-coder:6.7b',
-    displayName: 'DeepSeek Coder 6.7B',
-    description: 'Excellent for code - Good balance of speed and quality',
+    displayName: '💻 DeepSeek Coder 6.7B',
+    description: 'Specialized coder - Great code understanding & completion',
     size: '3.8GB',
+    tier: 'large',
+  },
+  {
+    name: 'codellama:7b',
+    displayName: '💻 CodeLlama 7B',
+    description: 'Meta code model - Strong at code generation & debugging',
+    size: '3.8GB',
+    tier: 'large',
+  },
+  {
+    name: 'starcoder2:7b',
+    displayName: '💻 StarCoder2 7B',
+    description: 'Code specialist - Trained on 600+ programming languages',
+    size: '4.0GB',
+    tier: 'large',
+  },
+
+  // ===== HIGH-QUALITY MODELS (8GB+) - Best quality, needs good PC =====
+  {
+    name: 'llama3.1:8b',
+    displayName: '🚀 Llama 3.1 8B',
+    description: 'Meta flagship - Excellent reasoning & long context',
+    size: '4.7GB',
+    tier: 'large',
+  },
+  {
+    name: 'qwen2.5:14b',
+    displayName: '🚀 Qwen 2.5 14B',
+    description: 'Large model - Best quality, needs 16GB+ RAM',
+    size: '9.0GB',
+    tier: 'large',
+  },
+  {
+    name: 'mixtral:8x7b',
+    displayName: '🚀 Mixtral 8x7B (Expert)',
+    description: 'Mixture of experts - Near GPT-4 quality, needs powerful PC',
+    size: '26GB',
+    tier: 'large',
+  },
+
+  // ===== SPECIALIZED MODELS =====
+  {
+    name: 'neural-chat:7b',
+    displayName: '💬 Neural Chat 7B',
+    description: 'Conversation specialist - Great for chat & dialogue',
+    size: '4.1GB',
+    tier: 'midtier',
+  },
+  {
+    name: 'openchat:7b',
+    displayName: '💬 OpenChat 7B',
+    description: 'Chat optimized - Friendly & helpful responses',
+    size: '4.1GB',
     tier: 'midtier',
   },
 ];
@@ -208,11 +301,16 @@ export function OllamaModelSelector({
       width="100%"
     >
       <Text bold color={theme.text.primary}>
-        🐝 Select Ollama Model
+        🐝 Select Ollama Model ({RECOMMENDED_MODELS.length} available)
       </Text>
       <Box marginTop={1}>
+        <Text color={theme.text.secondary}>
+          ⚡ Lightweight • 🎯 Balanced • 💻 Coding • 🚀 High-Quality • 💬 Chat
+        </Text>
+      </Box>
+      <Box marginTop={1}>
         <Text color={theme.text.primary}>
-          Choose a model based on your system capabilities:
+          Choose based on your system (scroll with ↑↓):
         </Text>
       </Box>
 
@@ -222,6 +320,8 @@ export function OllamaModelSelector({
           initialIndex={0}
           onSelect={handleModelSelect}
           isFocused={!isDownloading}
+          showScrollArrows={true}
+          maxItemsToShow={8}
           onHighlight={(modelName) => {
             // Show model details when highlighted
             const model = RECOMMENDED_MODELS.find((m) => m.name === modelName);
@@ -271,14 +371,15 @@ export function OllamaModelSelector({
 
       <Box marginTop={1}>
         <Text color={theme.text.secondary}>
-          (Use ↑↓ to navigate, Enter to select, Esc to cancel)
+          (↑↓ scroll • Enter select • Esc cancel • {installedModels.length}{' '}
+          installed)
         </Text>
       </Box>
 
       {installedModels.length > 0 && (
         <Box marginTop={1}>
           <Text color={theme.status.success}>
-            ✓ Models with checkmark are already installed
+            ✓ Installed models ready to use instantly
           </Text>
         </Box>
       )}
