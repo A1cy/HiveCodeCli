@@ -40,6 +40,13 @@ export const Tips: React.FC<TipsProps> = ({ config }) => {
         </Text>{' '}
         for more information.
       </Text>
+      <Text color={theme.text.primary}>
+        {geminiMdFileCount === 0 ? '5.' : '4.'} Use{' '}
+        <Text bold color={theme.text.accent}>
+          /settings
+        </Text>{' '}
+        to configure Ollama models (llama3.2:1b, qwen3:4b, qwen2.5-coder).
+      </Text>
     </Box>
   );
 };

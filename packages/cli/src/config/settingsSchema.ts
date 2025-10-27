@@ -1008,10 +1008,10 @@ const SETTINGS_SCHEMA = {
             label: 'Ollama Model',
             category: 'Security',
             requiresRestart: true,
-            default: undefined as string | undefined,
+            default: 'llama3.2:1b' as string | undefined,
             description:
-              'The selected Ollama model name (e.g., llama3.2:1b, qwen3:4b, qwen2.5-coder).',
-            showInDialog: false,
+              'Select Ollama model: llama3.2:1b (1.3GB, fast), qwen3:4b (2.5GB, balanced), qwen2.5-coder (4.7GB, best quality). Requires Ollama to be installed and running.',
+            showInDialog: true,
           },
         },
       },
