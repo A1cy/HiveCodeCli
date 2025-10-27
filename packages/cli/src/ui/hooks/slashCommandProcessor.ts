@@ -49,6 +49,7 @@ interface SlashCommandProcessorActions {
   openModelDialog: () => void;
   openPermissionsDialog: () => void;
   openOllamaModelDialog: () => void;
+  openMhgModelDialog: () => void;
   quit: (messages: HistoryItem[]) => void;
   setDebugMessage: (message: string) => void;
   toggleCorgiMode: () => void;
@@ -387,6 +388,9 @@ export const useSlashCommandProcessor = (
                       return { type: 'handled' };
                     case 'ollamaModel':
                       actions.openOllamaModelDialog();
+                      return { type: 'handled' };
+                    case 'mhgModel':
+                      actions.openMhgModelDialog();
                       return { type: 'handled' };
                     case 'help':
                       return { type: 'handled' };

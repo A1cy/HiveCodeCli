@@ -56,6 +56,7 @@ export interface UIState {
   isSettingsDialogOpen: boolean;
   isModelDialogOpen: boolean;
   isOllamaModelDialogOpen: boolean;
+  isMhgModelDialogOpen: boolean;
   isPermissionsDialogOpen: boolean;
   slashCommands: readonly SlashCommand[] | undefined;
   pendingSlashCommandHistoryItems: HistoryItemWithoutId[];

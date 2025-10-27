@@ -20,6 +20,7 @@ import { ProQuotaDialog } from './ProQuotaDialog.js';
 import { PermissionsModifyTrustDialog } from './PermissionsModifyTrustDialog.js';
 import { ModelDialog } from './ModelDialog.js';
 import { OllamaModelSelector } from '../auth/OllamaModelSelector.js';
+import { BedrockModelSelector } from '../auth/BedrockModelSelector.js';
 import { theme } from '../semantic-colors.js';
 import { useUIState } from '../contexts/UIStateContext.js';
 import { useUIActions } from '../contexts/UIActionsContext.js';
@@ -171,6 +172,37 @@ export const DialogManager = ({
           }
         }}
         onCancel={uiActions.closeOllamaModelDialog}
+      />
+    );
+  }
+  if (uiState.isMhgModelDialogOpen) {
+    return (
+      <BedrockModelSelector
+        onSelect={async (modelId: string) => {
+          try {
+            // Save the selected model to settings
+            await settings.setValue(
+              SettingScope.User,
+              'security.auth.bedrockModel',
+              modelId,
+            );
+
+            // Switch to Bedrock authentication
+            await settings.setValue(
+              SettingScope.User,
+              'security.auth.selectedType',
+              'aws-bedrock',
+            );
+
+            // Close the dialog after saving
+            uiActions.closeMhgModelDialog();
+          } catch (err) {
+            console.error('Failed to save Bedrock model setting:', err);
+            // Still close the dialog even if settings save fails
+            uiActions.closeMhgModelDialog();
+          }
+        }}
+        onCancel={uiActions.closeMhgModelDialog}
       />
     );
   }

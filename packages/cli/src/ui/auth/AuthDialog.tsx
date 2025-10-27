@@ -67,6 +67,11 @@ export function AuthDialog({
       value: AuthType.USE_OLLAMA,
       key: AuthType.USE_OLLAMA,
     },
+    {
+      label: '🌟 MHG AI - Premium Models (AWS Bedrock)',
+      value: AuthType.USE_BEDROCK,
+      key: AuthType.USE_BEDROCK,
+    },
   ];
 
   if (settings.merged.security?.auth?.enforcedType) {
@@ -95,6 +100,10 @@ export function AuthDialog({
 
     if (process.env['HIVECODE_USE_OLLAMA'] === 'true') {
       return item.value === AuthType.USE_OLLAMA;
+    }
+
+    if (process.env['HIVECODE_USE_BEDROCK'] === 'true') {
+      return item.value === AuthType.USE_BEDROCK;
     }
 
     if (process.env['GEMINI_API_KEY']) {

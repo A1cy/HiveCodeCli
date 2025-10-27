@@ -21,6 +21,7 @@ import { LoggingContentGenerator } from './loggingContentGenerator.js';
 import { InstallationManager } from '../utils/installationManager.js';
 import { FakeContentGenerator } from './fakeContentGenerator.js';
 import { OllamaContentGenerator } from '../providers/ollama-content-generator.js';
+import { BedrockContentGenerator } from '../providers/bedrock-content-generator.js';
 
 /**
  * Interface abstracting the core functionalities for generating content and counting tokens.
@@ -49,6 +50,7 @@ export enum AuthType {
   USE_VERTEX_AI = 'vertex-ai',
   CLOUD_SHELL = 'cloud-shell',
   USE_OLLAMA = 'ollama',
+  USE_BEDROCK = 'aws-bedrock',
 }
 
 export type ContentGeneratorConfig = {
@@ -58,6 +60,9 @@ export type ContentGeneratorConfig = {
   proxy?: string;
   ollamaModel?: string;
   ollamaBaseUrl?: string;
+  bedrockModel?: string;
+  bedrockApiKey?: string;
+  bedrockRegion?: string;
 };
 
 export function createContentGeneratorConfig(
@@ -78,10 +83,27 @@ export function createContentGeneratorConfig(
   const ollamaBaseUrl =
     process.env['OLLAMA_BASE_URL'] || 'http://localhost:11434';
 
+  // Bedrock configuration
+  const useBedrock = process.env['HIVECODE_USE_BEDROCK'] === 'true';
+  const bedrockModel = process.env['BEDROCK_MODEL'] || 'amazon.nova-lite-v1:0';
+  const bedrockApiKey =
+    process.env['BEDROCK_API_KEY'] ||
+    'ABSKQmVkcm9ja0FQSUtleS13ZDA5LWF0LTEyNDczNzE5NjQzMDpHaG1jK3lxaVJZNC9hT0VVQzNxMlgxb3ZpdTNEMml0OFo4djRaZzR3UVE3Um5pOWFoZ2c4aGI2VGFHZz0=';
+  const bedrockRegion = process.env['BEDROCK_REGION'] || 'us-east-1';
+
   const contentGeneratorConfig: ContentGeneratorConfig = {
     authType,
     proxy: config?.getProxy(),
   };
+
+  // If Bedrock is explicitly enabled, use it
+  if (useBedrock || authType === AuthType.USE_BEDROCK) {
+    contentGeneratorConfig.authType = AuthType.USE_BEDROCK;
+    contentGeneratorConfig.bedrockModel = bedrockModel;
+    contentGeneratorConfig.bedrockApiKey = bedrockApiKey;
+    contentGeneratorConfig.bedrockRegion = bedrockRegion;
+    return contentGeneratorConfig;
+  }
 
   // If Ollama is explicitly enabled, use it
   if (useOllama || authType === AuthType.USE_OLLAMA) {
@@ -126,6 +148,36 @@ export async function createContentGenerator(
 ): Promise<ContentGenerator> {
   if (gcConfig.fakeResponses) {
     return FakeContentGenerator.fromFile(gcConfig.fakeResponses);
+  }
+
+  // AWS Bedrock integration
+  if (config.authType === AuthType.USE_BEDROCK) {
+    const model = config.bedrockModel || 'amazon.nova-lite-v1:0';
+    const apiKey = config.bedrockApiKey;
+    const region = config.bedrockRegion || 'us-east-1';
+
+    console.log(`🌟 HiveCode: Using MHG AI / AWS Bedrock (${model})`);
+
+    const bedrockGenerator = new BedrockContentGenerator(model, apiKey, region);
+
+    // Check health on initialization
+    const isHealthy = await bedrockGenerator.checkHealth();
+
+    if (!isHealthy) {
+      console.error('');
+      console.error('❌ Failed to connect to AWS Bedrock.');
+      console.error('');
+      console.error('Please check your configuration:');
+      console.error(`  Model: ${model}`);
+      console.error(`  Region: ${region}`);
+      console.error('  API Key: [configured]');
+      console.error('');
+      console.error('Contact support if the issue persists.');
+      console.error('');
+      process.exit(1);
+    }
+
+    return new LoggingContentGenerator(bedrockGenerator, gcConfig);
   }
 
   // Ollama integration

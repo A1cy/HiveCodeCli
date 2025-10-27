@@ -479,6 +479,13 @@ Logging in with Google... Please restart HiveCode to continue.
     [],
   );
 
+  const [isMhgModelDialogOpen, setMhgModelDialogOpen] = useState(false);
+  const openMhgModelDialog = useCallback(() => setMhgModelDialogOpen(true), []);
+  const closeMhgModelDialog = useCallback(
+    () => setMhgModelDialogOpen(false),
+    [],
+  );
+
   const { toggleVimEnabled } = useVimMode();
 
   const slashCommandActions = useMemo(
@@ -491,6 +498,7 @@ Logging in with Google... Please restart HiveCode to continue.
       openModelDialog,
       openPermissionsDialog,
       openOllamaModelDialog,
+      openMhgModelDialog,
       quit: (messages: HistoryItem[]) => {
         setQuittingMessages(messages);
         setTimeout(async () => {
@@ -511,6 +519,7 @@ Logging in with Google... Please restart HiveCode to continue.
       openSettingsDialog,
       openModelDialog,
       openOllamaModelDialog,
+      openMhgModelDialog,
       setQuittingMessages,
       setDebugMessage,
       setShowPrivacyNotice,
@@ -1200,6 +1209,7 @@ Logging in with Google... Please restart HiveCode to continue.
       isSettingsDialogOpen,
       isModelDialogOpen,
       isOllamaModelDialogOpen,
+      isMhgModelDialogOpen,
       isPermissionsDialogOpen,
       slashCommands,
       pendingSlashCommandHistoryItems,
@@ -1282,6 +1292,7 @@ Logging in with Google... Please restart HiveCode to continue.
       isSettingsDialogOpen,
       isModelDialogOpen,
       isOllamaModelDialogOpen,
+      isMhgModelDialogOpen,
       isPermissionsDialogOpen,
       slashCommands,
       pendingSlashCommandHistoryItems,
@@ -1370,6 +1381,7 @@ Logging in with Google... Please restart HiveCode to continue.
       closeSettingsDialog,
       closeModelDialog,
       closeOllamaModelDialog,
+      closeMhgModelDialog,
       closePermissionsDialog,
       setShellModeActive,
       vimHandleInput,
@@ -1397,6 +1409,7 @@ Logging in with Google... Please restart HiveCode to continue.
       closeSettingsDialog,
       closeModelDialog,
       closeOllamaModelDialog,
+      closeMhgModelDialog,
       closePermissionsDialog,
       setShellModeActive,
       vimHandleInput,

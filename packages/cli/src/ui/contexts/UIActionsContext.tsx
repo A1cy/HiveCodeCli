@@ -31,6 +31,7 @@ export interface UIActions {
   closeSettingsDialog: () => void;
   closeModelDialog: () => void;
   closeOllamaModelDialog: () => void;
+  closeMhgModelDialog: () => void;
   closePermissionsDialog: () => void;
   setShellModeActive: (value: boolean) => void;
   vimHandleInput: (key: Key) => boolean;

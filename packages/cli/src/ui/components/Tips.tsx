@@ -51,6 +51,17 @@ export const Tips: React.FC<TipsProps> = ({ config }) => {
         </Text>{' '}
         local AI models.
       </Text>
+      <Text color={theme.text.primary}>
+        {geminiMdFileCount === 0 ? '6.' : '5.'} Type{' '}
+        <Text bold color={theme.text.accent}>
+          /mhgModelSelector
+        </Text>{' '}
+        for{' '}
+        <Text bold color={theme.status.warning}>
+          PREMIUM
+        </Text>{' '}
+        MHG AI models powered by AWS Bedrock (Amazon Nova, Meta Llama).
+      </Text>
     </Box>
   );
 };
