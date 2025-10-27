@@ -19,6 +19,8 @@ interface OllamaModelInfo {
   description: string;
   size: string;
   tier: 'lightweight' | 'midtier' | 'large';
+  ram: string;
+  cpu: string;
 }
 
 const RECOMMENDED_MODELS: OllamaModelInfo[] = [
@@ -28,6 +30,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
     displayName: '⚡ Llama 3.2 1B (Fastest)',
     description: 'Smallest & fastest - Works on any PC, great for basic tasks',
     size: '1.3GB',
+    ram: '4GB',
+    cpu: 'Any CPU',
     tier: 'lightweight',
   },
   {
@@ -35,6 +39,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
     displayName: '⚡ Phi 3 Mini',
     description: 'Microsoft AI - Very efficient, good reasoning for its size',
     size: '2.3GB',
+    ram: '4-6GB',
+    cpu: 'Mid-range CPU',
     tier: 'lightweight',
   },
   {
@@ -42,6 +48,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
     displayName: '⚡ Gemma 2B',
     description: 'Google AI - Fast and lightweight, good for chat',
     size: '1.7GB',
+    ram: '4GB',
+    cpu: 'Any CPU',
     tier: 'lightweight',
   },
 
@@ -51,6 +59,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
     displayName: '🎯 Qwen 2.5 3B (Recommended)',
     description: 'Balanced performance - Best overall for most users',
     size: '2.1GB',
+    ram: '6GB',
+    cpu: 'Mid-range CPU',
     tier: 'midtier',
   },
   {
@@ -58,13 +68,17 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
     displayName: '🎯 Llama 3.2 3B',
     description: 'Meta AI - Great all-rounder, good for conversations',
     size: '2.0GB',
+    ram: '6GB',
+    cpu: 'Mid-range CPU',
     tier: 'midtier',
   },
   {
     name: 'mistral:7b',
-    displayName: '🎯 Mistral 7B',
-    description: 'Popular & powerful - Excellent instruction following',
+    displayName: '🎯 Mistral 7B (GPT OSS)',
+    description: 'GPT-quality OSS model - Excellent instruction following',
     size: '4.1GB',
+    ram: '8GB',
+    cpu: 'Good CPU',
     tier: 'midtier',
   },
   {
@@ -72,6 +86,73 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
     displayName: '🎯 Phi 3 Medium',
     description: 'Microsoft AI - Strong reasoning, good for complex tasks',
     size: '7.9GB',
+    ram: '12GB',
+    cpu: 'Good CPU',
+    tier: 'midtier',
+  },
+
+  // ===== GPT OSS MODELS - Open Source GPT Alternatives =====
+  {
+    name: 'vicuna:7b',
+    displayName: '🔓 Vicuna 7B (GPT OSS)',
+    description: 'GPT-3.5 quality OSS - Fine-tuned from Llama, chat optimized',
+    size: '3.8GB',
+    ram: '8GB',
+    cpu: 'Good CPU',
+    tier: 'midtier',
+  },
+  {
+    name: 'orca-mini:7b',
+    displayName: '🔓 Orca Mini 7B (GPT OSS)',
+    description: 'GPT-3.5 quality OSS - Microsoft Orca training, reasoning',
+    size: '3.8GB',
+    ram: '8GB',
+    cpu: 'Good CPU',
+    tier: 'midtier',
+  },
+  {
+    name: 'wizardlm:7b',
+    displayName: '🔓 WizardLM 7B (GPT OSS)',
+    description: 'GPT-quality OSS - Complex instructions, problem solving',
+    size: '3.8GB',
+    ram: '8GB',
+    cpu: 'Good CPU',
+    tier: 'midtier',
+  },
+  {
+    name: 'nous-hermes2:10.7b',
+    displayName: '🔓 Nous Hermes 2 10.7B (GPT OSS)',
+    description: 'GPT-4 quality OSS - Advanced reasoning, long context',
+    size: '6.4GB',
+    ram: '12GB',
+    cpu: 'Good CPU',
+    tier: 'large',
+  },
+  {
+    name: 'dolphin-mixtral:8x7b',
+    displayName: '🔓 Dolphin Mixtral 8x7B (GPT OSS)',
+    description: 'GPT-4 quality OSS - Uncensored, excellent reasoning',
+    size: '26GB',
+    ram: '32GB',
+    cpu: 'High-end CPU/GPU',
+    tier: 'large',
+  },
+  {
+    name: 'solar:10.7b',
+    displayName: '🔓 Solar 10.7B (GPT OSS)',
+    description: 'GPT-quality OSS - Upstage AI, strong performance',
+    size: '6.1GB',
+    ram: '12GB',
+    cpu: 'Good CPU',
+    tier: 'large',
+  },
+  {
+    name: 'yi:6b',
+    displayName: '🔓 Yi 6B (GPT OSS)',
+    description: 'GPT-quality OSS - Chinese & English, multilingual',
+    size: '3.5GB',
+    ram: '8GB',
+    cpu: 'Good CPU',
     tier: 'midtier',
   },
 
@@ -81,6 +162,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
     displayName: '💻 Qwen 2.5 Coder 7B',
     description: 'Top coding model - Excellent for code generation & debugging',
     size: '4.7GB',
+    ram: '8GB',
+    cpu: 'Good CPU',
     tier: 'large',
   },
   {
@@ -88,6 +171,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
     displayName: '💻 DeepSeek Coder 6.7B',
     description: 'Specialized coder - Great code understanding & completion',
     size: '3.8GB',
+    ram: '8GB',
+    cpu: 'Good CPU',
     tier: 'large',
   },
   {
@@ -95,6 +180,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
     displayName: '💻 CodeLlama 7B',
     description: 'Meta code model - Strong at code generation & debugging',
     size: '3.8GB',
+    ram: '8GB',
+    cpu: 'Good CPU',
     tier: 'large',
   },
   {
@@ -102,6 +189,17 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
     displayName: '💻 StarCoder2 7B',
     description: 'Code specialist - Trained on 600+ programming languages',
     size: '4.0GB',
+    ram: '8GB',
+    cpu: 'Good CPU',
+    tier: 'large',
+  },
+  {
+    name: 'wizardcoder:7b',
+    displayName: '💻 WizardCoder 7B (GPT OSS)',
+    description: 'GPT-quality coding OSS - Complex code generation',
+    size: '3.8GB',
+    ram: '8GB',
+    cpu: 'Good CPU',
     tier: 'large',
   },
 
@@ -111,20 +209,53 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
     displayName: '🚀 Llama 3.1 8B',
     description: 'Meta flagship - Excellent reasoning & long context',
     size: '4.7GB',
+    ram: '10GB',
+    cpu: 'Good CPU',
+    tier: 'large',
+  },
+  {
+    name: 'llama3.1:70b',
+    displayName: '🚀 Llama 3.1 70B (GPT-4 Class)',
+    description: 'GPT-4 quality OSS - Meta flagship, exceptional reasoning',
+    size: '40GB',
+    ram: '48GB',
+    cpu: 'High-end CPU + GPU',
     tier: 'large',
   },
   {
     name: 'qwen2.5:14b',
     displayName: '🚀 Qwen 2.5 14B',
-    description: 'Large model - Best quality, needs 16GB+ RAM',
+    description: 'Large model - Best quality, advanced reasoning',
     size: '9.0GB',
+    ram: '16GB',
+    cpu: 'Good CPU',
+    tier: 'large',
+  },
+  {
+    name: 'qwen2.5:32b',
+    displayName: '🚀 Qwen 2.5 32B (GPT-4 Class)',
+    description: 'GPT-4 quality OSS - Top-tier performance, long context',
+    size: '19GB',
+    ram: '32GB',
+    cpu: 'High-end CPU/GPU',
     tier: 'large',
   },
   {
     name: 'mixtral:8x7b',
-    displayName: '🚀 Mixtral 8x7B (Expert)',
-    description: 'Mixture of experts - Near GPT-4 quality, needs powerful PC',
+    displayName: '🚀 Mixtral 8x7B (GPT-4 Class)',
+    description: 'GPT-4 quality OSS - Mixture of experts, exceptional',
     size: '26GB',
+    ram: '32GB',
+    cpu: 'High-end CPU/GPU',
+    tier: 'large',
+  },
+  {
+    name: 'mixtral:8x22b',
+    displayName: '🚀 Mixtral 8x22B (GPT-4+ Class)',
+    description: 'Best GPT OSS - Surpasses GPT-4, needs very powerful PC',
+    size: '80GB',
+    ram: '96GB+',
+    cpu: 'High-end GPU required',
     tier: 'large',
   },
 
@@ -134,6 +265,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
     displayName: '💬 Neural Chat 7B',
     description: 'Conversation specialist - Great for chat & dialogue',
     size: '4.1GB',
+    ram: '8GB',
+    cpu: 'Good CPU',
     tier: 'midtier',
   },
   {
@@ -141,6 +274,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
     displayName: '💬 OpenChat 7B',
     description: 'Chat optimized - Friendly & helpful responses',
     size: '4.1GB',
+    ram: '8GB',
+    cpu: 'Good CPU',
     tier: 'midtier',
   },
 ];
@@ -354,8 +489,12 @@ export function OllamaModelSelector({
                 <Box marginTop={1}>
                   <Text color={theme.text.secondary}>{model.description}</Text>
                 </Box>
-                <Box marginTop={1}>
+                <Box marginTop={1} flexDirection="row" gap={2}>
                   <Text color={theme.text.secondary}>Size: {model.size}</Text>
+                  <Text color={theme.text.secondary}>│</Text>
+                  <Text color={theme.text.secondary}>RAM: {model.ram}</Text>
+                  <Text color={theme.text.secondary}>│</Text>
+                  <Text color={theme.text.secondary}>CPU: {model.cpu}</Text>
                 </Box>
               </>
             );

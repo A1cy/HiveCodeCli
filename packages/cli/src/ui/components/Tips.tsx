@@ -49,7 +49,8 @@ export const Tips: React.FC<TipsProps> = ({ config }) => {
         <Text bold color={theme.status.success}>
           100% FREE
         </Text>{' '}
-        local AI models
+        local AI models (32 available including GPT OSS, no internet required
+        after download).
       </Text>
     </Box>
   );

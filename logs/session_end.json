@@ -16,5 +16,23 @@
     "reason": "other",
     "execution_mode": "NORMAL",
     "logged_at": "2025-10-27T12:05:37.986612"
+  },
+  {
+    "session_id": "ae1dd1cd-3503-47a7-a3e2-a0c7ca52e3fe",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/ae1dd1cd-3503-47a7-a3e2-a0c7ca52e3fe.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "hook_event_name": "SessionEnd",
+    "reason": "other",
+    "execution_mode": "NORMAL",
+    "logged_at": "2025-10-27T15:06:21.962319"
+  },
+  {
+    "session_id": "00f015d6-31e8-4811-96b8-4cae8c3e3269",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/00f015d6-31e8-4811-96b8-4cae8c3e3269.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "hook_event_name": "SessionEnd",
+    "reason": "other",
+    "execution_mode": "NORMAL",
+    "logged_at": "2025-10-27T15:06:23.017341"
   }
 ]
