@@ -172,13 +172,15 @@ export class OllamaHttpClient {
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
       let lastStatus = '';
+      let totalBytes = 0;
+      let completedBytes = 0;
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) {
           // Stream completed successfully
           if (onProgress && lastStatus !== 'success') {
-            onProgress('Pull complete');
+            onProgress('Pull complete - 100%');
           }
           break;
         }
@@ -189,13 +191,38 @@ export class OllamaHttpClient {
         for (const line of lines) {
           try {
             const json = JSON.parse(line);
+
+            // Update total and completed bytes if available
+            if (json.total) {
+              totalBytes = json.total;
+            }
+            if (json.completed !== undefined) {
+              completedBytes = json.completed;
+            }
+
             if (json.status && onProgress) {
               lastStatus = json.status;
-              onProgress(json.status);
+
+              // Calculate percentage if we have total and completed
+              if (totalBytes > 0 && completedBytes > 0) {
+                const percentage = Math.round(
+                  (completedBytes / totalBytes) * 100,
+                );
+                const downloadedMB = (completedBytes / 1024 / 1024).toFixed(1);
+                const totalMB = (totalBytes / 1024 / 1024).toFixed(1);
+
+                onProgress(
+                  `${json.status} - ${percentage}% (${downloadedMB}MB / ${totalMB}MB)`,
+                );
+              } else {
+                // Fallback to just status if no progress info
+                onProgress(json.status);
+              }
             }
+
             // Check for completion markers
             if (json.status === 'success' && onProgress) {
-              onProgress('Download successful');
+              onProgress('Download successful - 100%');
             }
           } catch (_e) {
             // Ignore JSON parse errors

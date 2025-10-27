@@ -45,7 +45,11 @@ export const Tips: React.FC<TipsProps> = ({ config }) => {
         <Text bold color={theme.text.accent}>
           /ollamaModelSelector
         </Text>{' '}
-        to select and download Ollama models interactively.
+        for{' '}
+        <Text bold color={theme.status.success}>
+          100% FREE
+        </Text>{' '}
+        local AI models (17 available, no internet required after download).
       </Text>
     </Box>
   );
