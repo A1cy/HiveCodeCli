@@ -54,3 +54,19 @@ gha-creds-*.json
 
 # Log files
 patch_output.log
+
+# Test utilities
+packages/test-utils/
+
+# TypeScript build artifacts
+integration-tests/**/*.d.ts
+integration-tests/**/*.js
+integration-tests/**/*.js.map
+packages/**/*.d.ts
+packages/**/*.js
+packages/**/*.js.map
+scripts/**/*.d.ts
+scripts/**/*.js
+scripts/**/*.js.map
+# But keep the main dist directory pattern
+!packages/*/dist/**/*
