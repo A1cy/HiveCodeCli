@@ -155,6 +155,13 @@ export const DialogManager = ({
               modelName,
             );
 
+            // Switch to Ollama authentication
+            await settings.setValue(
+              SettingScope.User,
+              'security.auth.selectedType',
+              'ollama',
+            );
+
             // Close the dialog after saving
             uiActions.closeOllamaModelDialog();
           } catch (err) {
