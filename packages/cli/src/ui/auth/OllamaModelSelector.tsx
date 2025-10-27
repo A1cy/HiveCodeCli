@@ -74,8 +74,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
   },
   {
     name: 'mistral:7b',
-    displayName: '🎯 Mistral 7B (GPT OSS)',
-    description: 'GPT-quality OSS model - Excellent instruction following',
+    displayName: '🎯 Mistral 7B',
+    description: 'Popular & powerful - Excellent instruction following',
     size: '4.1GB',
     ram: '8GB',
     cpu: 'Good CPU',
@@ -91,11 +91,32 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
     tier: 'midtier',
   },
 
-  // ===== GPT OSS MODELS - Open Source GPT Alternatives =====
+  // ===== GPT-OSS (OpenAI Official Open-Weight) =====
+  {
+    name: 'gpt-oss:20b',
+    displayName: '🤖 GPT-OSS 20B (OpenAI Official)',
+    description:
+      'OpenAI open-weight - 128K context, agentic capabilities, reasoning',
+    size: '14GB',
+    ram: '16GB',
+    cpu: 'Good CPU',
+    tier: 'large',
+  },
+  {
+    name: 'gpt-oss:120b',
+    displayName: '🤖 GPT-OSS 120B (OpenAI Flagship)',
+    description: 'OpenAI flagship open-weight - 128K context, best reasoning',
+    size: '65GB',
+    ram: '80GB',
+    cpu: 'High-end GPU required',
+    tier: 'large',
+  },
+
+  // ===== POPULAR OPEN SOURCE MODELS =====
   {
     name: 'vicuna:7b',
-    displayName: '🔓 Vicuna 7B (GPT OSS)',
-    description: 'GPT-3.5 quality OSS - Fine-tuned from Llama, chat optimized',
+    displayName: '🔓 Vicuna 7B',
+    description: 'Fine-tuned from Llama - Chat optimized, natural responses',
     size: '3.8GB',
     ram: '8GB',
     cpu: 'Good CPU',
@@ -103,8 +124,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
   },
   {
     name: 'orca-mini:7b',
-    displayName: '🔓 Orca Mini 7B (GPT OSS)',
-    description: 'GPT-3.5 quality OSS - Microsoft Orca training, reasoning',
+    displayName: '🔓 Orca Mini 7B',
+    description: 'Microsoft Orca training - Excellent reasoning & explanations',
     size: '3.8GB',
     ram: '8GB',
     cpu: 'Good CPU',
@@ -112,8 +133,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
   },
   {
     name: 'wizardlm:7b',
-    displayName: '🔓 WizardLM 7B (GPT OSS)',
-    description: 'GPT-quality OSS - Complex instructions, problem solving',
+    displayName: '🔓 WizardLM 7B',
+    description: 'Complex instructions - Strong problem solving capabilities',
     size: '3.8GB',
     ram: '8GB',
     cpu: 'Good CPU',
@@ -121,8 +142,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
   },
   {
     name: 'nous-hermes2:10.7b',
-    displayName: '🔓 Nous Hermes 2 10.7B (GPT OSS)',
-    description: 'GPT-4 quality OSS - Advanced reasoning, long context',
+    displayName: '🔓 Nous Hermes 2 10.7B',
+    description: 'Advanced reasoning - Long context, excellent capabilities',
     size: '6.4GB',
     ram: '12GB',
     cpu: 'Good CPU',
@@ -130,8 +151,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
   },
   {
     name: 'dolphin-mixtral:8x7b',
-    displayName: '🔓 Dolphin Mixtral 8x7B (GPT OSS)',
-    description: 'GPT-4 quality OSS - Uncensored, excellent reasoning',
+    displayName: '🔓 Dolphin Mixtral 8x7B',
+    description: 'Uncensored Mixtral - Excellent reasoning, powerful',
     size: '26GB',
     ram: '32GB',
     cpu: 'High-end CPU/GPU',
@@ -139,8 +160,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
   },
   {
     name: 'solar:10.7b',
-    displayName: '🔓 Solar 10.7B (GPT OSS)',
-    description: 'GPT-quality OSS - Upstage AI, strong performance',
+    displayName: '🔓 Solar 10.7B',
+    description: 'Upstage AI - Strong performance, well-balanced',
     size: '6.1GB',
     ram: '12GB',
     cpu: 'Good CPU',
@@ -148,8 +169,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
   },
   {
     name: 'yi:6b',
-    displayName: '🔓 Yi 6B (GPT OSS)',
-    description: 'GPT-quality OSS - Chinese & English, multilingual',
+    displayName: '🔓 Yi 6B',
+    description: 'Multilingual specialist - Chinese & English, versatile',
     size: '3.5GB',
     ram: '8GB',
     cpu: 'Good CPU',
@@ -195,8 +216,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
   },
   {
     name: 'wizardcoder:7b',
-    displayName: '💻 WizardCoder 7B (GPT OSS)',
-    description: 'GPT-quality coding OSS - Complex code generation',
+    displayName: '💻 WizardCoder 7B',
+    description: 'Complex code generation - Strong coding capabilities',
     size: '3.8GB',
     ram: '8GB',
     cpu: 'Good CPU',
@@ -215,8 +236,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
   },
   {
     name: 'llama3.1:70b',
-    displayName: '🚀 Llama 3.1 70B (GPT-4 Class)',
-    description: 'GPT-4 quality OSS - Meta flagship, exceptional reasoning',
+    displayName: '🚀 Llama 3.1 70B',
+    description: 'Meta flagship - Exceptional reasoning, rivals GPT-4',
     size: '40GB',
     ram: '48GB',
     cpu: 'High-end CPU + GPU',
@@ -233,8 +254,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
   },
   {
     name: 'qwen2.5:32b',
-    displayName: '🚀 Qwen 2.5 32B (GPT-4 Class)',
-    description: 'GPT-4 quality OSS - Top-tier performance, long context',
+    displayName: '🚀 Qwen 2.5 32B',
+    description: 'Top-tier performance - Long context, exceptional quality',
     size: '19GB',
     ram: '32GB',
     cpu: 'High-end CPU/GPU',
@@ -242,8 +263,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
   },
   {
     name: 'mixtral:8x7b',
-    displayName: '🚀 Mixtral 8x7B (GPT-4 Class)',
-    description: 'GPT-4 quality OSS - Mixture of experts, exceptional',
+    displayName: '🚀 Mixtral 8x7B',
+    description: 'Mixture of experts - Exceptional performance',
     size: '26GB',
     ram: '32GB',
     cpu: 'High-end CPU/GPU',
@@ -251,8 +272,8 @@ const RECOMMENDED_MODELS: OllamaModelInfo[] = [
   },
   {
     name: 'mixtral:8x22b',
-    displayName: '🚀 Mixtral 8x22B (GPT-4+ Class)',
-    description: 'Best GPT OSS - Surpasses GPT-4, needs very powerful PC',
+    displayName: '🚀 Mixtral 8x22B',
+    description: 'Best open source - State-of-the-art, very powerful',
     size: '80GB',
     ram: '96GB+',
     cpu: 'High-end GPU required',
@@ -440,7 +461,8 @@ export function OllamaModelSelector({
       </Text>
       <Box marginTop={1}>
         <Text color={theme.text.secondary}>
-          ⚡ Lightweight • 🎯 Balanced • 💻 Coding • 🚀 High-Quality • 💬 Chat
+          ⚡ Lightweight • 🎯 Balanced • 🤖 GPT-OSS • 🔓 Open Source • 💻 Coding
+          • 🚀 High-Quality • 💬 Chat
         </Text>
       </Box>
       <Box marginTop={1}>

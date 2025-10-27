@@ -1,9 +1,41 @@
 # HiveCode Ollama Models Guide
 
-## 32 Available Models - Updated with GPT OSS
+## 34 Available Models - Including OpenAI GPT-OSS
 
-HiveCode now includes **32 carefully curated Ollama models** organized by
-category, including multiple **GPT Open Source** alternatives!
+HiveCode now includes **34 carefully curated Ollama models** organized by
+category, including **OpenAI's official GPT-OSS** open-weight models!
+
+---
+
+## 🤖 GPT-OSS (OpenAI Official Open-Weight)
+
+**OpenAI's official open-source models** - Licensed under Apache 2.0
+
+### 1. GPT-OSS 20B (Official)
+
+- **Size**: 14GB
+- **RAM**: 16GB minimum
+- **CPU**: Good CPU
+- **Context**: 128K tokens
+- **Features**: Agentic capabilities, function calling, chain-of-thought
+  reasoning
+- **Best for**: Powerful reasoning, agentic tasks, versatile development
+- **Provider**: OpenAI (official)
+- **License**: Apache 2.0
+- **Command**: `ollama pull gpt-oss:20b`
+
+### 2. GPT-OSS 120B (Flagship)
+
+- **Size**: 65GB
+- **RAM**: 80GB GPU minimum
+- **CPU**: High-end GPU required
+- **Context**: 128K tokens
+- **Features**: Full agentic capabilities, configurable reasoning effort
+- **Best for**: State-of-the-art reasoning, complex tasks
+- **Provider**: OpenAI (official)
+- **License**: Apache 2.0
+- **Note**: Requires server-grade hardware
+- **Command**: `ollama pull gpt-oss:120b`
 
 ---
 
@@ -11,7 +43,7 @@ category, including multiple **GPT Open Source** alternatives!
 
 **Best for**: Slow PCs, limited RAM, quick responses
 
-### 1. Llama 3.2 1B (Fastest ⭐)
+### 3. Llama 3.2 1B (Fastest ⭐)
 
 - **Size**: 1.3GB
 - **RAM**: 4GB minimum
@@ -20,7 +52,7 @@ category, including multiple **GPT Open Source** alternatives!
 - **Best for**: Quick responses, basic tasks, any PC
 - **Command**: `ollama pull llama3.2:1b`
 
-### 2. Phi 3 Mini
+### 4. Phi 3 Mini
 
 - **Size**: 2.3GB
 - **RAM**: 4-6GB
@@ -30,7 +62,7 @@ category, including multiple **GPT Open Source** alternatives!
 - **Provider**: Microsoft
 - **Command**: `ollama pull phi3:mini`
 
-### 3. Gemma 2B
+### 5. Gemma 2B
 
 - **Size**: 1.7GB
 - **RAM**: 4GB minimum
@@ -46,7 +78,7 @@ category, including multiple **GPT Open Source** alternatives!
 
 **Best for**: Average systems, balanced performance
 
-### 4. Qwen 2.5 3B (Recommended ⭐)
+### 6. Qwen 2.5 3B (Recommended ⭐)
 
 - **Size**: 2.1GB
 - **RAM**: 6GB minimum
@@ -55,7 +87,7 @@ category, including multiple **GPT Open Source** alternatives!
 - **Best for**: General coding, best overall balance
 - **Command**: `ollama pull qwen2.5:3b`
 
-### 5. Llama 3.2 3B
+### 7. Llama 3.2 3B
 
 - **Size**: 2.0GB
 - **RAM**: 6GB minimum
@@ -65,17 +97,17 @@ category, including multiple **GPT Open Source** alternatives!
 - **Provider**: Meta
 - **Command**: `ollama pull llama3.2:3b`
 
-### 6. Mistral 7B (GPT OSS)
+### 8. Mistral 7B
 
 - **Size**: 4.1GB
 - **RAM**: 8GB minimum
 - **CPU**: Good CPU
 - **Speed**: Medium
-- **Best for**: GPT-quality OSS, instruction following, complex tasks
+- **Best for**: Instruction following, complex tasks
 - **Note**: Very popular, excellent quality
 - **Command**: `ollama pull mistral:7b`
 
-### 7. Phi 3 Medium
+### 9. Phi 3 Medium
 
 - **Size**: 7.9GB
 - **RAM**: 12GB minimum
@@ -87,71 +119,68 @@ category, including multiple **GPT Open Source** alternatives!
 
 ---
 
-## 🔓 GPT OSS MODELS - Open Source GPT Alternatives
+## 🔓 POPULAR OPEN SOURCE MODELS
 
-**Best for**: Users seeking GPT-3.5/GPT-4 quality without API costs
+**Best for**: Users seeking high-quality open-source alternatives
 
-### 8. Vicuna 7B (GPT-3.5 Quality)
+### 10. Vicuna 7B
 
 - **Size**: 3.8GB
 - **RAM**: 8GB minimum
 - **CPU**: Good CPU
-- **Best for**: GPT-3.5 quality conversations, fine-tuned from Llama
-- **Note**: Chat optimized, very natural responses
+- **Best for**: Chat optimization, natural conversations
+- **Note**: Fine-tuned from Llama
 - **Command**: `ollama pull vicuna:7b`
 
-### 9. Orca Mini 7B (GPT-3.5 Quality)
+### 11. Orca Mini 7B
 
 - **Size**: 3.8GB
 - **RAM**: 8GB minimum
 - **CPU**: Good CPU
-- **Best for**: GPT-3.5 quality reasoning, Microsoft Orca training
-- **Note**: Excellent at explanation and reasoning
+- **Best for**: Reasoning and explanations
+- **Provider**: Microsoft research
 - **Command**: `ollama pull orca-mini:7b`
 
-### 10. WizardLM 7B (GPT Quality)
+### 12. WizardLM 7B
 
 - **Size**: 3.8GB
 - **RAM**: 8GB minimum
 - **CPU**: Good CPU
 - **Best for**: Complex instructions, problem solving
-- **Note**: GPT-quality open source alternative
 - **Command**: `ollama pull wizardlm:7b`
 
-### 11. Nous Hermes 2 10.7B (GPT-4 Quality)
+### 13. Nous Hermes 2 10.7B
 
 - **Size**: 6.4GB
 - **RAM**: 12GB minimum
 - **CPU**: Good CPU
-- **Best for**: GPT-4 quality reasoning, long context
-- **Note**: Advanced reasoning capabilities
+- **Best for**: Advanced reasoning, long context
 - **Command**: `ollama pull nous-hermes2:10.7b`
 
-### 12. Dolphin Mixtral 8x7B (GPT-4 Quality)
+### 14. Dolphin Mixtral 8x7B
 
 - **Size**: 26GB
 - **RAM**: 32GB minimum
 - **CPU**: High-end CPU/GPU
-- **Best for**: GPT-4 quality, uncensored, excellent reasoning
-- **Note**: Mixture of experts, very powerful
+- **Best for**: Uncensored conversations, excellent reasoning
+- **Note**: Mixture of experts architecture
 - **Command**: `ollama pull dolphin-mixtral:8x7b`
 
-### 13. Solar 10.7B (GPT Quality)
+### 15. Solar 10.7B
 
 - **Size**: 6.1GB
 - **RAM**: 12GB minimum
 - **CPU**: Good CPU
-- **Best for**: GPT-quality performance, strong capabilities
+- **Best for**: Well-balanced performance
 - **Provider**: Upstage AI
 - **Command**: `ollama pull solar:10.7b`
 
-### 14. Yi 6B (GPT Quality)
+### 16. Yi 6B
 
 - **Size**: 3.5GB
 - **RAM**: 8GB minimum
 - **CPU**: Good CPU
-- **Best for**: Multilingual (Chinese & English), GPT-quality
-- **Note**: Excellent for multilingual tasks
+- **Best for**: Multilingual (Chinese & English)
 - **Command**: `ollama pull yi:6b`
 
 ---
@@ -160,7 +189,7 @@ category, including multiple **GPT Open Source** alternatives!
 
 **Best for**: Software development, debugging, code generation
 
-### 15. Qwen 2.5 Coder 7B (Top Coder ⭐)
+### 17. Qwen 2.5 Coder 7B (Top Coder ⭐)
 
 - **Size**: 4.7GB
 - **RAM**: 8GB minimum
@@ -170,7 +199,7 @@ category, including multiple **GPT Open Source** alternatives!
 - **Note**: #1 coding model currently
 - **Command**: `ollama pull qwen2.5-coder:7b`
 
-### 16. DeepSeek Coder 6.7B
+### 18. DeepSeek Coder 6.7B
 
 - **Size**: 3.8GB
 - **RAM**: 8GB minimum
@@ -180,7 +209,7 @@ category, including multiple **GPT Open Source** alternatives!
 - **Note**: Excellent at code comprehension
 - **Command**: `ollama pull deepseek-coder:6.7b`
 
-### 17. CodeLlama 7B
+### 19. CodeLlama 7B
 
 - **Size**: 3.8GB
 - **RAM**: 8GB minimum
@@ -190,7 +219,7 @@ category, including multiple **GPT Open Source** alternatives!
 - **Provider**: Meta
 - **Command**: `ollama pull codellama:7b`
 
-### 18. StarCoder2 7B
+### 20. StarCoder2 7B
 
 - **Size**: 4.0GB
 - **RAM**: 8GB minimum
@@ -200,13 +229,12 @@ category, including multiple **GPT Open Source** alternatives!
 - **Note**: Great for rare languages
 - **Command**: `ollama pull starcoder2:7b`
 
-### 19. WizardCoder 7B (GPT OSS)
+### 21. WizardCoder 7B
 
 - **Size**: 3.8GB
 - **RAM**: 8GB minimum
 - **CPU**: Good CPU
-- **Best for**: GPT-quality code generation, complex algorithms
-- **Note**: Excellent for complex coding tasks
+- **Best for**: Complex code generation
 - **Command**: `ollama pull wizardcoder:7b`
 
 ---
@@ -215,7 +243,7 @@ category, including multiple **GPT Open Source** alternatives!
 
 **Best for**: Best quality output, powerful systems
 
-### 20. Llama 3.1 8B
+### 22. Llama 3.1 8B
 
 - **Size**: 4.7GB
 - **RAM**: 10GB minimum
@@ -226,19 +254,18 @@ category, including multiple **GPT Open Source** alternatives!
 - **Note**: Flagship quality
 - **Command**: `ollama pull llama3.1:8b`
 
-### 21. Llama 3.1 70B (GPT-4 Class ⭐)
+### 23. Llama 3.1 70B
 
 - **Size**: 40GB
 - **RAM**: 48GB minimum
 - **CPU**: High-end CPU + GPU required
 - **Speed**: Slow (needs GPU)
-- **Best for**: GPT-4 quality open source, exceptional reasoning
+- **Best for**: Exceptional reasoning, rivals GPT-4
 - **Provider**: Meta
-- **Note**: Meta's flagship, rivals GPT-4
 - **Warning**: ⚠️ Only for very powerful PCs
 - **Command**: `ollama pull llama3.1:70b`
 
-### 22. Qwen 2.5 14B
+### 24. Qwen 2.5 14B
 
 - **Size**: 9.0GB
 - **RAM**: 16GB minimum
@@ -248,34 +275,34 @@ category, including multiple **GPT Open Source** alternatives!
 - **Note**: Needs powerful PC
 - **Command**: `ollama pull qwen2.5:14b`
 
-### 23. Qwen 2.5 32B (GPT-4 Class)
+### 25. Qwen 2.5 32B
 
 - **Size**: 19GB
 - **RAM**: 32GB minimum
 - **CPU**: High-end CPU/GPU
-- **Best for**: GPT-4 quality, top-tier performance, long context
+- **Best for**: Top-tier performance, long context
 - **Note**: Exceptional quality
 - **Warning**: ⚠️ Needs powerful system
 - **Command**: `ollama pull qwen2.5:32b`
 
-### 24. Mixtral 8x7B (GPT-4 Class ⭐)
+### 26. Mixtral 8x7B
 
 - **Size**: 26GB
 - **RAM**: 32GB minimum
 - **CPU**: High-end CPU/GPU
 - **Speed**: Very slow (without GPU)
-- **Best for**: GPT-4 quality open source
+- **Best for**: Exceptional performance
 - **Note**: Mixture of Experts architecture
 - **Warning**: ⚠️ Only for very powerful PCs
 - **Command**: `ollama pull mixtral:8x7b`
 
-### 25. Mixtral 8x22B (GPT-4+ Class)
+### 27. Mixtral 8x22B
 
 - **Size**: 80GB
 - **RAM**: 96GB+ minimum
 - **CPU**: High-end GPU required
-- **Best for**: Best GPT OSS available, surpasses GPT-4
-- **Note**: State-of-the-art open source model
+- **Best for**: State-of-the-art open source
+- **Note**: Best open-source model available
 - **Warning**: ⚠️⚠️ Requires server-grade hardware
 - **Command**: `ollama pull mixtral:8x22b`
 
@@ -285,7 +312,7 @@ category, including multiple **GPT Open Source** alternatives!
 
 **Best for**: Conversation, dialogue, friendly interaction
 
-### 26. Neural Chat 7B
+### 28. Neural Chat 7B
 
 - **Size**: 4.1GB
 - **RAM**: 8GB minimum
@@ -294,7 +321,7 @@ category, including multiple **GPT Open Source** alternatives!
 - **Best for**: Natural conversations, helpful responses
 - **Command**: `ollama pull neural-chat:7b`
 
-### 27. OpenChat 7B
+### 29. OpenChat 7B
 
 - **Size**: 4.1GB
 - **RAM**: 8GB minimum
@@ -315,30 +342,41 @@ category, including multiple **GPT Open Source** alternatives!
 ### 💻 Average PC (8GB RAM)
 
 - **Best**: Qwen 2.5 3B (Recommended)
-- **GPT OSS**: Vicuna 7B, Orca Mini 7B
+- **Open Source**: Vicuna 7B, Orca Mini 7B
 - **Coding**: DeepSeek Coder 6.7B
 - **Chat**: Mistral 7B
 
 ### 🚀 Good PC (16GB+ RAM)
 
 - **Best Quality**: Qwen 2.5 14B
-- **GPT OSS**: Nous Hermes 2 10.7B, Solar 10.7B
+- **OpenAI Official**: GPT-OSS 20B
+- **Open Source**: Nous Hermes 2 10.7B, Solar 10.7B
 - **Coding**: Qwen 2.5 Coder 7B
 - **General**: Llama 3.1 8B
 
 ### 💪 Powerful PC (32GB+ RAM, GPU)
 
 - **Top Quality**: Mixtral 8x7B, Qwen 2.5 32B
-- **GPT OSS**: Dolphin Mixtral 8x7B
+- **Open Source**: Dolphin Mixtral 8x7B
 - **Best Overall**: Llama 3.1 70B
 
-### 🏆 Server/Workstation (96GB+ RAM, High-end GPU)
+### 🏆 Server/Workstation (80GB+ GPU)
 
-- **Best GPT OSS**: Mixtral 8x22B
+- **OpenAI Official**: GPT-OSS 120B
+- **Open Source**: Mixtral 8x22B
 
 ---
 
 ## Model Categories Explained
+
+### 🤖 GPT-OSS (OpenAI Official)
+
+- OpenAI's official open-weight models
+- Apache 2.0 license - build freely
+- 128K context window
+- Agentic capabilities (function calling, web browsing, Python)
+- Full chain-of-thought reasoning
+- Fine-tuning support
 
 ### ⚡ Lightweight
 
@@ -354,13 +392,12 @@ category, including multiple **GPT Open Source** alternatives!
 - Best for most users
 - Versatile use cases
 
-### 🔓 GPT OSS (Open Source GPT)
+### 🔓 Open Source
 
-- GPT-3.5 to GPT-4+ quality
-- 100% free forever
-- No API costs
-- Privacy-preserving (runs locally)
 - Community-driven development
+- Free to use and modify
+- High quality alternatives
+- Various specializations
 
 ### 💻 Coding
 
@@ -385,20 +422,22 @@ category, including multiple **GPT Open Source** alternatives!
 
 ---
 
-## GPT OSS vs ChatGPT Comparison
+## GPT-OSS vs ChatGPT/GPT-4
 
-| Feature        | GPT OSS (Ollama) | ChatGPT/GPT-4  |
-| -------------- | ---------------- | -------------- |
-| Cost           | 100% Free        | $20+/month     |
-| Privacy        | 100% Local       | Data sent away |
-| Speed (GPU)    | Very Fast        | Network delay  |
-| Speed (CPU)    | Slow-Medium      | Fast           |
-| Internet       | Not required     | Required       |
-| Quality (7B)   | GPT-3.5 level    | GPT-3.5        |
-| Quality (70B+) | GPT-4 level      | GPT-4          |
-| Customization  | Full control     | Limited        |
-| Rate Limits    | None             | Yes            |
-| Censorship     | Optional         | Yes            |
+| Feature           | GPT-OSS (Ollama) | ChatGPT/GPT-4     |
+| ----------------- | ---------------- | ----------------- |
+| Provider          | OpenAI           | OpenAI            |
+| License           | Apache 2.0       | Proprietary       |
+| Cost              | 100% Free        | $20+/month        |
+| Privacy           | 100% Local       | Data sent to APIs |
+| Internet          | Not required     | Required          |
+| Context Window    | 128K tokens      | 128K tokens       |
+| Agentic Abilities | Yes              | Yes               |
+| Function Calling  | Yes              | Yes               |
+| Customization     | Full (fine-tune) | Limited           |
+| Rate Limits       | None             | Yes               |
+| Hardware Required | 16GB+ RAM        | None (cloud)      |
+| Quality           | Comparable       | GPT-4 level       |
 
 ---
 
@@ -411,13 +450,15 @@ category, including multiple **GPT Open Source** alternatives!
 - **Large (8-20GB models)**: 16GB RAM, good CPU, GPU recommended
 - **Huge (20-40GB models)**: 32GB RAM, high-end CPU, GPU required
 - **Massive (40GB+ models)**: 48GB+ RAM, powerful GPU required
+- **GPT-OSS 120B**: 80GB GPU required
 
 ### GPU Recommendations
 
 - **For 7B models**: GTX 1660 or better (6GB VRAM)
 - **For 13B models**: RTX 3060 or better (12GB VRAM)
 - **For 30B models**: RTX 3090 or better (24GB VRAM)
-- **For 70B+ models**: A100 or H100 (40-80GB VRAM)
+- **For 70B models**: A100 (40GB VRAM)
+- **For GPT-OSS 120B**: A100 or H100 (80GB VRAM)
 
 ---
 
@@ -430,12 +471,14 @@ category, including multiple **GPT Open Source** alternatives!
 - **8-10GB models**: 15-30 minutes
 - **20-30GB models**: 30-60 minutes
 - **40GB+ models**: 1-3 hours
+- **GPT-OSS 120B (65GB)**: 2-4 hours
 
 ### Disk Space Requirements
 
 Always have **2x the model size** free:
 
 - Example: For a 5GB model, have 10GB free space
+- For GPT-OSS 120B (65GB), have 130GB+ free
 
 ### First Run
 
@@ -444,55 +487,67 @@ faster.
 
 ---
 
-## GPT OSS Model Quality Tiers
+## What Makes GPT-OSS Special?
 
-### GPT-3.5 Quality (7B models)
+### OpenAI's Official Open-Weight Models
 
-- Vicuna 7B
-- Orca Mini 7B
-- WizardLM 7B
-- Mistral 7B
+GPT-OSS represents a partnership between **OpenAI** and **Ollama** to bring
+state-of-the-art open-weight models to local deployment.
 
-### GPT-4 Quality (10-30B models)
+### Key Features:
 
-- Nous Hermes 2 10.7B
-- Solar 10.7B
-- Qwen 2.5 32B
-- Dolphin Mixtral 8x7B
-- Mixtral 8x7B
+1. **MXFP4 Quantization**: Efficient 4.25 bits per parameter format
+2. **Apache 2.0 License**: Build freely without copyleft or patent restrictions
+3. **128K Context Window**: Handle large documents and conversations
+4. **Agentic Capabilities**:
+   - Function calling
+   - Web browsing
+   - Python tool calls
+5. **Chain-of-Thought Reasoning**: Configurable reasoning effort
+6. **Fine-Tuning Support**: Customize for your use case
+7. **Native Ollama Support**: Optimized integration, no extra quantization
 
-### GPT-4+ Quality (70B+ models)
+### Use Cases:
 
-- Llama 3.1 70B
-- Mixtral 8x22B
+- Agentic workflows and automation
+- Complex reasoning tasks
+- Code generation and debugging
+- Long-form content analysis
+- Privacy-critical applications
+- Custom enterprise deployments
 
 ---
 
 ## FAQs
 
 **Q: Which model should I choose?** A: Start with Qwen 2.5 3B (recommended).
-It's the best balance for most users. For GPT OSS, try Vicuna 7B or Mistral 7B.
+It's the best balance for most users. For OpenAI official, try GPT-OSS 20B if
+you have 16GB+ RAM.
 
-**Q: What is GPT OSS?** A: GPT Open Source models are free alternatives to
-ChatGPT that run on your PC. They offer GPT-3.5 to GPT-4 quality without any
-costs.
+**Q: What is GPT-OSS?** A: GPT-OSS is OpenAI's official open-weight model
+collection, licensed under Apache 2.0. It's different from other open-source
+models - these are official OpenAI releases with agentic capabilities.
+
+**Q: Is GPT-OSS the same as ChatGPT?** A: No, but they're from the same company.
+GPT-OSS is OpenAI's open-weight version designed for local deployment, while
+ChatGPT is their cloud-based proprietary service.
 
 **Q: Can I switch models later?** A: Yes! Use `/ollamaModelSelector` anytime.
 
-**Q: Do I need a GPU?** A: No, but it's 10-50x faster with GPU. CPU-only works
-but is slower.
+**Q: Do I need a GPU?** A: For most models, no - but it's 10-50x faster with
+GPU. GPT-OSS 120B requires an 80GB GPU.
 
-**Q: How much RAM do I need?** A: Minimum 4GB. Recommended: 8GB+. See
-model-specific requirements above.
+**Q: How much RAM do I need?** A: Minimum 4GB. Recommended: 8GB+. GPT-OSS 20B
+needs 16GB minimum. See model-specific requirements above.
 
 **Q: Can I use multiple models?** A: Yes! Download multiple models and switch
 between them.
 
-**Q: Are GPT OSS models as good as ChatGPT?** A: Yes! 7B models match GPT-3.5,
-and 70B+ models match or exceed GPT-4 quality.
+**Q: Will my data stay private?** A: Yes! All models run 100% locally on your
+PC. Nothing is sent to the cloud.
 
-**Q: Will my data stay private?** A: Yes! All GPT OSS models run 100% locally on
-your PC. Nothing is sent to the cloud.
+**Q: Can I fine-tune GPT-OSS?** A: Yes! GPT-OSS supports fine-tuning thanks to
+its Apache 2.0 license and open-weight nature.
 
 ---
 
@@ -502,8 +557,9 @@ For issues with Ollama models:
 
 1. Check Ollama is running: `ollama serve`
 2. Test model manually: `ollama run llama3.2:1b "Hello"`
-3. Check disk space
-4. Check RAM usage
+3. For GPT-OSS: `ollama run gpt-oss:20b "Hello"`
+4. Check disk space (remember 2x model size)
+5. Check RAM usage
 
 For HiveCode issues:
 
