@@ -145,8 +145,13 @@ export const DialogManager = ({
   if (uiState.isOllamaModelDialogOpen) {
     return (
       <OllamaModelSelector
-        onClose={uiActions.closeOllamaModelDialog}
-        settings={settings}
+        onSelect={async (modelName: string) => {
+          // Save the selected model to settings
+          settings.setValue('user', 'security.auth.ollamaModel', modelName);
+          // Close the dialog
+          uiActions.closeOllamaModelDialog();
+        }}
+        onCancel={uiActions.closeOllamaModelDialog}
       />
     );
   }
