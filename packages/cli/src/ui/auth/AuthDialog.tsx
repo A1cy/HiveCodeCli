@@ -62,6 +62,11 @@ export function AuthDialog({
       value: AuthType.USE_VERTEX_AI,
       key: AuthType.USE_VERTEX_AI,
     },
+    {
+      label: 'Use Ollama (100% Free)',
+      value: AuthType.USE_OLLAMA,
+      key: AuthType.USE_OLLAMA,
+    },
   ];
 
   if (settings.merged.security?.auth?.enforcedType) {
@@ -86,6 +91,10 @@ export function AuthDialog({
 
     if (defaultAuthType) {
       return item.value === defaultAuthType;
+    }
+
+    if (process.env['HIVECODE_USE_OLLAMA'] === 'true') {
+      return item.value === AuthType.USE_OLLAMA;
     }
 
     if (process.env['GEMINI_API_KEY']) {
