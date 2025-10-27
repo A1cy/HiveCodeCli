@@ -5,23 +5,23 @@
  */
 
 import type {
-  CountTokensResponse,
-  GenerateContentResponse,
-  GenerateContentParameters,
   CountTokensParameters,
-  EmbedContentResponse,
+  CountTokensResponse,
   EmbedContentParameters,
+  EmbedContentResponse,
+  GenerateContentParameters,
+  GenerateContentResponse,
 } from '@google/genai';
 import { GoogleGenAI } from '@google/genai';
 import { createCodeAssistContentGenerator } from '../code_assist/codeAssist.js';
 import type { Config } from '../config/config.js';
 
 import type { UserTierId } from '../code_assist/types.js';
-import { LoggingContentGenerator } from './loggingContentGenerator.js';
+import { BedrockContentGenerator } from '../providers/bedrock-content-generator.js';
+import { OllamaContentGenerator } from '../providers/ollama-content-generator.js';
 import { InstallationManager } from '../utils/installationManager.js';
 import { FakeContentGenerator } from './fakeContentGenerator.js';
-import { OllamaContentGenerator } from '../providers/ollama-content-generator.js';
-import { BedrockContentGenerator } from '../providers/bedrock-content-generator.js';
+import { LoggingContentGenerator } from './loggingContentGenerator.js';
 
 /**
  * Interface abstracting the core functionalities for generating content and counting tokens.
@@ -86,9 +86,7 @@ export function createContentGeneratorConfig(
   // Bedrock configuration
   const useBedrock = process.env['HIVECODE_USE_BEDROCK'] === 'true';
   const bedrockModel = process.env['BEDROCK_MODEL'] || 'amazon.nova-lite-v1:0';
-  const bedrockApiKey =
-    process.env['BEDROCK_API_KEY'] ||
-    'ABSKQmVkcm9ja0FQSUtleS13ZDA5LWF0LTEyNDczNzE5NjQzMDpHaG1jK3lxaVJZNC9hT0VVQzNxMlgxb3ZpdTNEMml0OFo4djRaZzR3UVE3Um5pOWFoZ2c4aGI2VGFHZz0=';
+  const bedrockApiKey = process.env['BEDROCK_API_KEY'] || ' ';
   const bedrockRegion = process.env['BEDROCK_REGION'] || 'us-east-1';
 
   const contentGeneratorConfig: ContentGeneratorConfig = {

@@ -58,10 +58,7 @@ export class BedrockHttpClient {
   private apiKey: string;
   private region: string;
 
-  constructor(
-    apiKey: string = 'ABSKQmVkcm9ja0FQSUtleS13ZDA5LWF0LTEyNDczNzE5NjQzMDpHaG1jK3lxaVJZNC9hT0VVQzNxMlgxb3ZpdTNEMml0OFo4djRaZzR3UVE3Um5pOWFoZ2c4aGI2VGFHZz0=',
-    region: string = 'us-east-1',
-  ) {
+  constructor(apiKey: string = ' ', region: string = 'us-east-1') {
     this.apiKey = apiKey;
     this.region = region;
 
