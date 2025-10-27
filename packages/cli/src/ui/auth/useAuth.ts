@@ -48,7 +48,13 @@ export const useAuthCommand = (settings: LoadedSettings, config: Config) => {
         return;
       }
 
-      const authType = settings.merged.security?.auth?.selectedType;
+      // Check for Ollama environment variable first (like non-interactive mode)
+      let authType = settings.merged.security?.auth?.selectedType;
+
+      if (process.env['HIVECODE_USE_OLLAMA'] === 'true') {
+        authType = AuthType.USE_OLLAMA;
+      }
+
       if (!authType) {
         if (process.env['GEMINI_API_KEY']) {
           onAuthError(
