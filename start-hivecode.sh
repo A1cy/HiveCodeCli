@@ -53,5 +53,5 @@ fi
 echo "🌟 Starting HiveCode with AWS Bedrock..."
 echo ""
 
-# Start hivecode with loaded credentials
-exec node "$SCRIPT_DIR/packages/cli/dist/index.js" "$@"
+# Start hivecode with loaded credentials (using globally installed command)
+exec hivecode "$@"
