@@ -1013,6 +1013,26 @@ const SETTINGS_SCHEMA = {
               'Select Ollama model: llama3.2:1b (1.3GB, fast), qwen3:4b (2.5GB, balanced), qwen2.5-coder (4.7GB, best quality). Requires Ollama to be installed and running.',
             showInDialog: true,
           },
+          bedrockModel: {
+            type: 'string',
+            label: 'AWS Bedrock Model',
+            category: 'Security',
+            requiresRestart: true,
+            default: 'amazon.nova-lite-v1:0' as string | undefined,
+            description:
+              'AWS Bedrock model ID. Recommended: amazon.nova-lite-v1:0 (multimodal). Use /MHG_Premium to select from 10 premium models.',
+            showInDialog: true,
+          },
+          bedrockRegion: {
+            type: 'string',
+            label: 'AWS Bedrock Region',
+            category: 'Security',
+            requiresRestart: true,
+            default: 'us-east-1' as string | undefined,
+            description:
+              'AWS region for Bedrock service. Common regions: us-east-1, us-west-2, eu-west-1.',
+            showInDialog: true,
+          },
         },
       },
     },

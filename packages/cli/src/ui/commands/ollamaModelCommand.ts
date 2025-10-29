@@ -8,8 +8,8 @@ import type { OpenDialogActionReturn, SlashCommand } from './types.js';
 import { CommandKind } from './types.js';
 
 export const ollamaModelCommand: SlashCommand = {
-  name: 'ollamaModelSelector',
-  description: 'Select and download Ollama models',
+  name: 'Ollama',
+  description: 'Select 100% FREE local AI model',
   kind: CommandKind.BUILT_IN,
   action: (_context, _args): OpenDialogActionReturn => ({
     type: 'dialog',

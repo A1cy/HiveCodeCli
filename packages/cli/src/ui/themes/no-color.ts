@@ -42,6 +42,7 @@ const noColorSemanticColors: SemanticColors = {
   border: {
     default: '',
     focused: '',
+    subtle: '',
   },
   ui: {
     comment: '',
@@ -52,6 +53,7 @@ const noColorSemanticColors: SemanticColors = {
     error: '',
     success: '',
     warning: '',
+    info: '',
   },
 };
 

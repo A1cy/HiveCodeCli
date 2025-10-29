@@ -23,6 +23,7 @@ export interface SemanticColors {
   border: {
     default: string;
     focused: string;
+    subtle: string;
   };
   ui: {
     comment: string;
@@ -33,6 +34,7 @@ export interface SemanticColors {
     error: string;
     success: string;
     warning: string;
+    info: string;
   };
 }
 
@@ -53,6 +55,7 @@ export const lightSemanticColors: SemanticColors = {
   border: {
     default: lightTheme.Gray,
     focused: lightTheme.AccentBlue,
+    subtle: lightTheme.Comment,
   },
   ui: {
     comment: lightTheme.Comment,
@@ -63,6 +66,7 @@ export const lightSemanticColors: SemanticColors = {
     error: lightTheme.AccentRed,
     success: lightTheme.AccentGreen,
     warning: lightTheme.AccentYellow,
+    info: lightTheme.AccentBlue,
   },
 };
 
@@ -83,6 +87,7 @@ export const darkSemanticColors: SemanticColors = {
   border: {
     default: darkTheme.Gray,
     focused: darkTheme.AccentBlue,
+    subtle: darkTheme.Comment,
   },
   ui: {
     comment: darkTheme.Comment,
@@ -93,6 +98,7 @@ export const darkSemanticColors: SemanticColors = {
     error: darkTheme.AccentRed,
     success: darkTheme.AccentGreen,
     warning: darkTheme.AccentYellow,
+    info: darkTheme.AccentBlue,
   },
 };
 
@@ -113,6 +119,7 @@ export const ansiSemanticColors: SemanticColors = {
   border: {
     default: ansiTheme.Gray,
     focused: ansiTheme.AccentBlue,
+    subtle: ansiTheme.Comment,
   },
   ui: {
     comment: ansiTheme.Comment,
@@ -123,5 +130,6 @@ export const ansiSemanticColors: SemanticColors = {
     error: ansiTheme.AccentRed,
     success: ansiTheme.AccentGreen,
     warning: ansiTheme.AccentYellow,
+    info: ansiTheme.AccentBlue,
   },
 };

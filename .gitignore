@@ -1,6 +1,10 @@
 # API keys and secrets
 .env
 .env~
+.env.bedrock
+.env.local
+**/*bedrock*.env
+# AWS Bedrock credentials (NEVER commit these!)
 
 # gemini-cli settings
 # We want to keep the .gemini in the root of the repo and ignore any .gemini
@@ -70,3 +74,10 @@ scripts/**/*.js
 scripts/**/*.js.map
 # But keep the main dist directory pattern
 !packages/*/dist/**/*
+CLAUDE.md
+.gitignore
+.claude/agents/frontend-developer.md
+.claude-flow/config.json
+.claude/orchestration/INITIAL.md
+.claude/orchestration/implementation.md
+.claude/A1_MASTERMIND.md

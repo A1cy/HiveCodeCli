@@ -61,8 +61,9 @@ export type ContentGeneratorConfig = {
   ollamaModel?: string;
   ollamaBaseUrl?: string;
   bedrockModel?: string;
-  bedrockApiKey?: string;
   bedrockRegion?: string;
+  // Note: AWS Bedrock credentials (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+  // are read directly from environment variables by the AWS SDK
 };
 
 export function createContentGeneratorConfig(
@@ -86,7 +87,8 @@ export function createContentGeneratorConfig(
   // Bedrock configuration
   const useBedrock = process.env['HIVECODE_USE_BEDROCK'] === 'true';
   const bedrockModel = process.env['BEDROCK_MODEL'] || 'amazon.nova-lite-v1:0';
-  const bedrockApiKey = process.env['BEDROCK_API_KEY'] || ' ';
+  // AWS credentials are read directly from AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+  // by the BedrockHttpClient, so we don't need to pass them through config
   const bedrockRegion = process.env['BEDROCK_REGION'] || 'us-east-1';
 
   const contentGeneratorConfig: ContentGeneratorConfig = {
@@ -98,8 +100,8 @@ export function createContentGeneratorConfig(
   if (useBedrock || authType === AuthType.USE_BEDROCK) {
     contentGeneratorConfig.authType = AuthType.USE_BEDROCK;
     contentGeneratorConfig.bedrockModel = bedrockModel;
-    contentGeneratorConfig.bedrockApiKey = bedrockApiKey;
     contentGeneratorConfig.bedrockRegion = bedrockRegion;
+    // bedrockApiKey is not needed - AWS SDK reads credentials directly from environment
     return contentGeneratorConfig;
   }
 
@@ -151,29 +153,47 @@ export async function createContentGenerator(
   // AWS Bedrock integration
   if (config.authType === AuthType.USE_BEDROCK) {
     const model = config.bedrockModel || 'amazon.nova-lite-v1:0';
-    const apiKey = config.bedrockApiKey;
     const region = config.bedrockRegion || 'us-east-1';
 
     console.log(`🌟 HiveCode: Using MHG AI / AWS Bedrock (${model})`);
 
-    const bedrockGenerator = new BedrockContentGenerator(model, apiKey, region);
+    // BedrockContentGenerator reads AWS credentials directly from environment variables
+    // AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+    const bedrockGenerator = new BedrockContentGenerator(model, undefined, region);
 
-    // Check health on initialization
-    const isHealthy = await bedrockGenerator.checkHealth();
+    // NOTE: Health check removed - it was blocking initialization
+    // Errors will be shown on first request if credentials are invalid
+    console.log('   ℹ️  Bedrock initialized (credentials will be validated on first request)');
 
-    if (!isHealthy) {
-      console.error('');
-      console.error('❌ Failed to connect to AWS Bedrock.');
-      console.error('');
-      console.error('Please check your configuration:');
-      console.error(`  Model: ${model}`);
-      console.error(`  Region: ${region}`);
-      console.error('  API Key: [configured]');
-      console.error('');
-      console.error('Contact support if the issue persists.');
-      console.error('');
-      process.exit(1);
-    }
+    // Verify model access in background (non-blocking, diagnostic only)
+    setTimeout(async () => {
+      try {
+        console.log('[BEDROCK] 🔍 Verifying model access...');
+        const testRequest = {
+          modelId: model,
+          messages: [{ role: 'user' as const, content: [{ type: 'text' as const, text: 'test' }] }],
+          temperature: 0.1,
+          maxOutputTokens: 5,
+        };
+
+        const streamGenerator = bedrockGenerator.generateStream(testRequest);
+        for await (const _chunk of streamGenerator) {
+          console.log('[BEDROCK] ✅ Model access verified:', model);
+          break; // Just need first chunk to verify
+        }
+      } catch (error) {
+        console.error('[BEDROCK] ❌ Model access DENIED:', model);
+        if (error instanceof Error) {
+          console.error('[BEDROCK] 📋 Error:', error.message);
+          if (error.message.includes('access')) {
+            console.error('[BEDROCK] 🔑 Action required: Request model access at:');
+            console.error('[BEDROCK]    https://console.aws.amazon.com/bedrock/');
+            console.error('[BEDROCK] 💡 Or switch to Nova Pro (no approval needed):');
+            console.error('[BEDROCK]    export BEDROCK_MODEL="amazon.nova-pro-v1:0"');
+          }
+        }
+      }
+    }, 2000); // Run after 2 seconds (non-blocking)
 
     return new LoggingContentGenerator(bedrockGenerator, gcConfig);
   }

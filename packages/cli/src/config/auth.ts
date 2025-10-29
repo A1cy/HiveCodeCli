@@ -49,5 +49,17 @@ export function validateAuthMethod(authMethod: string): string | null {
     return null;
   }
 
+  if (authMethod === AuthType.USE_BEDROCK) {
+    // AWS Bedrock - credentials validated on first request by AWS SDK
+    if (!process.env['AWS_ACCESS_KEY_ID'] || !process.env['AWS_SECRET_ACCESS_KEY']) {
+      return (
+        'AWS credentials not found. Please set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY.\n' +
+        '\n' +
+        'To continue, please set the AWS environment variables or add them to a .env.bedrock file.'
+      );
+    }
+    return null;
+  }
+
   return 'Invalid auth method selected.';
 }

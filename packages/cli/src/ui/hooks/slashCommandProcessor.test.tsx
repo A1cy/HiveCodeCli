@@ -153,6 +153,8 @@ describe('useSlashCommandProcessor', () => {
           openSettingsDialog: vi.fn(),
           openModelDialog: mockOpenModelDialog,
           openPermissionsDialog: vi.fn(),
+          openOllamaModelDialog: vi.fn(),
+          openMhgModelDialog: vi.fn(),
           quit: mockSetQuittingMessages,
           setDebugMessage: vi.fn(),
           toggleCorgiMode: vi.fn(),

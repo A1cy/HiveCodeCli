@@ -55,20 +55,29 @@ export interface BedrockModel {
  */
 export class BedrockHttpClient {
   private client: BedrockRuntimeClient;
-  private apiKey: string;
   private region: string;
+  private readonly decoder = new TextDecoder(); // Reuse for all decode operations
+  private readonly DEBUG = process.env['BEDROCK_DEBUG'] === 'true';
 
   constructor(apiKey: string = ' ', region: string = 'us-east-1') {
-    this.apiKey = apiKey;
     this.region = region;
 
-    // Initialize Bedrock Runtime client
+    // Initialize Bedrock Runtime client with secure credential handling
+    const credentials = {
+      accessKeyId: process.env['AWS_ACCESS_KEY_ID'] || '',
+      secretAccessKey: process.env['AWS_SECRET_ACCESS_KEY'] || apiKey || '',
+    };
+
     this.client = new BedrockRuntimeClient({
       region: this.region,
-      credentials: {
-        accessKeyId: 'BEDROCK',
-        secretAccessKey: this.apiKey,
+      credentials: credentials.accessKeyId && credentials.secretAccessKey
+        ? credentials
+        : undefined, // Falls back to AWS credential chain if env vars not set
+      requestHandler: {
+        // No timeout for streaming - let chunks flow naturally
+        // Connection timeout handled by AWS SDK defaults (60s)
       },
+      maxAttempts: 1, // No retries for streaming (fails fast)
     });
   }
 
@@ -94,7 +103,7 @@ export class BedrockHttpClient {
         throw new Error('No response body from AWS Bedrock');
       }
 
-      const responseBody = JSON.parse(new TextDecoder().decode(response.body));
+      const responseBody = JSON.parse(this.decoder.decode(response.body));
 
       return this.parseResponseBody(responseBody, request.modelId);
     } catch (error) {
@@ -116,51 +125,91 @@ export class BedrockHttpClient {
   async *generateStream(
     request: BedrockGenerateRequest,
   ): AsyncGenerator<BedrockGenerateResponse> {
+    const startTime = Date.now();
+    if (this.DEBUG) {
+      console.log('[BEDROCK] 🚀 Request started:', new Date().toISOString());
+      console.log('[BEDROCK] 📍 Model:', request.modelId);
+    }
+
     try {
       const payload = this.formatRequestPayload(request);
+
+      // Only add stream parameter for models that need it (Llama, OpenAI)
+      // Claude and Nova models use InvokeModelWithResponseStreamCommand without stream parameter
+      const isClaudeModel = request.modelId.startsWith('anthropic.claude');
+      const isNovaModel = request.modelId.startsWith('amazon.nova');
+      const needsStreamParam = !isClaudeModel && !isNovaModel;
+      const payloadWithStream = typeof payload === 'object' && payload !== null && needsStreamParam
+        ? { ...payload as Record<string, unknown>, stream: true }
+        : payload;
 
       const command = new InvokeModelWithResponseStreamCommand({
         modelId: request.modelId,
         contentType: 'application/json',
-        body: JSON.stringify(payload),
+        accept: 'application/json',
+        body: JSON.stringify(payloadWithStream),
       } as InvokeModelCommandInput);
 
       const response = await this.client.send(command);
+      const sendTime = Date.now();
+      if (this.DEBUG) {
+        console.log('[BEDROCK] ⏱️  AWS SDK send time:', sendTime - startTime, 'ms');
+      }
 
       if (!response.body) {
         throw new Error('No response body from AWS Bedrock');
       }
 
+      let firstChunkReceived = false;
+      let chunkCount = 0;
+
       for await (const event of response.body) {
         if (event.chunk && event.chunk.bytes) {
-          const chunk = JSON.parse(new TextDecoder().decode(event.chunk.bytes));
-
-          let textDelta = '';
-
-          // Handle different response formats
-          if (chunk.type === 'content_block_delta' && chunk.delta?.text) {
-            textDelta = chunk.delta.text;
-          } else if (chunk.type === 'message_delta') {
-            // Handle message completion
-            continue;
-          } else if (chunk.outputText) {
-            // Nova models format
-            textDelta = chunk.outputText;
-          } else if (chunk.generation) {
-            // Llama models format
-            textDelta = chunk.generation;
+          chunkCount++;
+          if (!firstChunkReceived) {
+            const firstTokenTime = Date.now();
+            if (this.DEBUG) {
+              console.log('[BEDROCK] ⚡ First token latency:', firstTokenTime - startTime, 'ms');
+            }
+            firstChunkReceived = true;
           }
 
+          const chunk = JSON.parse(this.decoder.decode(event.chunk.bytes));
+
+          // Fast-path optimization: Handle most common case FIRST (contentBlockDelta)
+          const textDelta = chunk.contentBlockDelta?.delta?.text;
           if (textDelta) {
             yield {
               modelId: request.modelId,
               content: [{ type: 'text', text: textDelta }],
-              stopReason: chunk.stopReason,
             };
+            continue; // Skip other checks
           }
+
+          // Handle messageStop event (stop reason)
+          if (chunk.messageStop) {
+            yield {
+              modelId: request.modelId,
+              content: [{ type: 'text', text: '' }],
+              stopReason: chunk.messageStop.stopReason,
+            };
+            continue;
+          }
+
+          // Skip non-content events (messageStart, contentBlockStop, metadata)
+          // No yield needed for these
         }
       }
+
+      const totalTime = Date.now() - startTime;
+      if (this.DEBUG) {
+        console.log('[BEDROCK] ✅ Stream complete:', totalTime, 'ms', `(${chunkCount} chunks)`);
+      }
     } catch (error) {
+      const errorTime = Date.now() - startTime;
+      if (this.DEBUG) {
+        console.error('[BEDROCK] ❌ Error after', errorTime, 'ms');
+      }
       if (error instanceof Error) {
         throw new Error(
           `AWS Bedrock streaming error: ${error.message}\n\n` +
@@ -178,6 +227,7 @@ export class BedrockHttpClient {
   private formatRequestPayload(request: BedrockGenerateRequest): unknown {
     const isNovaModel = request.modelId.startsWith('amazon.nova');
     const isLlamaModel = request.modelId.startsWith('meta.llama');
+    const isOpenAIModel = request.modelId.startsWith('openai.');
 
     if (isNovaModel) {
       // Amazon Nova format
@@ -200,6 +250,27 @@ export class BedrockHttpClient {
         prompt,
         temperature: request.temperature || 0.7,
         max_gen_len: request.max_tokens || 4096,
+        top_p: request.top_p || 0.9,
+      };
+    } else if (isOpenAIModel) {
+      // OpenAI Chat Completions format
+      const messages: Array<{ role: string; content: string }> = request.messages.map((msg) => ({
+        role: msg.role,
+        content: msg.content, // Simple string, not array
+      }));
+
+      // Add system message at the beginning if present
+      if (request.system) {
+        messages.unshift({
+          role: 'system',
+          content: request.system,
+        });
+      }
+
+      return {
+        messages,
+        max_tokens: request.max_tokens || 4096,
+        temperature: request.temperature || 0.7,
         top_p: request.top_p || 0.9,
       };
     }
@@ -248,34 +319,35 @@ export class BedrockHttpClient {
     const body = responseBody as Record<string, unknown>;
     const isNovaModel = modelId.startsWith('amazon.nova');
     const isLlamaModel = modelId.startsWith('meta.llama');
+    const isOpenAIModel = modelId.startsWith('openai.');
 
     if (isNovaModel) {
       // Amazon Nova format
-      const output = body.output as Record<string, unknown>;
-      const message = output?.message as Record<string, unknown>;
-      const content = message?.content as Array<Record<string, unknown>>;
+      const output = body['output'] as Record<string, unknown>;
+      const message = output?.['message'] as Record<string, unknown>;
+      const content = message?.['content'] as Array<Record<string, unknown>>;
 
       return {
         modelId,
         content: content.map((c) => ({
           type: 'text',
-          text: String(c.text || ''),
+          text: String(c['text'] || ''),
         })),
-        stopReason: String(body.stopReason || 'end_turn'),
-        usage: body.usage
+        stopReason: String(body['stopReason'] || 'end_turn'),
+        usage: body['usage']
           ? {
               inputTokens:
-                Number((body.usage as Record<string, unknown>).inputTokens) ||
+                Number((body['usage'] as Record<string, unknown>)['inputTokens']) ||
                 0,
               outputTokens:
-                Number((body.usage as Record<string, unknown>).outputTokens) ||
+                Number((body['usage'] as Record<string, unknown>)['outputTokens']) ||
                 0,
               totalTokens:
                 Number(
-                  (body.usage as Record<string, unknown>).inputTokens || 0,
+                  (body['usage'] as Record<string, unknown>)['inputTokens'] || 0,
                 ) +
                 Number(
-                  (body.usage as Record<string, unknown>).outputTokens || 0,
+                  (body['usage'] as Record<string, unknown>)['outputTokens'] || 0,
                 ),
             }
           : undefined,
@@ -287,38 +359,66 @@ export class BedrockHttpClient {
         content: [
           {
             type: 'text',
-            text: String(body.generation || ''),
+            text: String(body['generation'] || ''),
           },
         ],
-        stopReason: String(body.stop_reason || 'end_turn'),
+        stopReason: String(body['stop_reason'] || 'end_turn'),
         usage: {
-          inputTokens: Number(body.prompt_token_count) || 0,
-          outputTokens: Number(body.generation_token_count) || 0,
+          inputTokens: Number(body['prompt_token_count']) || 0,
+          outputTokens: Number(body['generation_token_count']) || 0,
           totalTokens:
-            (Number(body.prompt_token_count) || 0) +
-            (Number(body.generation_token_count) || 0),
+            (Number(body['prompt_token_count']) || 0) +
+            (Number(body['generation_token_count']) || 0),
         },
+      };
+    } else if (isOpenAIModel) {
+      // OpenAI Chat Completions format
+      const choices = body['choices'] as Array<Record<string, unknown>>;
+      const message = choices?.[0]?.['message'] as Record<string, unknown>;
+
+      return {
+        modelId,
+        content: [
+          {
+            type: 'text',
+            text: String(message?.['content'] || ''),
+          },
+        ],
+        stopReason: String(choices?.[0]?.['finish_reason'] || 'stop'),
+        usage: body['usage']
+          ? {
+              inputTokens:
+                Number((body['usage'] as Record<string, unknown>)['prompt_tokens']) ||
+                0,
+              outputTokens:
+                Number((body['usage'] as Record<string, unknown>)['completion_tokens']) ||
+                0,
+              totalTokens:
+                Number((body['usage'] as Record<string, unknown>)['total_tokens']) ||
+                0,
+            }
+          : undefined,
       };
     }
 
     // Default format (Anthropic Claude-like)
-    const content = body.content as Array<Record<string, unknown>>;
-    const usage = body.usage as Record<string, unknown> | undefined;
+    const content = body['content'] as Array<Record<string, unknown>>;
+    const usage = body['usage'] as Record<string, unknown> | undefined;
 
     return {
       modelId,
       content: content.map((c) => ({
         type: 'text',
-        text: String(c.text || ''),
+        text: String(c['text'] || ''),
       })),
-      stopReason: String(body.stop_reason || 'end_turn'),
+      stopReason: String(body['stop_reason'] || 'end_turn'),
       usage: usage
         ? {
-            inputTokens: Number(usage.input_tokens) || 0,
-            outputTokens: Number(usage.output_tokens) || 0,
+            inputTokens: Number(usage['input_tokens']) || 0,
+            outputTokens: Number(usage['output_tokens']) || 0,
             totalTokens:
-              (Number(usage.input_tokens) || 0) +
-              (Number(usage.output_tokens) || 0),
+              (Number(usage['input_tokens']) || 0) +
+              (Number(usage['output_tokens']) || 0),
           }
         : undefined,
     };
@@ -407,6 +507,12 @@ export class BedrockHttpClient {
         modelName: 'Meta Llama 3.2 11B',
         provider: 'Meta',
         capabilities: ['text', 'image'],
+      },
+      {
+        modelId: 'openai.gpt-oss-120b-1:0',
+        modelName: 'OpenAI GPT OSS 120B',
+        provider: 'OpenAI',
+        capabilities: ['text'],
       },
     ];
   }

@@ -62,6 +62,8 @@ const external = [
   '@lydell/node-pty-linux-x64',
   '@lydell/node-pty-win32-arm64',
   '@lydell/node-pty-win32-x64',
+  // Note: AWS SDK will be bundled (not external)
+  // This works because we set mainFields to prioritize 'module' over 'main'
 ];
 
 const baseConfig = {
@@ -71,6 +73,10 @@ const baseConfig = {
   external,
   loader: { '.node': 'file' },
   write: true,
+  // Use ESM versions of AWS SDK packages
+  mainFields: ['module', 'main'],
+  // Don't minify to preserve error messages
+  minify: false,
 };
 
 const cliConfig = {

@@ -2161,7 +2161,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 ============================================================
-mime@3.0.0
+mime@4.1.0
 (https://github.com/broofa/mime)
 
 MIT License

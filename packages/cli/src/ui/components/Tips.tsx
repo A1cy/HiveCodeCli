@@ -41,26 +41,26 @@ export const Tips: React.FC<TipsProps> = ({ config }) => {
         for more information.
       </Text>
       <Text color={theme.text.primary}>
-        {geminiMdFileCount === 0 ? '5.' : '4.'} Type{' '}
+        {geminiMdFileCount === 0 ? '5.' : '4.'}{' '}
         <Text bold color={theme.text.accent}>
-          /ollamaModelSelector
+          /Ollama
         </Text>{' '}
-        for{' '}
+        -{' '}
         <Text bold color={theme.status.success}>
           100% FREE
         </Text>{' '}
-        local AI models.
+        local AI models
       </Text>
       <Text color={theme.text.primary}>
-        {geminiMdFileCount === 0 ? '6.' : '5.'} Type{' '}
+        {geminiMdFileCount === 0 ? '6.' : '5.'}{' '}
         <Text bold color={theme.text.accent}>
-          /mhgModelSelector
+          /MHG_Premium
         </Text>{' '}
-        for{' '}
+        -{' '}
         <Text bold color={theme.status.warning}>
           PREMIUM
         </Text>{' '}
-        MHG AI models powered by AWS Bedrock (Amazon Nova, Meta Llama).
+        AI
       </Text>
     </Box>
   );

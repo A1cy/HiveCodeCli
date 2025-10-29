@@ -21,11 +21,43 @@ interface BedrockModelInfo {
 }
 
 const BEDROCK_MODELS: BedrockModelInfo[] = [
-  // ===== FAST MODELS (Text-only, Lightweight) =====
+  // ===== FASTEST MODELS (Claude 3 Haiku - 21K tokens/sec) =====
+  {
+    modelId: 'anthropic.claude-3-haiku-20240307-v1:0',
+    displayName: '⚡ Claude 3 Haiku (FASTEST - 21K tokens/sec)',
+    description: '3x faster than Nova Micro - Ultra-low latency, excellent quality',
+    provider: 'Anthropic',
+    capabilities: 'Text + Image input',
+    tier: 'fast',
+  },
+  {
+    modelId: 'anthropic.claude-3-5-haiku-20241022-v1:0',
+    displayName: '⚡ Claude 3.5 Haiku (Latest)',
+    description: 'Latest Claude - Ultra-fast with enhanced capabilities',
+    provider: 'Anthropic',
+    capabilities: 'Text + Image input',
+    tier: 'fast',
+  },
+  {
+    modelId: 'mistral.mistral-7b-instruct-v0:2',
+    displayName: '⚡ Mistral 7B Instruct',
+    description: 'Fast coding specialist - Optimized for development tasks',
+    provider: 'Mistral AI',
+    capabilities: 'Text only',
+    tier: 'fast',
+  },
+  {
+    modelId: 'mistral.mistral-small-2402-v1:0',
+    displayName: '⚡ Mistral Small',
+    description: 'Efficient & fast - Good balance for general tasks',
+    provider: 'Mistral AI',
+    capabilities: 'Text only',
+    tier: 'fast',
+  },
   {
     modelId: 'amazon.nova-micro-v1:0',
     displayName: '⚡ Amazon Nova Micro',
-    description: 'Fastest & smallest - Text-only, ideal for quick responses',
+    description: 'Lightweight - Text-only, quick responses',
     provider: 'Amazon',
     capabilities: 'Text only',
     tier: 'fast',
@@ -49,8 +81,24 @@ const BEDROCK_MODELS: BedrockModelInfo[] = [
 
   // ===== BALANCED MODELS (General Purpose) =====
   {
+    modelId: 'anthropic.claude-3-sonnet-20240229-v1:0',
+    displayName: '🎯 Claude 3 Sonnet (Recommended)',
+    description: 'Best quality/speed balance - Superior reasoning & coding',
+    provider: 'Anthropic',
+    capabilities: 'Text + Image input',
+    tier: 'balanced',
+  },
+  {
+    modelId: 'anthropic.claude-3-5-sonnet-20241022-v2:0',
+    displayName: '🎯 Claude 3.5 Sonnet v2',
+    description: 'Latest Sonnet - Enhanced capabilities, best for complex tasks',
+    provider: 'Anthropic',
+    capabilities: 'Text + Image input',
+    tier: 'balanced',
+  },
+  {
     modelId: 'amazon.nova-lite-v1:0',
-    displayName: '🎯 Amazon Nova Lite (Recommended)',
+    displayName: '🎯 Amazon Nova Lite',
     description: 'Fast multimodal - Handles text, images & video input',
     provider: 'Amazon',
     capabilities: 'Text + Image + Video input',
@@ -78,6 +126,24 @@ const BEDROCK_MODELS: BedrockModelInfo[] = [
     description: 'Latest 8B - Enhanced capabilities over Llama 3',
     provider: 'Meta',
     capabilities: 'Text only',
+    tier: 'balanced',
+  },
+  {
+    modelId: 'openai.gpt-oss-120b-1:0',
+    displayName: '🎯 OpenAI GPT OSS 120B',
+    description: '120B parameters - Powerful open-source GPT model',
+    provider: 'OpenAI',
+    capabilities: 'Text only',
+    tier: 'balanced',
+  },
+
+  // ===== POWERFUL MODELS (Maximum Capability) =====
+  {
+    modelId: 'anthropic.claude-3-opus-20240229-v1:0',
+    displayName: '💪 Claude 3 Opus',
+    description: 'Maximum intelligence - Best for complex reasoning & analysis',
+    provider: 'Anthropic',
+    capabilities: 'Text + Image input',
     tier: 'balanced',
   },
 
@@ -120,9 +186,11 @@ export function BedrockModelSelector({
   onCancel,
 }: BedrockModelSelectorProps): React.JSX.Element {
   const [selectedModelId, setSelectedModelId] = useState<string | null>(
-    'amazon.nova-lite-v1:0',
+    'anthropic.claude-3-haiku-20240307-v1:0', // Default to fastest model
   );
   const [error, setError] = useState<string | null>(null);
+  const [showRestartMessage, setShowRestartMessage] = useState(false);
+  const [savedModelName, setSavedModelName] = useState<string>('');
 
   const handleModelSelect = useCallback(
     async (modelId: string) => {
@@ -132,6 +200,13 @@ export function BedrockModelSelector({
       try {
         // Call onSelect immediately (no download needed for Bedrock)
         await Promise.resolve(onSelect(modelId));
+
+        // Show restart message after successful save
+        const model = BEDROCK_MODELS.find((m) => m.modelId === modelId);
+        if (model) {
+          setSavedModelName(model.displayName);
+          setShowRestartMessage(true);
+        }
       } catch (selectErr) {
         console.error('Error in onSelect:', selectErr);
         setError('Failed to save model settings');
@@ -159,6 +234,78 @@ export function BedrockModelSelector({
       })),
     [],
   );
+
+  // Show restart message after model saved
+  if (showRestartMessage) {
+    return (
+      <Box
+        borderStyle="round"
+        borderColor={theme.border.default}
+        flexDirection="column"
+        padding={1}
+      >
+        <Text bold color={theme.status.success}>
+          ✓ Model saved successfully!
+        </Text>
+        <Box marginTop={1}>
+          <Text color={theme.text.accent}>
+            {savedModelName} is now configured
+          </Text>
+        </Box>
+        <Box marginTop={1} paddingX={1}>
+          <Text bold color={theme.status.warning}>
+            ⚠️ RESTART REQUIRED
+          </Text>
+        </Box>
+        <Box marginTop={1}>
+          <Text color={theme.text.secondary}>
+            Please restart HiveCode for the AWS Bedrock model to activate:
+          </Text>
+        </Box>
+        <Box marginTop={1} paddingLeft={2}>
+          <Text color={theme.text.secondary}>
+            1. Type{' '}
+            <Text bold color={theme.text.accent}>
+              /quit
+            </Text>{' '}
+            or press{' '}
+            <Text bold color={theme.text.accent}>
+              Ctrl+C
+            </Text>
+          </Text>
+        </Box>
+        <Box paddingLeft={2}>
+          <Text color={theme.text.secondary}>
+            2. Run{' '}
+            <Text bold color={theme.text.accent}>
+              hivecode
+            </Text>{' '}
+            again
+          </Text>
+        </Box>
+        <Box marginTop={1}>
+          <Text color={theme.text.secondary}>
+            After restart, AWS Bedrock will be active with your selected model
+          </Text>
+        </Box>
+        <Box marginTop={1} borderStyle="round" borderColor="yellow" paddingX={1}>
+          <Text color={theme.status.warning}>
+            ℹ️ Note: Some models require access approval in AWS Console
+          </Text>
+        </Box>
+        <Box paddingLeft={2} marginTop={1}>
+          <Text color={theme.text.secondary}>
+            If model fails: AWS Console → Bedrock → Model Access → Request
+          </Text>
+        </Box>
+        <Box marginTop={1}>
+          <Text color={theme.text.secondary}>
+            Press Esc to close this dialog
+          </Text>
+        </Box>
+      </Box>
+    );
+  }
 
   return (
     <Box

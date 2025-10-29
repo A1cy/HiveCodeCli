@@ -480,7 +480,10 @@ Logging in with Google... Please restart HiveCode to continue.
   );
 
   const [isMhgModelDialogOpen, setMhgModelDialogOpen] = useState(false);
-  const openMhgModelDialog = useCallback(() => setMhgModelDialogOpen(true), []);
+  const openMhgModelDialog = useCallback(() => {
+    console.error('[DEBUG] openMhgModelDialog called');
+    setMhgModelDialogOpen(true);
+  }, []);
   const closeMhgModelDialog = useCallback(
     () => setMhgModelDialogOpen(false),
     [],
@@ -1177,6 +1180,7 @@ Logging in with Google... Please restart HiveCode to continue.
     isSettingsDialogOpen ||
     isModelDialogOpen ||
     isOllamaModelDialogOpen ||
+    isMhgModelDialogOpen ||
     isPermissionsDialogOpen ||
     isAuthenticating ||
     isAuthDialogOpen ||
@@ -1191,7 +1195,8 @@ Logging in with Google... Please restart HiveCode to continue.
   );
 
   const uiState: UIState = useMemo(
-    () => ({
+    () => {
+      return {
       history: historyManager.history,
       historyManager,
       isThemeDialogOpen,
@@ -1275,7 +1280,8 @@ Logging in with Google... Please restart HiveCode to continue.
       activePtyId,
       embeddedShellFocused,
       showDebugProfiler,
-    }),
+    };
+    },
     [
       isThemeDialogOpen,
       themeError,

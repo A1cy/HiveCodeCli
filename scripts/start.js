@@ -20,11 +20,24 @@
 import { spawn, execSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
+import dotenv from 'dotenv';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
 const pkg = JSON.parse(readFileSync(join(root, 'package.json'), 'utf-8'));
+
+// Load .env.bedrock if it exists (for AWS Bedrock configuration)
+const envBedrockPath = join(root, '.env.bedrock');
+if (existsSync(envBedrockPath)) {
+  dotenv.config({ path: envBedrockPath });
+  console.log('✅ Loaded .env.bedrock configuration');
+  // Log the model being used (helpful for debugging)
+  if (process.env.BEDROCK_MODEL) {
+    console.log(`🌟 HiveCode: Using MHG AI / AWS Bedrock (${process.env.BEDROCK_MODEL})`);
+    console.log('   ℹ️  Bedrock initialized (credentials will be validated on first request)');
+  }
+}
 
 // check build status, write warnings to file for app to display if needed
 execSync('node ./scripts/check-build-status.js', {

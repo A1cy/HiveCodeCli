@@ -20,6 +20,7 @@ import {
   type BedrockGenerateRequest,
   type BedrockGenerateResponse,
 } from './bedrock-client.js';
+import { debugLogger } from '../utils/debugLogger.js';
 
 /**
  * Adapter class that wraps AWS Bedrock to match Google Genai interface
@@ -44,14 +45,19 @@ export class BedrockAdapter {
     request: Content[],
     config?: GenerateContentConfig,
   ): Promise<GenerateContentResponse> {
-    // 1. Convert Content[] to Bedrock format
-    const bedrockRequest = this.convertRequest(request, config);
+    try {
+      // 1. Convert Content[] to Bedrock format
+      const bedrockRequest = this.convertRequest(request, config);
 
-    // 2. Call AWS Bedrock
-    const bedrockResponse = await this.client.generate(bedrockRequest);
+      // 2. Call AWS Bedrock
+      const bedrockResponse = await this.client.generate(bedrockRequest);
 
-    // 3. Convert response back to Google Genai format
-    return this.convertResponse(bedrockResponse);
+      // 3. Convert response back to Google Genai format
+      return this.convertResponse(bedrockResponse);
+    } catch (error) {
+      debugLogger.error('[Bedrock] Error:', error);
+      throw error;
+    }
   }
 
   /**
@@ -61,13 +67,19 @@ export class BedrockAdapter {
     request: Content[],
     config?: GenerateContentConfig,
   ): AsyncGenerator<GenerateContentResponse> {
-    // 1. Convert Content[] to Bedrock format
-    const bedrockRequest = this.convertRequest(request, config);
+    try {
+      // 1. Convert Content[] to Bedrock format
+      const bedrockRequest = this.convertRequest(request, config);
 
-    // 2. Stream from AWS Bedrock
-    for await (const chunk of this.client.generateStream(bedrockRequest)) {
-      // 3. Convert each chunk back to Google Genai format
-      yield this.convertResponse(chunk);
+      // 2. Stream from AWS Bedrock
+      for await (const chunk of this.client.generateStream(bedrockRequest)) {
+        // 3. Convert each chunk back to Google Genai format
+        const response = this.convertResponse(chunk);
+        yield response;
+      }
+    } catch (error) {
+      debugLogger.error('[Bedrock] Streaming error:', error);
+      throw error;
     }
   }
 
@@ -133,12 +145,26 @@ export class BedrockAdapter {
         .join('\n');
 
       if (textParts) {
-        messages.push({
-          role: content.role === 'user' ? 'user' : 'assistant',
-          content: textParts,
-        });
+        const role = content.role === 'user' ? 'user' : 'assistant';
+
+        // FIX: Merge consecutive messages with the same role
+        // Bedrock requires strict role alternation
+        const lastMessage = messages[messages.length - 1];
+        if (lastMessage && lastMessage.role === role) {
+          // Merge with previous message of same role
+          lastMessage.content += '\n\n' + textParts;
+        } else {
+          // Add new message
+          messages.push({
+            role,
+            content: textParts,
+          });
+        }
       }
     }
+
+    // Claude models don't accept stream parameter - streaming is indicated by using InvokeModelWithResponseStreamCommand
+    const isClaudeModel = this.model.startsWith('anthropic.claude');
 
     return {
       modelId: this.model,
@@ -147,7 +173,7 @@ export class BedrockAdapter {
       temperature: config?.temperature || 0.7,
       max_tokens: config?.maxOutputTokens || 4096,
       top_p: config?.topP,
-      stream: false,
+      ...(!isClaudeModel && { stream: true }), // Only add stream parameter for non-Claude models (Nova, Llama)
     };
   }
 

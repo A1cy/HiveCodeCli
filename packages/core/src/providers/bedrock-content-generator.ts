@@ -44,24 +44,44 @@ export class BedrockContentGenerator implements ContentGenerator {
     request: GenerateContentParameters,
     _userPromptId: string,
   ): Promise<GenerateContentResponse> {
-    // Convert contents to proper Content array
-    const contents: Content[] = Array.isArray(request.contents)
-      ? (request.contents as Content[])
-      : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        [createUserContent(request.contents as any)];
-    return this.adapter.generateContent(contents, request.config);
+    try {
+      // Convert contents to proper Content array
+      const contents: Content[] = Array.isArray(request.contents)
+        ? (request.contents as Content[])
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          [createUserContent(request.contents as any)];
+      return await this.adapter.generateContent(contents, request.config);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      throw new Error(
+        `AWS Bedrock request failed: ${errorMessage}\n\n` +
+          `💡 Troubleshooting:\n` +
+          `   - Check AWS credentials are loaded (run: echo $AWS_ACCESS_KEY_ID)\n` +
+          `   - Verify AWS Bedrock access in your AWS account\n` +
+          `   - Try switching to Ollama: /Ollama\n\n` +
+          `Original error: ${errorMessage}`,
+      );
+    }
   }
 
   async generateContentStream(
     request: GenerateContentParameters,
     _userPromptId: string,
   ): Promise<AsyncGenerator<GenerateContentResponse>> {
-    // Convert contents to proper Content array
-    const contents: Content[] = Array.isArray(request.contents)
-      ? (request.contents as Content[])
-      : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        [createUserContent(request.contents as any)];
-    return this.adapter.generateContentStream(contents, request.config);
+    try {
+      // Convert contents to proper Content array
+      const contents: Content[] = Array.isArray(request.contents)
+        ? (request.contents as Content[])
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          [createUserContent(request.contents as any)];
+      return this.adapter.generateContentStream(contents, request.config);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      throw new Error(
+        `AWS Bedrock streaming failed: ${errorMessage}\n\n` +
+          `💡 Try switching to Ollama: /Ollama`,
+      );
+    }
   }
 
   async countTokens(

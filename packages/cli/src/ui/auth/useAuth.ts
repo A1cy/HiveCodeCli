@@ -55,6 +55,10 @@ export const useAuthCommand = (settings: LoadedSettings, config: Config) => {
         authType = AuthType.USE_OLLAMA;
       }
 
+      if (process.env['HIVECODE_USE_BEDROCK'] === 'true') {
+        authType = AuthType.USE_BEDROCK;
+      }
+
       if (!authType) {
         if (process.env['GEMINI_API_KEY']) {
           onAuthError(
