@@ -163,10 +163,22 @@ export const DialogManager = ({
               'ollama',
             );
 
+            // Hot-reload the provider (no restart needed!)
+            if (uiActions.reloadProvider) {
+              await uiActions.reloadProvider();
+            }
+
             // Close the dialog after saving
             uiActions.closeOllamaModelDialog();
           } catch (err) {
             console.error('Failed to save Ollama model setting:', err);
+            addItem(
+              {
+                type: 'error',
+                text: `Failed to switch to Ollama: ${err instanceof Error ? err.message : String(err)}`,
+              },
+              Date.now(),
+            );
             // Still close the dialog even if settings save fails
             uiActions.closeOllamaModelDialog();
           }
@@ -194,10 +206,22 @@ export const DialogManager = ({
               'aws-bedrock',
             );
 
+            // Hot-reload the provider (no restart needed!)
+            if (uiActions.reloadProvider) {
+              await uiActions.reloadProvider();
+            }
+
             // Close the dialog after saving
             uiActions.closeMhgModelDialog();
           } catch (err) {
             console.error('Failed to save Bedrock model setting:', err);
+            addItem(
+              {
+                type: 'error',
+                text: `Failed to switch to AWS Bedrock: ${err instanceof Error ? err.message : String(err)}`,
+              },
+              Date.now(),
+            );
             // Still close the dialog even if settings save fails
             uiActions.closeMhgModelDialog();
           }

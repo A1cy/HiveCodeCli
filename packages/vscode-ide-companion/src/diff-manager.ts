@@ -57,9 +57,10 @@ export class DiffManager {
   private readonly subscriptions: vscode.Disposable[] = [];
 
   constructor(
-    private readonly log: (message: string) => void,
+    private readonly _log: (message: string) => void,
     private readonly diffContentProvider: DiffContentProvider,
   ) {
+    void _log; // Suppress TS6138
     this.subscriptions.push(
       vscode.window.onDidChangeActiveTextEditor((editor) => {
         this.onActiveEditorChange(editor);

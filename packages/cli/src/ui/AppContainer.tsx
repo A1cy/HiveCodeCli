@@ -1373,6 +1373,43 @@ Logging in with Google... Please restart HiveCode to continue.
     [setShowPrivacyNotice],
   );
 
+  const reloadProvider = useCallback(async () => {
+    try {
+      // Get the new auth type from settings (already updated by DialogManager)
+      const newAuthType = settings.merged.security?.auth?.selectedType;
+
+      if (newAuthType) {
+        // Refresh authentication with the new provider
+        await config.refreshAuth(newAuthType as AuthType);
+
+        // Update the current model display
+        setCurrentModel(getEffectiveModel());
+
+        // Add success message
+        const providerName =
+          newAuthType === 'ollama' ? 'Ollama' :
+          newAuthType === 'aws-bedrock' ? 'AWS Bedrock' :
+          newAuthType;
+
+        historyManager.addItem(
+          {
+            type: MessageType.INFO,
+            text: `✓ Provider switched to ${providerName} successfully - No restart required!`,
+          },
+          Date.now(),
+        );
+      }
+    } catch (error) {
+      historyManager.addItem(
+        {
+          type: MessageType.ERROR,
+          text: `Failed to reload provider: ${error instanceof Error ? error.message : String(error)}`,
+        },
+        Date.now(),
+      );
+    }
+  }, [settings, config, getEffectiveModel, setCurrentModel, historyManager]);
+
   const uiActions: UIActions = useMemo(
     () => ({
       handleThemeSelect,
@@ -1401,6 +1438,7 @@ Logging in with Google... Please restart HiveCode to continue.
       handleProQuotaChoice,
       setQueueErrorMessage,
       popAllMessages,
+      reloadProvider,
     }),
     [
       handleThemeSelect,
@@ -1429,6 +1467,7 @@ Logging in with Google... Please restart HiveCode to continue.
       handleProQuotaChoice,
       setQueueErrorMessage,
       popAllMessages,
+      reloadProvider,
     ],
   );
 

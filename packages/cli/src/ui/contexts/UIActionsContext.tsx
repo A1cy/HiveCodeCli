@@ -45,6 +45,7 @@ export interface UIActions {
   handleProQuotaChoice: (choice: 'auth' | 'continue') => void;
   setQueueErrorMessage: (message: string | null) => void;
   popAllMessages: (onPop: (messages: string | undefined) => void) => void;
+  reloadProvider?: () => Promise<void>;
 }
 
 export const UIActionsContext = createContext<UIActions | null>(null);
