@@ -25,5 +25,50 @@
     "hook_event_name": "SubagentStop",
     "stop_hook_active": false,
     "logged_at": "2025-10-27T12:05:38.957544"
+  },
+  {
+    "session_id": "af07990d-cb88-463f-8b1c-4be75dbd8684",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/af07990d-cb88-463f-8b1c-4be75dbd8684.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "default",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-10-30T10:36:15.239285"
+  },
+  {
+    "session_id": "e9323052-ef01-4ef2-b405-e6abbaf6e854",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/e9323052-ef01-4ef2-b405-e6abbaf6e854.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "default",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-10-30T10:36:16.821668"
+  },
+  {
+    "session_id": "e9323052-ef01-4ef2-b405-e6abbaf6e854",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/e9323052-ef01-4ef2-b405-e6abbaf6e854.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "default",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-10-30T10:36:17.348617"
+  },
+  {
+    "session_id": "af07990d-cb88-463f-8b1c-4be75dbd8684",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/af07990d-cb88-463f-8b1c-4be75dbd8684.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "default",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-10-30T10:36:19.604429"
+  },
+  {
+    "session_id": "e9323052-ef01-4ef2-b405-e6abbaf6e854",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/e9323052-ef01-4ef2-b405-e6abbaf6e854.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "plan",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-10-30T10:41:22.004629"
   }
 ]

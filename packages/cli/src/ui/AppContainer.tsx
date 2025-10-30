@@ -1379,6 +1379,26 @@ Logging in with Google... Please restart HiveCode to continue.
       const newAuthType = settings.merged.security?.auth?.selectedType;
 
       if (newAuthType) {
+        // CRITICAL: Update environment variables to match the new provider choice
+        // This ensures the provider selection logic respects the hot switch
+        if (newAuthType === 'ollama') {
+          // Clear Bedrock env vars
+          delete process.env['HIVECODE_USE_BEDROCK'];
+          delete process.env['BEDROCK_MODEL'];
+          // Set Ollama env vars
+          process.env['HIVECODE_USE_OLLAMA'] = 'true';
+          const ollamaModel = settings.merged.security?.auth?.ollamaModel || 'llama3.2:1b';
+          process.env['OLLAMA_MODEL'] = ollamaModel;
+        } else if (newAuthType === 'aws-bedrock') {
+          // Clear Ollama env vars
+          delete process.env['HIVECODE_USE_OLLAMA'];
+          delete process.env['OLLAMA_MODEL'];
+          // Set Bedrock env vars
+          process.env['HIVECODE_USE_BEDROCK'] = 'true';
+          const bedrockModel = settings.merged.security?.auth?.bedrockModel || 'amazon.nova-lite-v1:0';
+          process.env['BEDROCK_MODEL'] = bedrockModel;
+        }
+
         // Refresh authentication with the new provider
         await config.refreshAuth(newAuthType as AuthType);
 

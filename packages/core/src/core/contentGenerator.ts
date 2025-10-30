@@ -153,13 +153,11 @@ export function createContentGeneratorConfig(
     proxy: config?.getProxy(),
   };
 
-  // Dynamic provider detection: Auto-detect provider from model name
-  // This allows users to just select a model and have the provider automatically switch
-  const detectedBedrockProvider = detectProviderFromModel(bedrockModel);
-  const detectedOllamaProvider = detectProviderFromModel(ollamaModel);
+  // PRIORITY ORDER: authType parameter > model detection > environment variables
+  // This ensures hot provider switching works correctly by respecting explicit user choice
 
-  // If Bedrock model is detected and matches Bedrock provider
-  if (detectedBedrockProvider === AuthType.USE_BEDROCK && (useBedrock || authType === AuthType.USE_BEDROCK)) {
+  // Priority 1: Explicit authType parameter (from hot provider switching or settings)
+  if (authType === AuthType.USE_BEDROCK) {
     console.log(`🔄 Using AWS Bedrock provider for model: ${bedrockModel}`);
     contentGeneratorConfig.authType = AuthType.USE_BEDROCK;
     contentGeneratorConfig.bedrockModel = bedrockModel;
@@ -167,8 +165,7 @@ export function createContentGeneratorConfig(
     return contentGeneratorConfig;
   }
 
-  // If Ollama model is detected and matches Ollama provider
-  if (detectedOllamaProvider === AuthType.USE_OLLAMA && (useOllama || authType === AuthType.USE_OLLAMA)) {
+  if (authType === AuthType.USE_OLLAMA) {
     console.log(`🔄 Using Ollama provider for model: ${ollamaModel}`);
     contentGeneratorConfig.authType = AuthType.USE_OLLAMA;
     contentGeneratorConfig.ollamaModel = ollamaModel;
@@ -176,16 +173,37 @@ export function createContentGeneratorConfig(
     return contentGeneratorConfig;
   }
 
-  // Legacy: If Bedrock is explicitly enabled (without model detection)
-  if (useBedrock || authType === AuthType.USE_BEDROCK) {
+  // Priority 2: Model detection (auto-detect provider from model name)
+  const detectedBedrockProvider = detectProviderFromModel(bedrockModel);
+  const detectedOllamaProvider = detectProviderFromModel(ollamaModel);
+
+  if (detectedBedrockProvider === AuthType.USE_BEDROCK && useBedrock) {
+    console.log(`🔄 Using AWS Bedrock provider for model: ${bedrockModel} (auto-detected)`);
     contentGeneratorConfig.authType = AuthType.USE_BEDROCK;
     contentGeneratorConfig.bedrockModel = bedrockModel;
     contentGeneratorConfig.bedrockRegion = bedrockRegion;
     return contentGeneratorConfig;
   }
 
-  // Legacy: If Ollama is explicitly enabled (without model detection)
-  if (useOllama || authType === AuthType.USE_OLLAMA) {
+  if (detectedOllamaProvider === AuthType.USE_OLLAMA && useOllama) {
+    console.log(`🔄 Using Ollama provider for model: ${ollamaModel} (auto-detected)`);
+    contentGeneratorConfig.authType = AuthType.USE_OLLAMA;
+    contentGeneratorConfig.ollamaModel = ollamaModel;
+    contentGeneratorConfig.ollamaBaseUrl = ollamaBaseUrl;
+    return contentGeneratorConfig;
+  }
+
+  // Priority 3: Environment variables (legacy support, only if authType not set)
+  if (useBedrock) {
+    console.log(`🔄 Using AWS Bedrock provider for model: ${bedrockModel} (from environment)`);
+    contentGeneratorConfig.authType = AuthType.USE_BEDROCK;
+    contentGeneratorConfig.bedrockModel = bedrockModel;
+    contentGeneratorConfig.bedrockRegion = bedrockRegion;
+    return contentGeneratorConfig;
+  }
+
+  if (useOllama) {
+    console.log(`🔄 Using Ollama provider for model: ${ollamaModel} (from environment)`);
     contentGeneratorConfig.authType = AuthType.USE_OLLAMA;
     contentGeneratorConfig.ollamaModel = ollamaModel;
     contentGeneratorConfig.ollamaBaseUrl = ollamaBaseUrl;

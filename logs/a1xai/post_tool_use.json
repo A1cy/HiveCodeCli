@@ -1,0 +1,367 @@
+[
+  {
+    "session_id": "e9323052-ef01-4ef2-b405-e6abbaf6e854",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/e9323052-ef01-4ef2-b405-e6abbaf6e854.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "plan",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "WebFetch",
+    "tool_input": {
+      "url": "https://deuasy6ovuuuy.cloudfront.net/mhg/logo/mhg-logo-5.png",
+      "prompt": "Describe this image in detail, including all text, colors, design elements, style, and overall composition."
+    },
+    "tool_response": {
+      "bytes": 1486,
+      "code": 200,
+      "codeText": "OK",
+      "result": "The image appears to be a corrupted or partially loaded PNG file. While it has the proper PNG header information (as indicated by the \"\ufffdPNG\" at the beginning), the content displays as mostly garbled text with some binary data showing as symbols.\n\nI can see some structure in the file metadata (including \"IHDR\" which is part of the PNG format specification), but the actual image content isn't properly rendered as text. This is expected, as image binary data will appear as nonsensical characters when interpreted as text.\n\nWithout seeing the properly rendered image, I can't describe its visual content, colors, or design elements. This appears to be a case where the binary image data is being displayed as text rather than being rendered as a visual image.",
+      "durationMs": 42594,
+      "url": "https://deuasy6ovuuuy.cloudfront.net/mhg/logo/mhg-logo-5.png"
+    },
+    "a1xai_timestamp": "2025-10-30T10:37:59.884905",
+    "a1xai_hook_version": "7.0_optimized",
+    "a1xai_framework": "SuperClaude",
+    "a1xai_analysis": {
+      "tool_type": "WebFetch",
+      "success": false,
+      "execution_time": 0,
+      "timestamp": "2025-10-30T10:37:59.882364"
+    }
+  },
+  {
+    "session_id": "e9323052-ef01-4ef2-b405-e6abbaf6e854",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/e9323052-ef01-4ef2-b405-e6abbaf6e854.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "plan",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "AskUserQuestion",
+    "tool_input": {
+      "questions": [
+        {
+          "question": "What would you like me to do with the MHG logo image?",
+          "header": "Logo Task",
+          "options": [
+            {
+              "label": "Download and save it to the project",
+              "description": "Save the logo file locally in an appropriate directory (e.g., /assets, /public, /images)"
+            },
+            {
+              "label": "Integrate it into code/UI",
+              "description": "Use the logo URL in code, HTML, React components, or other UI elements"
+            },
+            {
+              "label": "Analyze for branding/design",
+              "description": "Research the MHG brand and provide context about the logo's use and design"
+            },
+            {
+              "label": "Just view and describe it",
+              "description": "You want me to describe what the logo looks like (requires alternative viewing method)"
+            }
+          ],
+          "multiSelect": false
+        }
+      ],
+      "answers": {
+        "What would you like me to do with the MHG logo image?": "Just view and describe it"
+      }
+    },
+    "tool_response": {
+      "questions": [
+        {
+          "question": "What would you like me to do with the MHG logo image?",
+          "header": "Logo Task",
+          "options": [
+            {
+              "label": "Download and save it to the project",
+              "description": "Save the logo file locally in an appropriate directory (e.g., /assets, /public, /images)"
+            },
+            {
+              "label": "Integrate it into code/UI",
+              "description": "Use the logo URL in code, HTML, React components, or other UI elements"
+            },
+            {
+              "label": "Analyze for branding/design",
+              "description": "Research the MHG brand and provide context about the logo's use and design"
+            },
+            {
+              "label": "Just view and describe it",
+              "description": "You want me to describe what the logo looks like (requires alternative viewing method)"
+            }
+          ],
+          "multiSelect": false
+        }
+      ],
+      "answers": {
+        "What would you like me to do with the MHG logo image?": "Just view and describe it"
+      }
+    },
+    "a1xai_timestamp": "2025-10-30T10:39:14.012582",
+    "a1xai_hook_version": "7.0_optimized",
+    "a1xai_framework": "SuperClaude",
+    "a1xai_analysis": {
+      "tool_type": "AskUserQuestion",
+      "success": false,
+      "execution_time": 0,
+      "timestamp": "2025-10-30T10:39:14.012178"
+    }
+  },
+  {
+    "session_id": "e9323052-ef01-4ef2-b405-e6abbaf6e854",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/e9323052-ef01-4ef2-b405-e6abbaf6e854.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "plan",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "curl -o /tmp/mhg-logo-5.png \"https://deuasy6ovuuuy.cloudfront.net/mhg/logo/mhg-logo-5.png\" && file /tmp/mhg-logo-5.png",
+      "description": "Download MHG logo and check file type"
+    },
+    "tool_response": {
+      "stdout": "A1 \ud83d\ude80 AI (AWS Bedrock Mode)\n/tmp/mhg-logo-5.png: PNG image data, 131 x 132, 8-bit/color RGBA, non-interlaced\n  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\r100   850  100   850    0     0    769      0  0:00:01  0:00:01 --:--:--   769\r100   850  100   850    0     0    769      0  0:00:01  0:00:01 --:--:--   769",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    },
+    "a1xai_timestamp": "2025-10-30T10:39:48.772420",
+    "a1xai_hook_version": "7.0_optimized",
+    "a1xai_framework": "SuperClaude",
+    "a1xai_analysis": {
+      "tool_type": "Bash",
+      "success": false,
+      "execution_time": 0,
+      "timestamp": "2025-10-30T10:39:48.772039"
+    }
+  },
+  {
+    "session_id": "e9323052-ef01-4ef2-b405-e6abbaf6e854",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/e9323052-ef01-4ef2-b405-e6abbaf6e854.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "plan",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Read",
+    "tool_input": {
+      "file_path": "/tmp/mhg-logo-5.png"
+    },
+    "tool_response": {
+      "type": "image",
+      "file": {
+        "base64": "iVBORw0KGgoAAAANSUhEUgAAAIMAAACECAYAAACzmJjeAAAACXBIWXMAABYlAAAWJQFJUiTwAAADBElEQVR4nO3bv0uUcRzA8Y9hhkOggoZQcC1S5JCTQSTa6BoUCEG5NUVDLtHUVkNbtQSOFv4FDllGkkNLKTTZE04VHiKaYFBt7+6807rjee7puPdru1/f5zu8ue+X5+7bFpOz1yLiZKjltUfE9YgYyXsiyt+hvCeg/4cxCMYgGINgDIIxCMYgGINgDIIxCMYgGINgDIIxCMYgGINgDIIxCMYgGINgDIIxCMYgGINgDIIxCMYgGINgDIIxCMYgGINgDIIxCMYgGINgDIIxCMYgGINgDIIxCMYgGINgDIIxCMYgGINgDIIxCMYgGINgDIIxCMYgGINgDIIxCMYgGINgDIIxCMYgtKcyypHDMdrfncpQpZKd3Ui+bBx4nYXiVvzc/F7TuIVjXVHo7Nj/Oi0qlRhG+7tj/u6FNIYqs7RcjHMP5w+8zoNnH2NqbqWmcWcmhmJ4sGff67QqlwnBGARjENLZQFZxZ/pDLK792ZTdOF+IyxdPlL1n7N7rssdZ7Dv07zKLYXFtI14mX3k8PtBb8Z7S15U/lwnBGITMlolGGTnTF/dr/Mzxvs5M5tLsmj6G4cGeshtIqp/LhGAMgjEITb9nqOeHqre3xtxnVOE3g2AMgjEIxiAYg2AMgjEIqdxnSHZ2Y2m5WPFcqdX17Yr37LX39fdJ+T+Wq11ndX271ulWjLv3catqi8nZVxExkvdElD+XCcEYhOY6UaVMNdWJKmXLZUIwBsEYhMz+3PL8xVp8/lb7DaFS9dxQUv0yi+Hxm8QTU03GZUIwBqFhf4gdLfRVPXx7kNX17XjyLslmQqrQsBjGB3rj9pVTNX1mabloDA3kMiEYg2AMQsP2DFNzK389+fTr6aUGzUbV+M0gGINgDEJme4ZHV8/G5taPVMcsHOuKmYmhsuemFz55LyIlmcVwunA09TELnR0VR+kXVvwxLC0uE4IxCJmdqEpDVieqVJ0nqgSXCcEYBGMQjEEwBsEYBGMQjEEwBsEYBGMQjEEwBsEYBGMQjEFoj4ibEdGV90SUv9/Mia1c8fXJ9QAAAABJRU5ErkJggg==",
+        "type": "image/png",
+        "originalSize": 850
+      }
+    },
+    "a1xai_timestamp": "2025-10-30T10:39:54.205552",
+    "a1xai_hook_version": "7.0_optimized",
+    "a1xai_framework": "SuperClaude",
+    "a1xai_analysis": {
+      "tool_type": "Read",
+      "success": false,
+      "execution_time": 0,
+      "timestamp": "2025-10-30T10:39:54.205019"
+    }
+  },
+  {
+    "session_id": "e9323052-ef01-4ef2-b405-e6abbaf6e854",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/e9323052-ef01-4ef2-b405-e6abbaf6e854.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "plan",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "curl -s \"https://deuasy6ovuuuy.cloudfront.net\" 2>&1 | head -20",
+      "description": "Check CloudFront domain for any context"
+    },
+    "tool_response": {
+      "stdout": "A1 \ud83d\ude80 AI (AWS Bedrock Mode)\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ListBucketResult xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\"><Name>all-our-websites</Name><Prefix></Prefix><Marker></Marker><MaxKeys>1000</MaxKeys><IsTruncated>true</IsTruncated><Contents><Key>01-ar-at-3x-80-150x150.jpg</Key><LastModified>2025-07-08T11:27:51.000Z</LastModified><ETag>&quot;3e36cbed9935c080f98ef922a8b28367&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>2411</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-ar-at-3x-80-300x280.jpg</Key><LastModified>2025-07-08T11:27:54.000Z</LastModified><ETag>&quot;3840c94eca5d38dc71d33e1f6aca77e1&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>6087</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-ar-at-3x-80-398x255.jpg</Key><LastModified>2025-07-08T11:27:53.000Z</LastModified><ETag>&quot;04d87fb3f26802bc4a49f93f404fa565&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>6307</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-ar-at-3x-80-620x380.jpg</Key><LastModified>2025-07-08T11:27:52.000Z</LastModified><ETag>&quot;5bd4a168911ae580952900b0e586e7d6&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>11821</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-ar-at-3x-80.jpg</Key><LastModified>2025-07-08T11:27:49.000Z</LastModified><ETag>&quot;ed7815c5f45e7f400e8cc5f7267cac50&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>940064</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-en-at-3x-80-2-150x150.jpg</Key><LastModified>2025-07-08T11:27:12.000Z</LastModified><ETag>&quot;05b899f5f8c2d6c43eaadbc0bf72684b&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>2521</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-en-at-3x-80-2-300x280.jpg</Key><LastModified>2025-07-08T11:27:15.000Z</LastModified><ETag>&quot;e9c263996aefa2e74a97b1b4949149e1&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>6697</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-en-at-3x-80-2-398x255.jpg</Key><LastModified>2025-07-08T11:27:14.000Z</LastModified><ETag>&quot;ea80f0a0757f6c7a004cc9b2cf8f91d8&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>6748</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-en-at-3x-80-2-620x380.jpg</Key><LastModified>2025-07-08T11:27:13.000Z</LastModified><ETag>&quot;4ed41397d995a5a4cb21414c80ac4739&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>12228</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-en-at-3x-80-2.jpg</Key><LastModified>2025-07-08T11:27:11.000Z</LastModified><ETag>&quot;e8e9204e6a68c29bc386a24e26e68a43&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>972594</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-en-at-3x-80-3-150x150.jpg</Key><LastModified>2025-07-08T11:28:58.000Z</LastModified><ETag>&quot;05b899f5f8c2d6c43eaadbc0bf72684b&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>2521</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-en-at-3x-80-3-300x280.jpg</Key><LastModified>2025-07-08T11:29:01.000Z</LastModified><ETag>&quot;e9c263996aefa2e74a97b1b4949149e1&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>6697</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-en-at-3x-80-3-398x255.jpg</Key><LastModified>2025-07-08T11:29:00.000Z</LastModified><ETag>&quot;ea80f0a0757f6c7a004cc9b2cf8f91d8&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>6748</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-en-at-3x-80-3-620x380.jpg</Key><LastModified>2025-07-08T11:28:59.000Z</LastModified><ETag>&quot;4ed41397d995a5a4cb21414c80ac4739&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>12228</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-en-at-3x-80-3.jpg</Key><LastModified>2025-07-08T11:28:56.000Z</LastModified><ETag>&quot;e8e9204e6a68c29bc386a24e26e68a43&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>972594</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-en-at-3x-80-4-150x150.jpg</Key><LastModified>2025-07-08T13:21:08.000Z</LastModified><ETag>&quot;05b899f5f8c2d6c43eaadbc0bf72684b&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>2521</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-en-at-3x-80-4-300x280.jpg</Key><LastModified>2025-07-08T13:21:12.000Z</LastModified><ETag>&quot;e9c263996aefa2e74a97b1b4949149e1&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>6697</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-en-at-3x-80-4-398x255.jpg</Key><LastModified>2025-07-08T13:21:11.000Z</LastModified><ETag>&quot;ea80f0a0757f6c7a004cc9b2cf8f91d8&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>6748</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-en-at-3x-80-4-620x380.jpg</Key><LastModified>2025-07-08T13:21:10.000Z</LastModified><ETag>&quot;4ed41397d995a5a4cb21414c80ac4739&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>12228</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>01-en-at-3x-80-4.jpg</Key><LastModified>2025-07-08T13:21:06.000Z</LastModified><ETag>&quot;e8e9204e6a68c29bc386a24e26e68a43&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>972594</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>02-scaled-150x150.jpg</Key><LastModified>2025-07-08T13:07:57.000Z</LastModified><ETag>&quot;396a7429c65f82a4923b44cee76a510f&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>4586</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>02-scaled-300x280.jpg</Key><LastModified>2025-07-08T13:07:58.000Z</LastModified><ETag>&quot;229b1a38cc4cbb78726209a98ee20b25&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>12432</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>02-scaled-398x255.jpg</Key><LastModified>2025-07-08T13:07:57.000Z</LastModified><ETag>&quot;d576845ce7ffbe0ff4832013b50af8c3&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>15903</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>02-scaled-620x380.jpg</Key><LastModified>2025-07-08T13:07:57.000Z</LastModified><ETag>&quot;bb90201dd9b11ee1e66350a1c101fbbf&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>32246</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/</Key><LastModified>2025-06-29T12:56:14.000Z</LastModified><ETag>&quot;d41d8cd98f00b204e9800998ecf8427e&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>0</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/.htaccess</Key><LastModified>2025-06-30T09:11:37.000Z</LastModified><ETag>&quot;88e493571a271802b6dbe4f1c6bb227b&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>603</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/0-17-1-150x150.jpg</Key><LastModified>2025-06-30T10:04:46.000Z</LastModified><ETag>&quot;c486acdadbb288c2332629347a584d03&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>5125</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/0-17-1-300x280.jpg</Key><LastModified>2025-06-30T10:04:46.000Z</LastModified><ETag>&quot;edb8fd9754f7decd0c9e3d048a4caf0a&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>14232</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/0-17-1-398x255.jpg</Key><LastModified>2025-06-30T10:04:46.000Z</LastModified><ETag>&quot;028018831bdddaed3887350dc4dd615e&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>16149</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/0-17-1-620x380.jpg</Key><LastModified>2025-06-30T10:04:46.000Z</LastModified><ETag>&quot;6ae07fa0f9fef8ee213063ba8d44d775&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>31722</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/0-17-1.jpg</Key><LastModified>2025-06-30T10:04:46.000Z</LastModified><ETag>&quot;bc3af6598ca6f023de9b5dccd4c5c5d7&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>2506349</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/0-17-150x150.jpg</Key><LastModified>2025-06-30T10:04:49.000Z</LastModified><ETag>&quot;c486acdadbb288c2332629347a584d03&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>5125</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/0-17-300x280.jpg</Key><LastModified>2025-06-30T10:04:49.000Z</LastModified><ETag>&quot;edb8fd9754f7decd0c9e3d048a4caf0a&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>14232</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/0-17-398x255.jpg</Key><LastModified>2025-06-30T10:04:49.000Z</LastModified><ETag>&quot;028018831bdddaed3887350dc4dd615e&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>16149</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/0-17-620x380.jpg</Key><LastModified>2025-06-30T10:04:49.000Z</LastModified><ETag>&quot;6ae07fa0f9fef8ee213063ba8d44d775&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>31722</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/0-17.jpg</Key><LastModified>2025-06-30T10:04:49.000Z</LastModified><ETag>&quot;bc3af6598ca6f023de9b5dccd4c5c5d7&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>2506349</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/01-ar3x-80-150x150.jpg</Key><LastModified>2025-06-30T10:04:52.000Z</LastModified><ETag>&quot;f715cd4b6889c7071b651588aaddce4f&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>1933</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/01-ar3x-80-300x280.jpg</Key><LastModified>2025-06-30T10:04:52.000Z</LastModified><ETag>&quot;3640e0b4cbe858acd9b7c404e8c4950f&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>4429</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/01-ar3x-80-398x255.jpg</Key><LastModified>2025-06-30T10:04:52.000Z</LastModified><ETag>&quot;e16a02240285b8d45f8bec49b8e7eb5e&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>4303</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/01-ar3x-80-620x380.jpg</Key><LastModified>2025-06-30T10:04:52.000Z</LastModified><ETag>&quot;ab27831d076183cecf3880aa6c5a7991&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>8365</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/01-ar3x-80.jpg</Key><LastModified>2025-06-30T10:04:52.000Z</LastModified><ETag>&quot;d91fa8dafdef0e25b3c907eab768e859&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>769075</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/01-en-at-3x-80-1-150x150.jpg</Key><LastModified>2025-06-30T10:04:54.000Z</LastModified><ETag>&quot;1a75306726157a0859501e6b388fa631&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>1970</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/01-en-at-3x-80-1-300x280.jpg</Key><LastModified>2025-06-30T10:04:55.000Z</LastModified><ETag>&quot;1b55ff7cf4f0e4d0bc2d786cc9494e9e&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>4926</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/01-en-at-3x-80-1-398x255.jpg</Key><LastModified>2025-06-30T10:04:55.000Z</LastModified><ETag>&quot;29c1581085faa41620d13cccee9a4dcc&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>4635</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/01-en-at-3x-80-1-620x380.jpg</Key><LastModified>2025-06-30T10:04:55.000Z</LastModified><ETag>&quot;55b188306888692b050bda9dece6301e&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>8792</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/01-en-at-3x-80-1.jpg</Key><LastModified>2025-06-30T10:04:55.000Z</LastModified><ETag>&quot;e56db1852c0830865448770f0349c38c&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>809321</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/01-en-at-3x-80-150x150.jpg</Key><LastModified>2025-06-30T10:04:58.000Z</LastModified><ETag>&quot;1a75306726157a0859501e6b388fa631&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>1970</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/01-en-at-3x-80-300x280.jpg</Key><LastModified>2025-06-30T10:04:58.000Z</LastModified><ETag>&quot;1b55ff7cf4f0e4d0bc2d786cc9494e9e&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>4926</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/01-en-at-3x-80-398x255.jpg</Key><LastModified>2025-06-30T10:04:58.000Z</LastModified><ETag>&quot;29c1581085faa41620d13cccee9a4dcc&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>4635</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/01-en-at-3x-80-620x380.jpg</Key><LastModified>2025-06-30T10:04:59.000Z</LastModified><ETag>&quot;55b188306888692b050bda9dece6301e&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>8792</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/01-en-at-3x-80.jpg</Key><LastModified>2025-06-30T10:04:58.000Z</LastModified><ETag>&quot;e56db1852c0830865448770f0349c38c&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>809321</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-ar3x-80-1-150x150.jpg</Key><LastModified>2025-06-30T10:05:01.000Z</LastModified><ETag>&quot;3ac25285b07b8428cfc359e334166885&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>3167</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-ar3x-80-1-300x280.jpg</Key><LastModified>2025-06-30T10:05:01.000Z</LastModified><ETag>&quot;4a79765426d143297da7787d89ef1def&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>7598</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-ar3x-80-1-398x255.jpg</Key><LastModified>2025-06-30T10:05:01.000Z</LastModified><ETag>&quot;a986ac645d7823b5033bae25b4b0b516&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>8005</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-ar3x-80-1-620x380.jpg</Key><LastModified>2025-06-30T10:05:01.000Z</LastModified><ETag>&quot;aa79ddf7b7449dd96bac4b60b1bd698d&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>15197</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-ar3x-80-1.jpg</Key><LastModified>2025-06-30T10:05:02.000Z</LastModified><ETag>&quot;8827c474aec07154fecb6203796b9a45&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>1093092</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-ar3x-80-150x150.jpg</Key><LastModified>2025-06-30T10:05:04.000Z</LastModified><ETag>&quot;57341c95a6c89bf34b55c989ea7b47d8&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>3168</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-ar3x-80-300x280.jpg</Key><LastModified>2025-06-30T10:05:04.000Z</LastModified><ETag>&quot;b076806293a131c879bbc0091052fae1&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>7597</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-ar3x-80-398x255.jpg</Key><LastModified>2025-06-30T10:05:04.000Z</LastModified><ETag>&quot;a11bd55143ed15dc86776d13cecf9f69&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>8014</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-ar3x-80-620x380.jpg</Key><LastModified>2025-06-30T10:05:04.000Z</LastModified><ETag>&quot;3009ed43a532d0ce4cfea2a388846c55&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>15187</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-ar3x-80.jpg</Key><LastModified>2025-06-30T10:05:06.000Z</LastModified><ETag>&quot;a443374c50325ad03bd509430837e901&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>1095852</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-en3x-80-150x150.jpg</Key><LastModified>2025-06-30T10:05:07.000Z</LastModified><ETag>&quot;ec743538a2abf0257b8819d41c14500e&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>3330</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-en3x-80-300x280.jpg</Key><LastModified>2025-06-30T10:05:07.000Z</LastModified><ETag>&quot;51d8f6ee6a44bbe9f345c5722a41c39b&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>7896</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-en3x-80-398x255.jpg</Key><LastModified>2025-06-30T10:05:07.000Z</LastModified><ETag>&quot;68ad1b08aa0bba1de6241628416c44ba&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>8314</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-en3x-80-620x380.jpg</Key><LastModified>2025-06-30T10:05:08.000Z</LastModified><ETag>&quot;08f55ae7642199eff3ba34c936c5fea0&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>15533</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-en3x-80.jpg</Key><LastModified>2025-06-30T10:05:09.000Z</LastModified><ETag>&quot;ac0a7db866ed9bdb7e730b6a1cb71b26&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>1110669</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-scaled-150x150.jpg</Key><LastModified>2025-06-30T10:05:09.000Z</LastModified><ETag>&quot;21dfd2730ba262248122c6a5522a6c7a&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>4573</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-scaled-300x280.jpg</Key><LastModified>2025-06-30T10:05:10.000Z</LastModified><ETag>&quot;e063b6a1a40bf87e012a9606665d5557&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>12401</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-scaled-398x255.jpg</Key><LastModified>2025-06-30T10:05:10.000Z</LastModified><ETag>&quot;66a0572fcfc2fc50857ec36cc8d937c6&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>15841</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-scaled-620x380.jpg</Key><LastModified>2025-06-30T10:05:12.000Z</LastModified><ETag>&quot;476cade2290604cf4f10727cf7830ef4&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>32062</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/02-scaled.jpg</Key><LastModified>2025-06-30T10:05:12.000Z</LastModified><ETag>&quot;9c5d2c905e6724fe6a33c0bdb183880e&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>506588</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/03-ar3x-80-1-150x150.jpg</Key><LastModified>2025-06-30T10:05:13.000Z</LastModified><ETag>&quot;1501c75f2092a0bc567d6bfb69fbbc26&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>3005</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/03-ar3x-80-1-300x280.jpg</Key><LastModified>2025-06-30T10:05:13.000Z</LastModified><ETag>&quot;67303860632a75eb6ed4e1c39daffa8c&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>7363</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/03-ar3x-80-1-398x255.jpg</Key><LastModified>2025-06-30T10:05:13.000Z</LastModified><ETag>&quot;3b5c04eab5ac944f43a70dc1ec1dd984&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>7721</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/03-ar3x-80-1-620x380.jpg</Key><LastModified>2025-06-30T10:05:15.000Z</LastModified><ETag>&quot;b34d29aafe8d635f2d8f824df8a43525&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>15549</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/03-ar3x-80-1.jpg</Key><LastModified>2025-06-30T10:05:15.000Z</LastModified><ETag>&quot;4ee54fb7df90a98948a8f3ebbbd4ccb0&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>1468252</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/03-ar3x-80.jpg</Key><LastModified>2025-06-30T10:05:16.000Z</LastModified><ETag>&quot;4ee54fb7df90a98948a8f3ebbbd4ccb0&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>1468252</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/03-en3x-80-150x150.jpg</Key><LastModified>2025-06-30T10:05:16.000Z</LastModified><ETag>&quot;fe2bc7d341ca2ea9a0eba47c5c2e6c07&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>3175</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/03-en3x-80-300x280.jpg</Key><LastModified>2025-06-30T10:05:17.000Z</LastModified><ETag>&quot;4c14bc99ca81fcf60b63e56606bc093a&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>8080</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/03-en3x-80-398x255.jpg</Key><LastModified>2025-06-30T10:05:18.000Z</LastModified><ETag>&quot;c491ccfe7dcb7f7ceb6b465a25cba083&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>8320</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/03-en3x-80-620x380.jpg</Key><LastModified>2025-06-30T10:05:18.000Z</LastModified><ETag>&quot;92839ad256ea034ecd4e705abf247dd3&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>16082</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/03-en3x-80.jpg</Key><LastModified>2025-06-30T10:05:19.000Z</LastModified><ETag>&quot;7fa0a091b661ec21dd10ddd199b115b4&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>1492670</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/adobe-express-file-150x150.jpg</Key><LastModified>2025-06-30T10:05:19.000Z</LastModified><ETag>&quot;32f50f60c10f4636cf9df345ab2f61a9&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>7734</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/adobe-express-file-300x280.jpg</Key><LastModified>2025-06-30T10:05:20.000Z</LastModified><ETag>&quot;7e5d4e51a40e55304f8b798e4127a980&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>23118</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/adobe-express-file-398x255.jpg</Key><LastModified>2025-06-30T10:05:21.000Z</LastModified><ETag>&quot;592c41c41de83eafa9abd8ea5d3aa4d2&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>26888</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/adobe-express-file-620x380.jpg</Key><LastModified>2025-06-30T10:05:22.000Z</LastModified><ETag>&quot;aa1043bc2f08d47ff7fd352449ca48d8&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>54303</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/adobe-express-file.jpg</Key><LastModified>2025-06-30T10:05:22.000Z</LastModified><ETag>&quot;373c5942ca65cd5d7a5b1f9312fd25ce&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>1535468</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/artboard-1-150x150.png</Key><LastModified>2025-06-30T10:05:22.000Z</LastModified><ETag>&quot;e72635fcfd58a3b613fe07e10a5c0d90&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>44414</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/artboard-1-300x280.png</Key><LastModified>2025-06-30T10:05:24.000Z</LastModified><ETag>&quot;2694cb7d371375c250521713fdc55482&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>145451</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/artboard-1-398x255.png</Key><LastModified>2025-06-30T10:05:23.000Z</LastModified><ETag>&quot;f6e265c3c0994192fca049b547d46c3b&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>176398</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/artboard-1-620x380.png</Key><LastModified>2025-06-30T10:05:24.000Z</LastModified><ETag>&quot;98d5c5c9946f68732a339adbfe8c461a&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>375363</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/artboard-1.png</Key><LastModified>2025-06-30T10:05:25.000Z</LastModified><ETag>&quot;201cfe783a8e9ae877eeeed648e4c421&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>1096930</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/artboard-11-150x150.png</Key><LastModified>2025-06-30T10:05:25.000Z</LastModified><ETag>&quot;4d42bea965bf96f9d10ba91bde316ac1&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>47011</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/artboard-11-300x280.png</Key><LastModified>2025-06-30T10:05:27.000Z</LastModified><ETag>&quot;abee8071297c1ca33485253df8fffdb5&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>154589</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/artboard-11-398x255.png</Key><LastModified>2025-06-30T10:05:27.000Z</LastModified><ETag>&quot;ed89d2efb1cc1f3b69873926da31e719&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>187842</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/artboard-11-620x380.png</Key><LastModified>2025-06-30T10:05:27.000Z</LastModified><ETag>&quot;3495774d15e376459aeef89fda8656bc&quot;</ETag><ChecksumAlgorithm>CRC64NVME</ChecksumAlgorithm><ChecksumType>FULL_OBJECT</ChecksumType><Size>400685</Size><StorageClass>STANDARD</StorageClass></Contents><Contents><Key>MHG/a\n\n... [1 lines truncated] ...",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    },
+    "a1xai_timestamp": "2025-10-30T10:40:05.327731",
+    "a1xai_hook_version": "7.0_optimized",
+    "a1xai_framework": "SuperClaude",
+    "a1xai_analysis": {
+      "tool_type": "Bash",
+      "success": false,
+      "execution_time": 0,
+      "timestamp": "2025-10-30T10:40:05.327113"
+    }
+  },
+  {
+    "session_id": "e9323052-ef01-4ef2-b405-e6abbaf6e854",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/e9323052-ef01-4ef2-b405-e6abbaf6e854.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "plan",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "curl -s \"https://deuasy6ovuuuy.cloudfront.net/mhg/\" 2>&1 | grep -i \"logo\" | head -20",
+      "description": "Search for logo files in MHG directory"
+    },
+    "tool_response": {
+      "stdout": "A1 \ud83d\ude80 AI (AWS Bedrock Mode)",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    },
+    "a1xai_timestamp": "2025-10-30T10:40:19.714854",
+    "a1xai_hook_version": "7.0_optimized",
+    "a1xai_framework": "SuperClaude",
+    "a1xai_analysis": {
+      "tool_type": "Bash",
+      "success": false,
+      "execution_time": 0,
+      "timestamp": "2025-10-30T10:40:19.714489"
+    }
+  },
+  {
+    "session_id": "e9323052-ef01-4ef2-b405-e6abbaf6e854",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/e9323052-ef01-4ef2-b405-e6abbaf6e854.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "plan",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "curl -s \"https://deuasy6ovuuuy.cloudfront.net/mhg/logo/\" 2>&1 | head -50",
+      "description": "Check MHG logo directory contents"
+    },
+    "tool_response": {
+      "stdout": "A1 \ud83d\ude80 AI (AWS Bedrock Mode)\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Error><Code>NoSuchKey</Code><Message>The specified key does not exist.</Message><Key>mhg/logo/</Key><RequestId>6D0RMRRQ4Z9W6J3F</RequestId><HostId>C+sr/KCcncNZZ8KTMxfsn6U2s1+MhRHvqB3ERznvMy9EBPVo1wmPG+ptqx1sUJe81YBoHrYPymv2ORGRQ+rat2bLhE4fDAjMF1161OPyBHI=</HostId></Error>",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    },
+    "a1xai_timestamp": "2025-10-30T10:40:29.207224",
+    "a1xai_hook_version": "7.0_optimized",
+    "a1xai_framework": "SuperClaude",
+    "a1xai_analysis": {
+      "tool_type": "Bash",
+      "success": false,
+      "execution_time": 0,
+      "timestamp": "2025-10-30T10:40:29.206839"
+    }
+  },
+  {
+    "session_id": "e9323052-ef01-4ef2-b405-e6abbaf6e854",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/e9323052-ef01-4ef2-b405-e6abbaf6e854.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "plan",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "curl -s \"https://deuasy6ovuuuy.cloudfront.net\" 2>&1 | grep -i \"mhg/logo\" | head -30",
+      "description": "Search for MHG logo files in bucket"
+    },
+    "tool_response": {
+      "stdout": "A1 \ud83d\ude80 AI (AWS Bedrock Mode)",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    },
+    "a1xai_timestamp": "2025-10-30T10:40:38.018360",
+    "a1xai_hook_version": "7.0_optimized",
+    "a1xai_framework": "SuperClaude",
+    "a1xai_analysis": {
+      "tool_type": "Bash",
+      "success": false,
+      "execution_time": 0,
+      "timestamp": "2025-10-30T10:40:38.017806"
+    }
+  },
+  {
+    "session_id": "e9323052-ef01-4ef2-b405-e6abbaf6e854",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/e9323052-ef01-4ef2-b405-e6abbaf6e854.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "plan",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "identify -verbose /tmp/mhg-logo-5.png 2>&1 | head -50",
+      "description": "Get detailed image information"
+    },
+    "tool_response": {
+      "stdout": "A1 \ud83d\ude80 AI (AWS Bedrock Mode)\n/bin/bash: line 1: identify: command not found",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    },
+    "a1xai_timestamp": "2025-10-30T10:40:52.698183",
+    "a1xai_hook_version": "7.0_optimized",
+    "a1xai_framework": "SuperClaude",
+    "a1xai_analysis": {
+      "tool_type": "Bash",
+      "success": false,
+      "execution_time": 0,
+      "timestamp": "2025-10-30T10:40:52.697663"
+    }
+  },
+  {
+    "session_id": "e9323052-ef01-4ef2-b405-e6abbaf6e854",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/e9323052-ef01-4ef2-b405-e6abbaf6e854.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "plan",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Bash",
+    "tool_input": {
+      "command": "hexdump -C /tmp/mhg-logo-5.png | head -30",
+      "description": "Examine PNG file header and data"
+    },
+    "tool_response": {
+      "stdout": "A1 \ud83d\ude80 AI (AWS Bedrock Mode)\n00000000  89 50 4e 47 0d 0a 1a 0a  00 00 00 0d 49 48 44 52  |.PNG........IHDR|\n00000010  00 00 00 83 00 00 00 84  08 06 00 00 00 b3 98 98  |................|\n00000020  de 00 00 00 09 70 48 59  73 00 00 16 25 00 00 16  |.....pHYs...%...|\n00000030  25 01 49 52 24 f0 00 00  03 04 49 44 41 54 78 9c  |%.IR$.....IDATx.|\n00000040  ed db bf 4b 94 71 1c c0  f1 8f 61 86 43 a0 82 86  |...K.q....a.C...|\n00000050  50 70 2d 52 e4 90 93 41  24 da e8 1a 14 08 41 b9  |Pp-R...A$.....A.|\n00000060  35 45 43 2e d1 d4 56 43  5b b5 04 8e 16 fe 05 0e  |5EC...VC[.......|\n00000070  59 46 92 43 4b 29 34 d9  13 4e 15 1e 22 9a 60 50  |YF.CK)4..N..\".`P|\n00000080  6d ef ee bc d3 ba e3 79  ee e9 b8 f7 6b bb 5f df  |m......y....k._.|\n00000090  e7 3b bc b9 ef 97 e7 ee  db 16 93 b3 d7 22 e2 64  |.;...........\".d|\n000000a0  a8 e5 b5 47 c4 f5 88 18  c9 7b 22 ca df a1 bc 27  |...G.....{\"....'|\n000000b0  a0 ff 87 31 08 c6 20 18  83 60 0c 82 31 08 c6 20  |...1.. ..`..1.. |\n000000c0  18 83 60 0c 82 31 08 c6  20 18 83 60 0c 82 31 08  |..`..1.. ..`..1.|\n000000d0  c6 20 18 83 60 0c 82 31  08 c6 20 18 83 60 0c 82  |. ..`..1.. ..`..|\n000000e0  31 08 c6 20 18 83 60 0c  82 31 08 c6 20 18 83 60  |1.. ..`..1.. ..`|\n000000f0  0c 82 31 08 c6 20 18 83  60 0c 82 31 08 c6 20 18  |..1.. ..`..1.. .|\n00000100  83 60 0c 82 31 08 c6 20  18 83 60 0c 82 31 08 c6  |.`..1.. ..`..1..|\n00000110  20 18 83 60 0c 82 31 08  c6 20 18 83 60 0c 82 31  | ..`..1.. ..`..1|\n00000120  08 c6 20 18 83 60 0c 82  31 08 c6 20 18 83 60 0c  |.. ..`..1.. ..`.|\n00000130  82 31 08 c6 20 18 83 60  0c 82 31 08 c6 20 b4 a7  |.1.. ..`..1.. ..|\n00000140  32 ca 91 c3 31 da df 9d  ca 50 a5 92 9d dd 48 be  |2...1....P....H.|\n00000150  6c 1c 78 9d 85 e2 56 fc  dc fc 5e d3 b8 85 63 5d  |l.x...V...^...c]|\n00000160  51 e8 ec d8 ff 3a 2d 2a  95 18 46 fb bb 63 fe ee  |Q....:-*..F..c..|\n00000170  85 34 86 2a b3 b4 5c 8c  73 0f e7 0f bc ce 83 67  |.4.*..\\.s......g|\n00000180  1f 63 6a 6e a5 a6 71 67  26 86 62 78 b0 67 df eb  |.cjn..qg&.bx.g..|\n00000190  b4 2a 97 09 c1 18 04 63  10 d2 d9 40 56 71 67 fa  |.*.....c...@Vqg.|\n000001a0  43 2c ae fd d9 94 dd 38  5f 88 cb 17 4f 94 bd 67  |C,.....8_...O..g|\n000001b0  ec de eb b2 c7 59 ec 3b  f4 ef 32 8b 61 71 6d 23  |.....Y.;..2.aqm#|\n000001c0  5e 26 5f 79 3c 3e d0 5b  f1 9e d2 d7 95 3f 97 09  |^&_y<>.[.....?..|\n000001d0  c1 18 84 cc 96 89 46 19  39 d3 17 f7 6b fc cc f1  |......F.9...k...|",
+      "stderr": "",
+      "interrupted": false,
+      "isImage": false
+    },
+    "a1xai_timestamp": "2025-10-30T10:40:59.146852",
+    "a1xai_hook_version": "7.0_optimized",
+    "a1xai_framework": "SuperClaude",
+    "a1xai_analysis": {
+      "tool_type": "Bash",
+      "success": false,
+      "execution_time": 0,
+      "timestamp": "2025-10-30T10:40:59.146334"
+    }
+  },
+  {
+    "session_id": "e9323052-ef01-4ef2-b405-e6abbaf6e854",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/e9323052-ef01-4ef2-b405-e6abbaf6e854.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "plan",
+    "hook_event_name": "PostToolUse",
+    "tool_name": "Task",
+    "tool_input": {
+      "description": "Research MHG logo details",
+      "prompt": "I need to research and describe the MHG logo that's located at this URL: https://deuasy6ovuuuy.cloudfront.net/mhg/logo/mhg-logo-5.png\n\nYour task is to:\n1. Research what \"MHG\" stands for and what organization/company it represents\n2. Try to find information about their branding and logo design\n3. If possible, use alternative methods to view or describe the logo (e.g., downloading it with curl/wget and examining it)\n4. Provide a comprehensive description of:\n   - What the logo looks like (colors, shapes, typography)\n   - What MHG represents\n   - The style and design approach\n   - Any notable design elements\n\nPlease be thorough in your research and provide as much detail as possible about the logo and the organization it represents.\n\nIMPORTANT: You are in research/read-only mode. Do not make any file changes or modifications. Focus on gathering information and describing what you find.",
+      "subagent_type": "Plan"
+    },
+    "tool_response": {
+      "status": "completed",
+      "prompt": "I need to research and describe the MHG logo that's located at this URL: https://deuasy6ovuuuy.cloudfront.net/mhg/logo/mhg-logo-5.png\n\nYour task is to:\n1. Research what \"MHG\" stands for and what organization/company it represents\n2. Try to find information about their branding and logo design\n3. If possible, use alternative methods to view or describe the logo (e.g., downloading it with curl/wget and examining it)\n4. Provide a comprehensive description of:\n   - What the logo looks like (colors, shapes, typography)\n   - What MHG represents\n   - The style and design approach\n   - Any notable design elements\n\nPlease be thorough in your research and provide as much detail as possible about the logo and the organization it represents.\n\nIMPORTANT: You are in research/read-only mode. Do not make any file changes or modifications. Focus on gathering information and describing what you find.",
+      "agentId": "e1633443",
+      "content": [
+        {
+          "type": "text",
+          "text": "Perfect! Now I have a clear view of the logo. Let me provide you with a comprehensive description based on what I can see.\n\n## Research Findings: MHG Logo\n\nBased on my analysis of the logo image at https://deuasy6ovuuuy.cloudfront.net/mhg/logo/mhg-logo-5.png, here's a comprehensive description:\n\n### Logo Visual Description\n\n**Design Elements:**\n- **Typography:** The logo features bold, white capital letters \"MHG.\" spelled out\n- **Layout:** The text is arranged in a stacked format:\n  - \"MH\" on the first line\n  - \"G.\" on the second line (note the period after G)\n- **Color Scheme:** \n  - Background: Solid royal blue/cobalt blue (#0066CC or similar)\n  - Text: Pure white (#FFFFFF)\n- **Dimensions:** 131 x 132 pixels (nearly square format)\n- **File Format:** PNG with RGBA transparency support\n- **Style:** Clean, modern, minimalist design with strong contrast\n\n### Design Approach\n\nThe logo follows a **modern corporate/institutional design philosophy** with these characteristics:\n\n1. **Minimalist Aesthetic:** Simple geometric letterforms without decorative elements\n2. **High Contrast:** White text on blue background ensures maximum readability\n3. **Geometric Precision:** Square format and stacked typography create visual stability\n4. **Professional Tone:** The color palette and typography suggest a corporate, institutional, or healthcare organization\n\n### Notable Design Elements\n\n- **Period After \"G\":** The inclusion of a period is distinctive and may indicate:\n  - An abbreviation or acronym\n  - A deliberate branding element to create visual interest\n  - Professional/corporate formality\n- **Stacked Layout:** Creates a compact, square logo ideal for:\n  - Social media avatars\n  - App icons\n  - Favicon usage\n  - Responsive web design\n- **Color Psychology:** Royal blue conveys trust, professionalism, reliability, and authority - commonly used in healthcare, finance, and corporate sectors\n\n### What MHG Might Represent\n\nBased on the professional design and the context of finding this in a CloudFront distribution (suggesting a web-based organization), **MHG** could potentially stand for various organizations. Common possibilities include:\n\n1. **Medical/Healthcare Groups** (most likely given the professional blue color scheme)\n2. **Management or Holding Groups**\n3. **A company or organization name**\n\nWithout access to additional website context or metadata, I cannot definitively determine which specific organization this represents, but the design strongly suggests a professional services, healthcare, or corporate entity.\n\n---\n\n**Summary:** This is a clean, professional logo featuring the white acronym \"MHG.\" on a royal blue background, designed in a square format with stacked typography. The minimalist design and color scheme suggest a corporate, institutional, or healthcare organization that values professionalism, trust, and modern aesthetics."
+        }
+      ],
+      "totalDurationMs": 112344,
+      "totalTokens": 37025,
+      "totalToolUseCount": 8,
+      "usage": {
+        "input_tokens": 0,
+        "cache_creation_input_tokens": 1873,
+        "cache_read_input_tokens": 34486,
+        "output_tokens": 666
+      }
+    },
+    "a1xai_timestamp": "2025-10-30T10:41:22.162024",
+    "a1xai_hook_version": "7.0_optimized",
+    "a1xai_framework": "SuperClaude",
+    "a1xai_analysis": {
+      "tool_type": "Task",
+      "success": false,
+      "execution_time": 0,
+      "timestamp": "2025-10-30T10:41:22.161597"
+    }
+  }
+]

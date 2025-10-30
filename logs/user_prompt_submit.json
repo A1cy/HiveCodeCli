@@ -7,5 +7,14 @@
     "hook_event_name": "UserPromptSubmit",
     "prompt": "<ide_opened_file>The user opened the file /home/a1xai/HiveCodeCli/README.md in the IDE. This may or may not be related to the current task.</ide_opened_file>\nim trying to  provide an internal  cli  for my company ,  but using ollama llm is too  slow and not effecint,  also i want to  stay on the free use of it ! what can be the solution for this ?",
     "logged_at": "2025-10-27T12:06:24.762187"
+  },
+  {
+    "session_id": "e9323052-ef01-4ef2-b405-e6abbaf6e854",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/e9323052-ef01-4ef2-b405-e6abbaf6e854.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "plan",
+    "hook_event_name": "UserPromptSubmit",
+    "prompt": "check the image of mhg here :  https://deuasy6ovuuuy.cloudfront.net/mhg/logo/mhg-logo-5.png",
+    "logged_at": "2025-10-30T10:36:54.523779"
   }
 ]
