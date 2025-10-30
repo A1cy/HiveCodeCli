@@ -110,23 +110,8 @@ function detectProviderFromModel(model: string | undefined): AuthType | undefine
   return undefined;
 }
 
-/**
- * Validate that the model name is appropriate for the provider
- * Prevents cross-contamination where Bedrock models are used with Ollama and vice versa
- */
-function validateModelForProvider(model: string, provider: AuthType): boolean {
-  // Ollama models should have ":" in the name (e.g., llama3.2:1b, qwen2.5:3b)
-  if (provider === AuthType.USE_OLLAMA) {
-    return model.includes(':');
-  }
-
-  // Bedrock models should have "." and either "-v" or ":" (e.g., amazon.nova-lite-v1:0, openai.gpt-oss-120b-1:0)
-  if (provider === AuthType.USE_BEDROCK) {
-    return model.includes('.') && (model.includes('-v') || model.includes(':'));
-  }
-
-  return true;
-}
+// Note: Model validation is now handled at the settings/UI layer (DialogManager)
+// to prevent invalid models from being saved in the first place
 
 export type ContentGeneratorConfig = {
   apiKey?: string;

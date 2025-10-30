@@ -149,11 +149,16 @@ export const DialogManager = ({
       <OllamaModelSelector
         onSelect={async (modelName: string) => {
           try {
+            // Validate Ollama model (must have : in name, e.g., llama3.2:1b)
+            const validOllamaModel = modelName.includes(':')
+              ? modelName
+              : 'llama3.2:1b';
+
             // Save the selected model to settings
             await settings.setValue(
               SettingScope.User,
               'security.auth.ollamaModel',
-              modelName,
+              validOllamaModel,
             );
 
             // Switch to Ollama authentication
@@ -192,11 +197,19 @@ export const DialogManager = ({
       <BedrockModelSelector
         onSelect={async (modelId: string) => {
           try {
+            // Validate Bedrock model (must have . and either -v or :)
+            const isValidBedrock =
+              modelId.includes('.') &&
+              (modelId.includes('-v') || modelId.includes(':'));
+            const validBedrockModel = isValidBedrock
+              ? modelId
+              : 'amazon.nova-lite-v1:0';
+
             // Save the selected model to settings
             await settings.setValue(
               SettingScope.User,
               'security.auth.bedrockModel',
-              modelId,
+              validBedrockModel,
             );
 
             // Switch to Bedrock authentication
