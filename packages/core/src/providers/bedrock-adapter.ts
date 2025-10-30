@@ -184,7 +184,18 @@ export class BedrockAdapter {
     bedrockResponse: BedrockGenerateResponse,
   ): GenerateContentResponse {
     // Extract text from Bedrock content array
-    const text = bedrockResponse.content.map((c) => c.text).join('');
+    let text = bedrockResponse.content.map((c) => c.text).join('');
+
+    // CRITICAL FIX: Strip <reasoning> tags for OpenAI models
+    // OpenAI GPT-OSS models include internal reasoning that should not be displayed
+    // This prevents unprofessional output like: "<reasoning>internal thoughts</reasoning>Hello!"
+    text = text.replace(/<reasoning>[\s\S]*?<\/reasoning>/gi, '');
+
+    // Also remove any unclosed reasoning tags (safety measure for streaming)
+    text = text.replace(/<reasoning>[\s\S]*$/gi, '');
+
+    // Trim any extra whitespace left after tag removal
+    text = text.trim();
 
     const parts: Part[] = [
       {
