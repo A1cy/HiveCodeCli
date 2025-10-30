@@ -70,9 +70,9 @@ const MODEL_PROVIDER_MAP: Record<string, AuthType> = {
   'qwen3:4b': AuthType.USE_OLLAMA,
   'gemma:2b': AuthType.USE_OLLAMA,
   'gemma:7b': AuthType.USE_OLLAMA,
-  'gpt-oss:20b': AuthType.USE_OLLAMA,
 
   // AWS Bedrock models (cloud)
+  // Note: gpt-oss models are BEDROCK models, not Ollama!
   'openai.gpt-oss-120b-1:0': AuthType.USE_BEDROCK,
   'amazon.nova-micro-v1:0': AuthType.USE_BEDROCK,
   'amazon.nova-lite-v1:0': AuthType.USE_BEDROCK,
@@ -108,6 +108,24 @@ function detectProviderFromModel(model: string | undefined): AuthType | undefine
   }
 
   return undefined;
+}
+
+/**
+ * Validate that the model name is appropriate for the provider
+ * Prevents cross-contamination where Bedrock models are used with Ollama and vice versa
+ */
+function validateModelForProvider(model: string, provider: AuthType): boolean {
+  // Ollama models should have ":" in the name (e.g., llama3.2:1b, qwen2.5:3b)
+  if (provider === AuthType.USE_OLLAMA) {
+    return model.includes(':');
+  }
+
+  // Bedrock models should have "." and either "-v" or ":" (e.g., amazon.nova-lite-v1:0, openai.gpt-oss-120b-1:0)
+  if (provider === AuthType.USE_BEDROCK) {
+    return model.includes('.') && (model.includes('-v') || model.includes(':'));
+  }
+
+  return true;
 }
 
 export type ContentGeneratorConfig = {

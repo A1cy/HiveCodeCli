@@ -21,23 +21,8 @@ interface BedrockModelInfo {
 }
 
 const BEDROCK_MODELS: BedrockModelInfo[] = [
-  // ===== FASTEST MODELS (Claude 3 Haiku - 21K tokens/sec) =====
-  {
-    modelId: 'anthropic.claude-3-haiku-20240307-v1:0',
-    displayName: '⚡ Claude 3 Haiku (FASTEST - 21K tokens/sec)',
-    description: '3x faster than Nova Micro - Ultra-low latency, excellent quality',
-    provider: 'Anthropic',
-    capabilities: 'Text + Image input',
-    tier: 'fast',
-  },
-  {
-    modelId: 'anthropic.claude-3-5-haiku-20241022-v1:0',
-    displayName: '⚡ Claude 3.5 Haiku (Latest)',
-    description: 'Latest Claude - Ultra-fast with enhanced capabilities',
-    provider: 'Anthropic',
-    capabilities: 'Text + Image input',
-    tier: 'fast',
-  },
+  // ===== FASTEST MODELS =====
+  // Note: Claude models removed - require AWS inference profiles
   {
     modelId: 'mistral.mistral-7b-instruct-v0:2',
     displayName: '⚡ Mistral 7B Instruct',
@@ -80,22 +65,7 @@ const BEDROCK_MODELS: BedrockModelInfo[] = [
   },
 
   // ===== BALANCED MODELS (General Purpose) =====
-  {
-    modelId: 'anthropic.claude-3-sonnet-20240229-v1:0',
-    displayName: '🎯 Claude 3 Sonnet (Recommended)',
-    description: 'Best quality/speed balance - Superior reasoning & coding',
-    provider: 'Anthropic',
-    capabilities: 'Text + Image input',
-    tier: 'balanced',
-  },
-  {
-    modelId: 'anthropic.claude-3-5-sonnet-20241022-v2:0',
-    displayName: '🎯 Claude 3.5 Sonnet v2',
-    description: 'Latest Sonnet - Enhanced capabilities, best for complex tasks',
-    provider: 'Anthropic',
-    capabilities: 'Text + Image input',
-    tier: 'balanced',
-  },
+  // Note: Claude Sonnet models removed - require AWS inference profiles
   {
     modelId: 'amazon.nova-lite-v1:0',
     displayName: '🎯 Amazon Nova Lite',
@@ -138,14 +108,7 @@ const BEDROCK_MODELS: BedrockModelInfo[] = [
   },
 
   // ===== POWERFUL MODELS (Maximum Capability) =====
-  {
-    modelId: 'anthropic.claude-3-opus-20240229-v1:0',
-    displayName: '💪 Claude 3 Opus',
-    description: 'Maximum intelligence - Best for complex reasoning & analysis',
-    provider: 'Anthropic',
-    capabilities: 'Text + Image input',
-    tier: 'balanced',
-  },
+  // Note: Claude Opus removed - requires AWS inference profiles
 
   // ===== MULTIMODAL MODELS =====
   {
@@ -186,7 +149,7 @@ export function BedrockModelSelector({
   onCancel,
 }: BedrockModelSelectorProps): React.JSX.Element {
   const [selectedModelId, setSelectedModelId] = useState<string | null>(
-    'anthropic.claude-3-haiku-20240307-v1:0', // Default to fastest model
+    'openai.gpt-oss-120b-1:0', // Default to GPT-OSS 120B (verified working model)
   );
   const [error, setError] = useState<string | null>(null);
   const [showRestartMessage, setShowRestartMessage] = useState(false);
@@ -333,7 +296,7 @@ export function BedrockModelSelector({
       <Box marginTop={1}>
         <RadioButtonSelect
           items={items}
-          initialIndex={3} // Default to Nova Lite (recommended)
+          initialIndex={0} // Default to first model (GPT-OSS 120B)
           onSelect={handleModelSelect}
           isFocused={true}
           showScrollArrows={true}
