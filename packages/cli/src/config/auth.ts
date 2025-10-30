@@ -50,12 +50,47 @@ export function validateAuthMethod(authMethod: string): string | null {
   }
 
   if (authMethod === AuthType.USE_BEDROCK) {
-    // AWS Bedrock - credentials validated on first request by AWS SDK
+    // Check for AWS Bedrock Bearer Token (Long-term API Keys) first
+    // Format: base64(3-byte-header + AccessKeyID:SecretAccessKey)
+    const bearerToken = process.env['AWS_BEARER_TOKEN_BEDROCK'];
+
+    if (bearerToken) {
+      try {
+        // Decode the bearer token to extract credentials
+        // AWS Bedrock Long-term API Keys have a 3-byte header, skip it
+        const decoded = Buffer.from(bearerToken, 'base64');
+        const decodedStr = decoded.subarray(3).toString('utf-8');
+        const parts = decodedStr.split(':');
+
+        if (parts.length === 2 && parts[0] && parts[1]) {
+          // Set environment variables for AWS SDK
+          process.env['AWS_ACCESS_KEY_ID'] = parts[0];
+          process.env['AWS_SECRET_ACCESS_KEY'] = parts[1];
+          return null; // Bearer token successfully decoded and set
+        } else {
+          return (
+            'AWS Bearer Token format is invalid. Expected format: base64(AccessKeyID:SecretAccessKey)\n' +
+            '\n' +
+            'Please check your AWS_BEARER_TOKEN_BEDROCK in .env.bedrock file.'
+          );
+        }
+      } catch (error) {
+        return (
+          'Failed to decode AWS Bearer Token: ' + (error instanceof Error ? error.message : 'Unknown error') + '\n' +
+          '\n' +
+          'Please check your AWS_BEARER_TOKEN_BEDROCK in .env.bedrock file.'
+        );
+      }
+    }
+
+    // Fall back to standard AWS credentials if no bearer token
     if (!process.env['AWS_ACCESS_KEY_ID'] || !process.env['AWS_SECRET_ACCESS_KEY']) {
       return (
-        'AWS credentials not found. Please set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY.\n' +
+        'AWS credentials not found. Please set either:\n' +
+        '• AWS_BEARER_TOKEN_BEDROCK (for Long-term API Keys), or\n' +
+        '• AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY (for IAM credentials)\n' +
         '\n' +
-        'To continue, please set the AWS environment variables or add them to a .env.bedrock file.'
+        'To continue, add credentials to a .env.bedrock file or set environment variables.'
       );
     }
     return null;

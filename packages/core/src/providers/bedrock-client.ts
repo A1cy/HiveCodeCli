@@ -62,22 +62,53 @@ export class BedrockHttpClient {
   constructor(apiKey: string = ' ', region: string = 'us-east-1') {
     this.region = region;
 
-    // Initialize Bedrock Runtime client with secure credential handling
+    // Check for AWS Bedrock Bearer Token (Long-term API Keys)
+    // Format: base64(3-byte-header + AccessKeyID:SecretAccessKey)
+    const bearerToken = process.env['AWS_BEARER_TOKEN_BEDROCK'] || '';
+
+    let accessKeyId = '';
+    let secretAccessKey = '';
+
+    if (bearerToken) {
+      try {
+        // Decode the bearer token to extract credentials
+        // AWS Bedrock Long-term API Keys have a 3-byte header, skip it
+        const decoded = Buffer.from(bearerToken, 'base64');
+        const decodedStr = decoded.subarray(3).toString('utf-8');
+        const parts = decodedStr.split(':');
+        if (parts.length === 2) {
+          accessKeyId = parts[0] || '';
+          secretAccessKey = parts[1] || '';
+        }
+      } catch (error) {
+        console.error('[BEDROCK] Failed to decode bearer token:', error);
+      }
+    }
+
+    // Fall back to environment variables if bearer token not present
+    if (!accessKeyId) {
+      accessKeyId = process.env['AWS_ACCESS_KEY_ID'] || '';
+    }
+    if (!secretAccessKey) {
+      secretAccessKey = process.env['AWS_SECRET_ACCESS_KEY'] || apiKey || '';
+    }
+
+    // Initialize AWS SDK client with credentials
     const credentials = {
-      accessKeyId: process.env['AWS_ACCESS_KEY_ID'] || '',
-      secretAccessKey: process.env['AWS_SECRET_ACCESS_KEY'] || apiKey || '',
+      accessKeyId,
+      secretAccessKey,
     };
+
+    const hasValidCredentials = credentials.accessKeyId && credentials.secretAccessKey;
+
+    if (!hasValidCredentials && this.DEBUG) {
+      console.warn('[BEDROCK] No valid credentials found, will use IAM role');
+    }
 
     this.client = new BedrockRuntimeClient({
       region: this.region,
-      credentials: credentials.accessKeyId && credentials.secretAccessKey
-        ? credentials
-        : undefined, // Falls back to AWS credential chain if env vars not set
-      requestHandler: {
-        // No timeout for streaming - let chunks flow naturally
-        // Connection timeout handled by AWS SDK defaults (60s)
-      },
-      maxAttempts: 1, // No retries for streaming (fails fast)
+      credentials: hasValidCredentials ? credentials : undefined,
+      maxAttempts: 1,
     });
   }
 
@@ -91,6 +122,7 @@ export class BedrockHttpClient {
       // Format payload based on model provider
       const payload = this.formatRequestPayload(request);
 
+      // Use AWS SDK with SigV4 signing
       const command = new InvokeModelCommand({
         modelId: request.modelId,
         contentType: 'application/json',
@@ -126,6 +158,7 @@ export class BedrockHttpClient {
     request: BedrockGenerateRequest,
   ): AsyncGenerator<BedrockGenerateResponse> {
     const startTime = Date.now();
+
     if (this.DEBUG) {
       console.log('[BEDROCK] 🚀 Request started:', new Date().toISOString());
       console.log('[BEDROCK] 📍 Model:', request.modelId);
@@ -134,6 +167,7 @@ export class BedrockHttpClient {
     try {
       const payload = this.formatRequestPayload(request);
 
+      // Use AWS SDK with SigV4 signing
       // Only add stream parameter for models that need it (Llama, OpenAI)
       // Claude and Nova models use InvokeModelWithResponseStreamCommand without stream parameter
       const isClaudeModel = request.modelId.startsWith('anthropic.claude');
@@ -150,10 +184,14 @@ export class BedrockHttpClient {
         body: JSON.stringify(payloadWithStream),
       } as InvokeModelCommandInput);
 
+      if (this.DEBUG) {
+        console.log('[BEDROCK] Sending streaming request to model:', request.modelId);
+      }
+
       const response = await this.client.send(command);
       const sendTime = Date.now();
       if (this.DEBUG) {
-        console.log('[BEDROCK] ⏱️  AWS SDK send time:', sendTime - startTime, 'ms');
+        console.log('[BEDROCK] ⏱️  Request sent, latency:', sendTime - startTime, 'ms');
       }
 
       if (!response.body) {
@@ -166,6 +204,7 @@ export class BedrockHttpClient {
       for await (const event of response.body) {
         if (event.chunk && event.chunk.bytes) {
           chunkCount++;
+
           if (!firstChunkReceived) {
             const firstTokenTime = Date.now();
             if (this.DEBUG) {
@@ -176,14 +215,38 @@ export class BedrockHttpClient {
 
           const chunk = JSON.parse(this.decoder.decode(event.chunk.bytes));
 
-          // Fast-path optimization: Handle most common case FIRST (contentBlockDelta)
+          // Handle OpenAI-compatible models (openai.gpt-oss-*)
+          if (chunk.choices && Array.isArray(chunk.choices) && chunk.choices.length > 0) {
+            const choice = chunk.choices[0];
+            const deltaContent = choice.delta?.content || choice.text || '';
+
+            if (deltaContent) {
+              yield {
+                modelId: request.modelId,
+                content: [{ type: 'text', text: deltaContent }],
+              };
+              continue;
+            }
+
+            // Handle finish_reason
+            if (choice.finish_reason) {
+              yield {
+                modelId: request.modelId,
+                content: [{ type: 'text', text: '' }],
+                stopReason: choice.finish_reason,
+              };
+              continue;
+            }
+          }
+
+          // Fast-path optimization: Handle Native Bedrock (contentBlockDelta)
           const textDelta = chunk.contentBlockDelta?.delta?.text;
           if (textDelta) {
             yield {
               modelId: request.modelId,
               content: [{ type: 'text', text: textDelta }],
             };
-            continue; // Skip other checks
+            continue;
           }
 
           // Handle messageStop event (stop reason)
@@ -197,8 +260,21 @@ export class BedrockHttpClient {
           }
 
           // Skip non-content events (messageStart, contentBlockStop, metadata)
-          // No yield needed for these
         }
+      }
+
+      // Check if we received any chunks at all
+      if (chunkCount === 0) {
+        throw new Error(
+          `No response chunks from AWS Bedrock.\n\n` +
+          `Model: ${request.modelId}\n` +
+          `Region: ${this.region}\n\n` +
+          `Possible causes:\n` +
+          `1. Model not available in region\n` +
+          `2. Model access not enabled in AWS account\n` +
+          `3. Incorrect model ID format\n` +
+          `4. Model does not support streaming`
+        );
       }
 
       const totalTime = Date.now() - startTime;

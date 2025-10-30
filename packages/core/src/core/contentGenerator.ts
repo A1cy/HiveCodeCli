@@ -169,14 +169,16 @@ export async function createContentGenerator(
     setTimeout(async () => {
       try {
         console.log('[BEDROCK] 🔍 Verifying model access...');
-        const testRequest = {
-          modelId: model,
-          messages: [{ role: 'user' as const, content: [{ type: 'text' as const, text: 'test' }] }],
-          temperature: 0.1,
-          maxOutputTokens: 5,
+        const testRequest: GenerateContentParameters = {
+          model: model,
+          contents: 'test',
+          config: {
+            temperature: 0.1,
+            maxOutputTokens: 5,
+          },
         };
 
-        const streamGenerator = bedrockGenerator.generateStream(testRequest);
+        const streamGenerator = await bedrockGenerator.generateStream(testRequest);
         for await (const _chunk of streamGenerator) {
           console.log('[BEDROCK] ✅ Model access verified:', model);
           break; // Just need first chunk to verify
@@ -237,11 +239,14 @@ export async function createContentGenerator(
           console.error('');
           console.error('❌ Failed to start Ollama server automatically.');
           console.error('');
-          console.error('Please start Ollama manually:');
-          console.error('  ollama serve');
+          console.error('💡 To use Ollama (free, local):');
+          console.error('  1. Start Ollama: ollama serve');
+          console.error(`  2. Install model: ollama pull ${model}`);
+          console.error('  3. Restart HiveCode');
           console.error('');
-          console.error(`Then install the model if needed:`);
-          console.error(`  ollama pull ${model}`);
+          console.error('💡 Alternative: Use AWS Bedrock (cloud, low-spec PCs):');
+          console.error('  1. Set up .env.bedrock with your credentials');
+          console.error('  2. Run: ./start-hivecode.sh');
           console.error('');
           process.exit(1);
         }
@@ -252,11 +257,15 @@ export async function createContentGenerator(
           error instanceof Error ? error.message : String(error),
         );
         console.error('');
-        console.error('Please start Ollama manually:');
-        console.error('  ollama serve');
+        console.error('💡 To use Ollama (free, local):');
+        console.error('  1. Install Ollama: https://ollama.ai/download');
+        console.error('  2. Start server: ollama serve');
+        console.error(`  3. Install model: ollama pull ${model}`);
+        console.error('  4. Restart HiveCode');
         console.error('');
-        console.error(`Then install the model if needed:`);
-        console.error(`  ollama pull ${model}`);
+        console.error('💡 Alternative: Use AWS Bedrock (cloud, low-spec PCs):');
+        console.error('  1. Set up .env.bedrock with your credentials');
+        console.error('  2. Run: ./start-hivecode.sh');
         console.error('');
         process.exit(1);
       }

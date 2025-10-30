@@ -113,4 +113,13 @@ export class BedrockContentGenerator implements ContentGenerator {
   async checkHealth(): Promise<boolean> {
     return this.adapter.checkConnection();
   }
+
+  /**
+   * Alias for generateContentStream - used for direct streaming access
+   */
+  async generateStream(
+    request: GenerateContentParameters,
+  ): Promise<AsyncGenerator<GenerateContentResponse>> {
+    return this.generateContentStream(request, 'health-check');
+  }
 }
