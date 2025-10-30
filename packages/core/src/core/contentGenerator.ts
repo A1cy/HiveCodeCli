@@ -53,6 +53,63 @@ export enum AuthType {
   USE_BEDROCK = 'aws-bedrock',
 }
 
+/**
+ * Model-to-Provider mapping for automatic provider detection
+ * This enables dynamic provider switching based on model selection
+ */
+const MODEL_PROVIDER_MAP: Record<string, AuthType> = {
+  // Ollama models (free, local)
+  'llama3.2:1b': AuthType.USE_OLLAMA,
+  'llama3.2:3b': AuthType.USE_OLLAMA,
+  'llama3.2:latest': AuthType.USE_OLLAMA,
+  'llama3:8b': AuthType.USE_OLLAMA,
+  'llama3:70b': AuthType.USE_OLLAMA,
+  'qwen2.5:3b': AuthType.USE_OLLAMA,
+  'qwen2.5:7b': AuthType.USE_OLLAMA,
+  'qwen2.5-coder:latest': AuthType.USE_OLLAMA,
+  'qwen3:4b': AuthType.USE_OLLAMA,
+  'gemma:2b': AuthType.USE_OLLAMA,
+  'gemma:7b': AuthType.USE_OLLAMA,
+  'gpt-oss:20b': AuthType.USE_OLLAMA,
+
+  // AWS Bedrock models (cloud)
+  'openai.gpt-oss-120b-1:0': AuthType.USE_BEDROCK,
+  'amazon.nova-micro-v1:0': AuthType.USE_BEDROCK,
+  'amazon.nova-lite-v1:0': AuthType.USE_BEDROCK,
+  'amazon.nova-pro-v1:0': AuthType.USE_BEDROCK,
+  'anthropic.claude-3-5-sonnet-20241022-v2:0': AuthType.USE_BEDROCK,
+  'anthropic.claude-3-5-sonnet-20240620-v1:0': AuthType.USE_BEDROCK,
+  'anthropic.claude-3-5-haiku-20241022-v1:0': AuthType.USE_BEDROCK,
+  'anthropic.claude-3-opus-20240229-v1:0': AuthType.USE_BEDROCK,
+  'anthropic.claude-3-sonnet-20240229-v1:0': AuthType.USE_BEDROCK,
+  'anthropic.claude-3-haiku-20240307-v1:0': AuthType.USE_BEDROCK,
+};
+
+/**
+ * Detect provider from model name
+ * Returns the appropriate AuthType for a given model, or undefined if not recognized
+ */
+function detectProviderFromModel(model: string | undefined): AuthType | undefined {
+  if (!model) return undefined;
+
+  // Direct match
+  if (MODEL_PROVIDER_MAP[model]) {
+    return MODEL_PROVIDER_MAP[model];
+  }
+
+  // Pattern matching for Ollama models (usually end with :tag)
+  if (model.includes(':')) {
+    return AuthType.USE_OLLAMA;
+  }
+
+  // Pattern matching for Bedrock models (usually have dots and colons)
+  if (model.includes('.') && model.includes('-v')) {
+    return AuthType.USE_BEDROCK;
+  }
+
+  return undefined;
+}
+
 export type ContentGeneratorConfig = {
   apiKey?: string;
   vertexai?: boolean;
@@ -96,16 +153,38 @@ export function createContentGeneratorConfig(
     proxy: config?.getProxy(),
   };
 
-  // If Bedrock is explicitly enabled, use it
+  // Dynamic provider detection: Auto-detect provider from model name
+  // This allows users to just select a model and have the provider automatically switch
+  const detectedBedrockProvider = detectProviderFromModel(bedrockModel);
+  const detectedOllamaProvider = detectProviderFromModel(ollamaModel);
+
+  // If Bedrock model is detected and matches Bedrock provider
+  if (detectedBedrockProvider === AuthType.USE_BEDROCK && (useBedrock || authType === AuthType.USE_BEDROCK)) {
+    console.log(`🔄 Using AWS Bedrock provider for model: ${bedrockModel}`);
+    contentGeneratorConfig.authType = AuthType.USE_BEDROCK;
+    contentGeneratorConfig.bedrockModel = bedrockModel;
+    contentGeneratorConfig.bedrockRegion = bedrockRegion;
+    return contentGeneratorConfig;
+  }
+
+  // If Ollama model is detected and matches Ollama provider
+  if (detectedOllamaProvider === AuthType.USE_OLLAMA && (useOllama || authType === AuthType.USE_OLLAMA)) {
+    console.log(`🔄 Using Ollama provider for model: ${ollamaModel}`);
+    contentGeneratorConfig.authType = AuthType.USE_OLLAMA;
+    contentGeneratorConfig.ollamaModel = ollamaModel;
+    contentGeneratorConfig.ollamaBaseUrl = ollamaBaseUrl;
+    return contentGeneratorConfig;
+  }
+
+  // Legacy: If Bedrock is explicitly enabled (without model detection)
   if (useBedrock || authType === AuthType.USE_BEDROCK) {
     contentGeneratorConfig.authType = AuthType.USE_BEDROCK;
     contentGeneratorConfig.bedrockModel = bedrockModel;
     contentGeneratorConfig.bedrockRegion = bedrockRegion;
-    // bedrockApiKey is not needed - AWS SDK reads credentials directly from environment
     return contentGeneratorConfig;
   }
 
-  // If Ollama is explicitly enabled, use it
+  // Legacy: If Ollama is explicitly enabled (without model detection)
   if (useOllama || authType === AuthType.USE_OLLAMA) {
     contentGeneratorConfig.authType = AuthType.USE_OLLAMA;
     contentGeneratorConfig.ollamaModel = ollamaModel;
