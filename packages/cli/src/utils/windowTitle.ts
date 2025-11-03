@@ -5,13 +5,13 @@
  */
 
 /**
- * Computes the window title for the HiveCode application.
+ * Computes the window title for the MHG Code application.
  *
- * @param folderName - The name of the current folder/workspace to display in the title
- * @returns The computed window title, either from CLI_TITLE environment variable or the default Gemini title
+ * @param folderName - The name of the current folder/workspace (not used in default title)
+ * @returns The computed window title, either from CLI_TITLE environment variable or "MHG Code"
  */
 export function computeWindowTitle(folderName: string): string {
-  const title = process.env['CLI_TITLE'] || `Gemini - ${folderName}`;
+  const title = process.env['CLI_TITLE'] || 'MHG Code';
 
   // Remove control characters that could cause issues in terminal titles
   return title.replace(

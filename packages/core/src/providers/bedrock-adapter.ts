@@ -30,7 +30,7 @@ export class BedrockAdapter {
   private model: string;
 
   constructor(
-    model: string = 'amazon.nova-lite-v1:0',
+    model: string = 'openai.gpt-oss-120b-1:0',
     apiKey?: string,
     region?: string,
   ) {
@@ -184,18 +184,28 @@ export class BedrockAdapter {
     bedrockResponse: BedrockGenerateResponse,
   ): GenerateContentResponse {
     // Extract text from Bedrock content array
-    let text = bedrockResponse.content.map((c) => c.text).join('');
+    // Use space separator to prevent words from being combined
+    const textArray = bedrockResponse.content.map((c) => c.text);
+    debugLogger.debug(`[BEDROCK DEBUG] Text chunks (${textArray.length}): ${JSON.stringify(textArray)}`);
+
+    let text = textArray.join(' ');
+    debugLogger.debug(`[BEDROCK DEBUG] After join(' '): "${text}" (length: ${text.length}, has spaces: ${text.includes(' ')})`);
+
 
     // CRITICAL FIX: Strip <reasoning> tags for OpenAI models
     // OpenAI GPT-OSS models include internal reasoning that should not be displayed
     // This prevents unprofessional output like: "<reasoning>internal thoughts</reasoning>Hello!"
     text = text.replace(/<reasoning>[\s\S]*?<\/reasoning>/gi, '');
+    debugLogger.debug(`[BEDROCK DEBUG] After removing reasoning tags: "${text.substring(0, 100)}..." (has spaces: ${text.includes(' ')})`);
 
     // Also remove any unclosed reasoning tags (safety measure for streaming)
     text = text.replace(/<reasoning>[\s\S]*$/gi, '');
 
-    // Trim any extra whitespace left after tag removal
-    text = text.trim();
+    // CRITICAL FIX: Don't trim streaming chunks - it strips the intentional leading spaces
+    // that bedrock-client.ts adds for proper inter-word spacing in streaming responses
+    // text = text.trim();  // DISABLED - breaks streaming word concatenation
+    debugLogger.debug(`[BEDROCK DEBUG] Final text: "${text.substring(0, 100)}..." (length: ${text.length}, has spaces: ${text.includes(' ')})`);
+
 
     const parts: Part[] = [
       {
@@ -221,7 +231,8 @@ export class BedrockAdapter {
             candidatesTokenCount: bedrockResponse.usage.outputTokens,
             totalTokenCount: bedrockResponse.usage.totalTokens,
           }
-        : undefined,
+        : (debugLogger.debug('[BEDROCK DEBUG] No usage metadata in API response'), undefined),
+      modelVersion: this.model, // Add model version for telemetry and display
       // Add getter properties required by GenerateContentResponse
       get text() {
         return text;
@@ -267,7 +278,7 @@ export class BedrockAdapter {
  */
 export const BEDROCK_MODEL_MAP: Record<string, string> = {
   'gemini-2.5-pro': 'amazon.nova-pro-v1:0',
-  'gemini-2.5-flash': 'amazon.nova-lite-v1:0',
+  'gemini-2.5-flash': 'openai.gpt-oss-120b-1:0',
   'gemini-2.5-flash-lite': 'amazon.nova-micro-v1:0',
 };
 
@@ -275,5 +286,5 @@ export const BEDROCK_MODEL_MAP: Record<string, string> = {
  * Get the Bedrock model ID for a given Gemini model name
  */
 export function getBedrockModel(geminiModel: string): string {
-  return BEDROCK_MODEL_MAP[geminiModel] || 'amazon.nova-lite-v1:0';
+  return BEDROCK_MODEL_MAP[geminiModel] || 'openai.gpt-oss-120b-1:0';
 }

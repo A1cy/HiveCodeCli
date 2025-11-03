@@ -1381,21 +1381,26 @@ Logging in with Google... Please restart HiveCode to continue.
       if (newAuthType) {
         // CRITICAL: Update environment variables to match the new provider choice
         // This ensures the provider selection logic respects the hot switch
+        // MIGRATION NOTE: Using MHGCODE_* env vars (keeping HIVECODE_* for backward compatibility)
         if (newAuthType === 'ollama') {
           // Clear Bedrock env vars
+          delete process.env['MHGCODE_USE_BEDROCK'];
           delete process.env['HIVECODE_USE_BEDROCK'];
           delete process.env['BEDROCK_MODEL'];
           // Set Ollama env vars
-          process.env['HIVECODE_USE_OLLAMA'] = 'true';
+          process.env['MHGCODE_USE_OLLAMA'] = 'true';
+          process.env['HIVECODE_USE_OLLAMA'] = 'true';  // backward compat
           const ollamaModel = settings.merged.security?.auth?.ollamaModel || 'llama3.2:1b';
           process.env['OLLAMA_MODEL'] = ollamaModel;
         } else if (newAuthType === 'aws-bedrock') {
           // Clear Ollama env vars
+          delete process.env['MHGCODE_USE_OLLAMA'];
           delete process.env['HIVECODE_USE_OLLAMA'];
           delete process.env['OLLAMA_MODEL'];
           // Set Bedrock env vars
-          process.env['HIVECODE_USE_BEDROCK'] = 'true';
-          const bedrockModel = settings.merged.security?.auth?.bedrockModel || 'amazon.nova-lite-v1:0';
+          process.env['MHGCODE_USE_BEDROCK'] = 'true';
+          process.env['HIVECODE_USE_BEDROCK'] = 'true';  // backward compat
+          const bedrockModel = settings.merged.security?.auth?.bedrockModel || 'openai.gpt-oss-120b-1:0';
           process.env['BEDROCK_MODEL'] = bedrockModel;
         }
 

@@ -30,7 +30,7 @@ export interface LSToolParams {
   ignore?: string[];
 
   /**
-   * Whether to respect .gitignore and .hivecodeignore patterns (optional, defaults to true)
+   * Whether to respect .gitignore and .mhgcodeignore patterns (optional, defaults to true)
    */
   file_filtering_options?: {
     respect_git_ignore?: boolean;
@@ -277,7 +277,7 @@ export class LSTool extends BaseDeclarativeTool<LSToolParams, ToolResult> {
           },
           file_filtering_options: {
             description:
-              'Optional: Whether to respect ignore patterns from .gitignore or .hivecodeignore',
+              'Optional: Whether to respect ignore patterns from .gitignore or .mhgcodeignore',
             type: 'object',
             properties: {
               respect_git_ignore: {
@@ -287,7 +287,7 @@ export class LSTool extends BaseDeclarativeTool<LSToolParams, ToolResult> {
               },
               respect_gemini_ignore: {
                 description:
-                  'Optional: Whether to respect .hivecodeignore patterns when listing files. Defaults to true.',
+                  'Optional: Whether to respect .mhgcodeignore patterns when listing files. Defaults to true.',
                 type: 'boolean',
               },
             },

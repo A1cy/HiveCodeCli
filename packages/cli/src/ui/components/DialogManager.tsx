@@ -203,7 +203,7 @@ export const DialogManager = ({
               (modelId.includes('-v') || modelId.includes(':'));
             const validBedrockModel = isValidBedrock
               ? modelId
-              : 'amazon.nova-lite-v1:0';
+              : 'openai.gpt-oss-120b-1:0';
 
             // Save the selected model to settings
             await settings.setValue(

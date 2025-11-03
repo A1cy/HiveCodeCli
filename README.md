@@ -1,23 +1,24 @@
 <div align="center">
 
 ```
-  ⬡⬡    ██╗  ██╗██╗██╗   ██╗███████╗ ██████╗ ██████╗ ██████╗ ███████╗    ⬡⬡
- ⬡⬡     ██║  ██║██║██║   ██║██╔════╝██╔════╝██╔═══██╗██╔══██╗██╔════╝   ⬡⬡
-⬡⬡      ███████║██║██║   ██║█████╗  ██║     ██║   ██║██║  ██║█████╗    ⬡⬡
- ⬡⬡     ██╔══██║██║╚██╗ ██╔╝██╔══╝  ██║     ██║   ██║██║  ██║██╔══╝     ⬡⬡
-  ⬢⬢    ██║  ██║██║ ╚████╔╝ ███████╗╚██████╗╚██████╔╝██████╔╝███████╗    ⬢⬢
-   ⬢⬢   ╚═╝  ╚═╝╚═╝  ╚═══╝  ╚══════╝ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝     ⬢⬢
-    ⬢⬢                         by A1xAI                                    ⬢⬢
-                 🐝 Where AI Agents Work Together for Free 🐝
+        ███╗   ███╗██╗  ██╗ ██████╗      ██████╗ ██████╗ ██████╗ ███████╗
+        ████╗ ████║██║  ██║██╔════╝     ██╔════╝██╔═══██╗██╔══██╗██╔════╝
+        ██╔████╔██║███████║██║  ███╗    ██║     ██║   ██║██║  ██║█████╗
+        ██║╚██╔╝██║██╔══██║██║   ██║    ██║     ██║   ██║██║  ██║██╔══╝
+        ██║ ╚═╝ ██║██║  ██║╚██████╔╝    ╚██████╗╚██████╔╝██████╔╝███████╗
+        ╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝      ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝
+                                  v1.0
+                    Free Offline Agents + Premium Cloud Models
+                                by ERP team
 ```
 
 **100% Free | 100% Open | 100% Local**
 
-[![Version](https://img.shields.io/badge/version-0.1.0--dev-orange.svg)](https://github.com/A1cy/HiveCodeCli)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-1.0.0-orange.svg)](https://github.com/A1cy/HiveCodeCli)
+[![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)](LICENSE)
 [![Cost](https://img.shields.io/badge/cost-%240%2Fmonth-brightgreen.svg)](README.md)
-[![Status](https://img.shields.io/badge/status-Phase%202%20Complete-blue.svg)](STATUS.md)
-[![Powered by](https://img.shields.io/badge/powered%20by-Gemini%20CLI%20%2B%20Ollama-orange.svg)](https://ollama.ai)
+[![Status](https://img.shields.io/badge/status-Production%20Ready-brightgreen.svg)](STATUS.md)
+[![Powered by](https://img.shields.io/badge/powered%20by-AWS%20Bedrock%20%2B%20OpenAI-orange.svg)](https://aws.amazon.com/bedrock/)
 
 [🚀 Quick Start](#quick-start) • [📖 Documentation](#documentation) •
 [🤖 Meet the Agents](#planned-features) • [💰 Cost Comparison](#cost-comparison)
@@ -27,37 +28,17 @@
 
 ---
 
-## 🚧 Development Status: Phase 2 Complete → Phase 3 In Progress
+## 🎯 What is MHG Code?
 
-**HiveCode** is currently under active development. We've completed Phase 2
-(fork and documentation) and are now in Phase 3 (renaming and branding).
+**MHG Code** is a production-ready AI-powered development assistant built on top of Claude Code with integrated AWS Bedrock support, providing access to cutting-edge language models including OpenAI GPT-OSS 120B, Amazon Nova Pro, and more.
 
-### Current Phase: Renaming & Branding
+### Key Features
 
-**Phase 2 Complete ✅**:
-
-- ✅ HiveCode forked to HiveCodeCli
-- ✅ PRP.md (project north star) integrated
-- ✅ Complete documentation migrated
-- ✅ Repository structure established
-- ✅ Branding assets and guidelines created
-
-**Phase 3 In Progress ⏳**:
-
-- ⏳ Rename binary (gemini → hivecode)
-- ⏳ Update package.json
-- ⏳ Change config paths (~/.gemini/ → ~/.hivecode/)
-- ⏳ Test build system with new names
-
-**See [STATUS.md](STATUS.md) for complete development journey and roadmap.**
-
----
-
-## 🎯 What is HiveCode?
-
-**HiveCode** is a **100% free, open-source** alternative to Claude Code and
-GitHub Copilot, powered by **local AI models** (Ollama) and featuring **5
-specialized agents** that work together to build complete applications.
+- ✅ **AWS Bedrock Integration**: Direct access to premium models via AWS
+- ✅ **OpenAI GPT-OSS 120B**: Powerful open-source 120B parameter model
+- ✅ **Perfect Arabic RTL Support**: Native right-to-left text rendering
+- ✅ **Production-Ready**: Fully tested and deployed
+- ✅ **Zero Configuration**: Works out of the box with proper credentials
 
 ### Vision
 
@@ -205,7 +186,7 @@ Output to user
 
 - ⏳ Fork HiveCode repository to A1cy/HiveCode
 - ⏳ Rename project (gemini → hivecode)
-- ⏳ Add HiveCode configuration structure (`.hivecode/` config)
+- ⏳ Add HiveCode configuration structure (`.mhgcode/` config)
 - ⏳ Verify base functionality and build system
 
 ### Phase 3: Custom Features ⏳

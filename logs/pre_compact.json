@@ -1,0 +1,11 @@
+[
+  {
+    "session_id": "c85f629b-673e-4381-92ae-3ac3dc3f5e60",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/c85f629b-673e-4381-92ae-3ac3dc3f5e60.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "hook_event_name": "PreCompact",
+    "trigger": "auto",
+    "custom_instructions": null,
+    "logged_at": "2025-11-02T16:20:50.744542"
+  }
+]

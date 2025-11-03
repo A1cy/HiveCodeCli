@@ -76,16 +76,16 @@ HiveCode CLI with 100% free Ollama integration
 
 #### 2. Config Directory Renaming ✅
 
-- **Master Constant**: `GEMINI_DIR = '.gemini'` → `'.hivecode'`
+- **Master Constant**: `GEMINI_DIR = '.gemini'` → `'.mhgcode'`
 - **Location**: packages/core/src/utils/paths.ts:11
-- **Impact**: All config paths now use `~/.hivecode/`
+- **Impact**: All config paths now use `~/.mhgcode/`
 
 #### 3. Systematic Replacements (40 files) ✅
 
-- `.geminiignore` → `.hivecodeignore`
-- `.gemini-clipboard` → `.hivecode-clipboard`
-- `.gemini/` → `.hivecode/` (all directory references)
-- Root directory: `.gemini/` → `.hivecode/`
+- `.geminiignore` → `.mhgcodeignore`
+- `.gemini-clipboard` → `.mhgcode-clipboard`
+- `.gemini/` → `.mhgcode/` (all directory references)
+- Root directory: `.gemini/` → `.mhgcode/`
 - Context file: `GEMINI.md` → `HIVECODE.md`
 
 #### 4. Build System ✅
@@ -125,7 +125,7 @@ node bundle/hivecode.js --help      # → Shows commands ✅
 /home/a1xai/HiveCodeCli/
 ├── package.json ✅ (@hivecode/cli v0.1.0)
 ├── bundle/hivecode.js ✅ (20MB, executable)
-├── .hivecode/ ✅ (config directory)
+├── .mhgcode/ ✅ (config directory)
 ├── HIVECODE.md ✅ (context file)
 ├── README.md ✅ (branded intro)
 ├── docs/assets/BRANDING.md ✅
@@ -255,7 +255,7 @@ b562bf58 Phase 2: Integrate HiveCodeCli documentation
 
 - ✅ HiveCode forked successfully
 - ✅ All documentation integrated
-- ✅ Config directory renamed (.gemini → .hivecode)
+- ✅ Config directory renamed (.gemini → .mhgcode)
 - ✅ Binary renamed and building (hivecode)
 - ✅ Package renamed (@hivecode/cli)
 - ✅ Version reset (0.1.0)
@@ -311,7 +311,7 @@ TypeScript codebase + Active Google maintenance
 
 ### 2. Config Directory Naming ✅
 
-**Decision**: `.gemini/` → `.hivecode/` **Reason**: Brand consistency + user
+**Decision**: `.gemini/` → `.mhgcode/` **Reason**: Brand consistency + user
 clarity **Result**: All 40 files updated, master constant changed
 
 ### 3. Binary Naming ✅
@@ -346,7 +346,7 @@ for marker **Result**: Build process documented without tracking bundle
 
 - `docs/assets/BRANDING.md` - Brand guidelines
 - `PROGRESS.md` - This file
-- `.hivecode/` - Config directory
+- `.mhgcode/` - Config directory
 - `HIVECODE.md` - Context file
 - `bundle/hivecode.js` - CLI binary (generated)
 

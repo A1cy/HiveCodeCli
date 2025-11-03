@@ -252,7 +252,7 @@ hivecode --version
 # Auth validation:
 hivecode
 # Error mentions: HIVECODE_USE_OLLAMA (not GEMINI) ✅
-# Config path: /home/a1xai/.hivecode/settings.json (not .gemini) ✅
+# Config path: /home/a1xai/.mhgcode/settings.json (not .gemini) ✅
 ```
 
 ### What's Working
@@ -264,7 +264,7 @@ hivecode
 - ✅ **Environment Variables**: HIVECODE_USE_OLLAMA, OLLAMA_MODEL,
   OLLAMA_BASE_URL
 - ✅ **Non-Interactive Mode**: Ollama startup message displays correctly
-- ✅ **Config Migration**: Uses ~/.hivecode/ instead of ~/.gemini/
+- ✅ **Config Migration**: Uses ~/.mhgcode/ instead of ~/.gemini/
 - ✅ **Global Installation**: `hivecode` command works via npm link
 - ✅ **Bundle Build**: Fresh compilation from TypeScript source
 

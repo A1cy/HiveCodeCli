@@ -221,9 +221,19 @@ export class BedrockHttpClient {
             const deltaContent = choice.delta?.content || choice.text || '';
 
             if (deltaContent) {
+              // CRITICAL FIX: Add leading space to prevent word concatenation in streaming
+              // OpenAI models return chunks without inter-word spacing
+              // Skip space for: first chunk, punctuation, or if already has leading space
+              const needsSpace = chunkCount > 1 &&
+                                deltaContent &&
+                                !deltaContent.startsWith(' ') &&
+                                !/^[.,!?;:\-—)}\]"'،؛؟]/.test(deltaContent);
+
+              const textWithSpacing = needsSpace ? ' ' + deltaContent : deltaContent;
+
               yield {
                 modelId: request.modelId,
-                content: [{ type: 'text', text: deltaContent }],
+                content: [{ type: 'text', text: textWithSpacing }],
               };
               continue;
             }
@@ -242,9 +252,19 @@ export class BedrockHttpClient {
           // Fast-path optimization: Handle Native Bedrock (contentBlockDelta)
           const textDelta = chunk.contentBlockDelta?.delta?.text;
           if (textDelta) {
+            // CRITICAL FIX: Add leading space to prevent word concatenation in streaming
+            // Claude and Nova models may also return chunks without inter-word spacing
+            // Skip space for: first chunk, punctuation, or if already has leading space
+            const needsSpace = chunkCount > 1 &&
+                              textDelta &&
+                              !textDelta.startsWith(' ') &&
+                              !/^[.,!?;:\-—)}\]"'،؛؟]/.test(textDelta);
+
+            const textWithSpacing = needsSpace ? ' ' + textDelta : textDelta;
+
             yield {
               modelId: request.modelId,
-              content: [{ type: 'text', text: textDelta }],
+              content: [{ type: 'text', text: textWithSpacing }],
             };
             continue;
           }

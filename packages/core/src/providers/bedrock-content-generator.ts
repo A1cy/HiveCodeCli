@@ -30,7 +30,7 @@ export class BedrockContentGenerator implements ContentGenerator {
   private adapter: BedrockAdapter;
 
   constructor(
-    model: string = 'amazon.nova-lite-v1:0',
+    model: string = 'openai.gpt-oss-120b-1:0',
     apiKey?: string,
     region?: string,
   ) {

@@ -138,7 +138,7 @@ describe('runNonInteractive', () => {
       getSessionId: vi.fn().mockReturnValue('test-session-id'),
       getProjectRoot: vi.fn().mockReturnValue('/test/project'),
       storage: {
-        getProjectTempDir: vi.fn().mockReturnValue('/test/project/.hivecode/tmp'),
+        getProjectTempDir: vi.fn().mockReturnValue('/test/project/.mhgcode/tmp'),
       },
       getIdeMode: vi.fn().mockReturnValue(false),
 

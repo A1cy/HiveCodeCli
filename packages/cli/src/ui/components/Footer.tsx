@@ -13,6 +13,7 @@ import process from 'node:process';
 import Gradient from 'ink-gradient';
 import { MemoryUsageDisplay } from './MemoryUsageDisplay.js';
 import { ContextUsageDisplay } from './ContextUsageDisplay.js';
+import { getModelDisplayName } from '../../utils/modelDisplayNames.js';
 import { DebugProfiler } from './DebugProfiler.js';
 import { isDevelopment } from '../../utils/installationInfo.js';
 
@@ -146,7 +147,7 @@ export const Footer: React.FC = () => {
         <Box alignItems="center" justifyContent="flex-end">
           <Box alignItems="center">
             <Text color={theme.text.accent}>
-              {model}{' '}
+              {getModelDisplayName(model)}{' '}
               <ContextUsageDisplay
                 promptTokenCount={promptTokenCount}
                 model={model}

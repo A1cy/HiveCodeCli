@@ -52,8 +52,8 @@
 ### 5. Test File Fixes
 **File**: `packages/cli/src/ui/commands/setupGithubCommand.test.ts`
 
-- Fixed 3 broken string literals from `.gemini` → `.hivecode` replacement
-- All test assertions now correctly reference `.hivecode/`
+- Fixed 3 broken string literals from `.gemini` → `.mhgcode` replacement
+- All test assertions now correctly reference `.mhgcode/`
 
 ---
 

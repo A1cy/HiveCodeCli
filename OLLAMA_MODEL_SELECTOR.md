@@ -145,7 +145,7 @@ The selected model is saved to your HiveCode settings:
 }
 ```
 
-Location: `~/.hivecode/settings.json`
+Location: `~/.mhgcode/settings.json`
 
 ## Troubleshooting
 

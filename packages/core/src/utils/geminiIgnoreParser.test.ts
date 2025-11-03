@@ -30,10 +30,10 @@ describe('GeminiIgnoreParser', () => {
     vi.restoreAllMocks();
   });
 
-  describe('when .hivecodeignore exists', () => {
+  describe('when .mhgcodeignore exists', () => {
     beforeEach(async () => {
       await createTestFile(
-        '.hivecodeignore',
+        '.mhgcodeignore',
         'ignored.txt\n# A comment\n/ignored_dir/\n',
       );
       await createTestFile('ignored.txt', 'ignored');
@@ -48,7 +48,7 @@ describe('GeminiIgnoreParser', () => {
       );
     });
 
-    it('should ignore files specified in .hivecodeignore', () => {
+    it('should ignore files specified in .mhgcodeignore', () => {
       const parser = new GeminiIgnoreParser(projectRoot);
       expect(parser.getPatterns()).toEqual(['ignored.txt', '/ignored_dir/']);
       expect(parser.isIgnored('ignored.txt')).toBe(true);
@@ -60,7 +60,7 @@ describe('GeminiIgnoreParser', () => {
     });
   });
 
-  describe('when .hivecodeignore does not exist', () => {
+  describe('when .mhgcodeignore does not exist', () => {
     it('should not load any patterns and not ignore any files', () => {
       const parser = new GeminiIgnoreParser(projectRoot);
       expect(parser.getPatterns()).toEqual([]);

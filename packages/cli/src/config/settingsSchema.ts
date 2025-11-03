@@ -321,7 +321,7 @@ const SETTINGS_SCHEMA = {
         requiresRestart: false,
         default: false,
         description:
-          'Show HiveCode status and thoughts in the terminal window title',
+          'Show MHG Code status and thoughts in the terminal window title',
         showInDialog: true,
       },
       hideTips: {
@@ -349,7 +349,7 @@ const SETTINGS_SCHEMA = {
         requiresRestart: false,
         default: false,
         description:
-          'Hide the context summary (HIVECODE.md, MCP servers) above the input.',
+          'Hide the context summary (MHGCODE.md, MCP servers) above the input.',
         showInDialog: true,
       },
       footer: {
@@ -675,11 +675,11 @@ const SETTINGS_SCHEMA = {
           },
           respectGeminiIgnore: {
             type: 'boolean',
-            label: 'Respect .hivecodeignore',
+            label: 'Respect .mhgcodeignore',
             category: 'Context',
             requiresRestart: true,
             default: true,
-            description: 'Respect .hivecodeignore files when searching',
+            description: 'Respect .mhgcodeignore files when searching',
             showInDialog: true,
           },
           enableRecursiveFileSearch: {
@@ -1018,9 +1018,9 @@ const SETTINGS_SCHEMA = {
             label: 'AWS Bedrock Model',
             category: 'Security',
             requiresRestart: true,
-            default: 'amazon.nova-lite-v1:0' as string | undefined,
+            default: 'openai.gpt-oss-120b-1:0' as string | undefined,
             description:
-              'AWS Bedrock model ID. Recommended: amazon.nova-lite-v1:0 (multimodal). Use /MHG_Premium to select from 10 premium models.',
+              'AWS Bedrock model ID. Default: openai.gpt-oss-120b-1:0 (120B parameters). Use /MHG_Premium to select from 10 premium models.',
             showInDialog: true,
           },
           bedrockRegion: {

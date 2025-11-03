@@ -51,18 +51,21 @@ export const useAuthCommand = (settings: LoadedSettings, config: Config) => {
       // Check for Ollama environment variable first (like non-interactive mode)
       let authType = settings.merged.security?.auth?.selectedType;
 
-      if (process.env['HIVECODE_USE_OLLAMA'] === 'true') {
+      // MIGRATION NOTE: MHGCODE_USE_OLLAMA replaces HIVECODE_USE_OLLAMA (backward compatible check)
+      if (process.env['MHGCODE_USE_OLLAMA'] === 'true' || process.env['HIVECODE_USE_OLLAMA'] === 'true') {
         authType = AuthType.USE_OLLAMA;
       }
 
-      if (process.env['HIVECODE_USE_BEDROCK'] === 'true') {
+      // MIGRATION NOTE: MHGCODE_USE_BEDROCK replaces HIVECODE_USE_BEDROCK (backward compatible check)
+      if (process.env['MHGCODE_USE_BEDROCK'] === 'true' || process.env['HIVECODE_USE_BEDROCK'] === 'true') {
         authType = AuthType.USE_BEDROCK;
       }
 
       if (!authType) {
-        if (process.env['GEMINI_API_KEY']) {
+        // MIGRATION NOTE: MHGCODE_API_KEY replaces GEMINI_API_KEY (backward compatible check)
+        if (process.env['MHGCODE_API_KEY'] || process.env['GEMINI_API_KEY']) {
           onAuthError(
-            'Existing API key detected (GEMINI_API_KEY). Select "Gemini API Key" option to use it.',
+            'Existing API key detected (MHGCODE_API_KEY or GEMINI_API_KEY). Select "Gemini API Key" option to use it.',
           );
         } else {
           onAuthError('No authentication method selected.');

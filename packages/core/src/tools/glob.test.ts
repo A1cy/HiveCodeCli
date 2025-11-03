@@ -392,13 +392,13 @@ describe('GlobTool', () => {
       expect(result.llmContent).not.toContain('a.ignored.txt');
     });
 
-    it('should respect .hivecodeignore files by default', async () => {
+    it('should respect .mhgcodeignore files by default', async () => {
       await fs.writeFile(
-        path.join(tempRootDir, '.hivecodeignore'),
-        '*.hivecodeignored.txt',
+        path.join(tempRootDir, '.mhgcodeignore'),
+        '*.mhgcodeignored.txt',
       );
       await fs.writeFile(
-        path.join(tempRootDir, 'a.hivecodeignored.txt'),
+        path.join(tempRootDir, 'a.mhgcodeignored.txt'),
         'ignored content',
       );
       await fs.writeFile(
@@ -411,7 +411,7 @@ describe('GlobTool', () => {
       const result = await invocation.execute(abortSignal);
 
       expect(result.llmContent).toContain('Found 3 file(s)'); // fileA.txt, FileB.TXT, b.notignored.txt
-      expect(result.llmContent).not.toContain('a.hivecodeignored.txt');
+      expect(result.llmContent).not.toContain('a.mhgcodeignored.txt');
     });
 
     it('should not respect .gitignore when respect_git_ignore is false', async () => {
@@ -432,13 +432,13 @@ describe('GlobTool', () => {
       expect(result.llmContent).toContain('a.ignored.txt');
     });
 
-    it('should not respect .hivecodeignore when respect_gemini_ignore is false', async () => {
+    it('should not respect .mhgcodeignore when respect_gemini_ignore is false', async () => {
       await fs.writeFile(
-        path.join(tempRootDir, '.hivecodeignore'),
-        '*.hivecodeignored.txt',
+        path.join(tempRootDir, '.mhgcodeignore'),
+        '*.mhgcodeignored.txt',
       );
       await fs.writeFile(
-        path.join(tempRootDir, 'a.hivecodeignored.txt'),
+        path.join(tempRootDir, 'a.mhgcodeignored.txt'),
         'ignored content',
       );
 
@@ -449,8 +449,8 @@ describe('GlobTool', () => {
       const invocation = globTool.build(params);
       const result = await invocation.execute(abortSignal);
 
-      expect(result.llmContent).toContain('Found 3 file(s)'); // fileA.txt, FileB.TXT, a.hivecodeignored.txt
-      expect(result.llmContent).toContain('a.hivecodeignored.txt');
+      expect(result.llmContent).toContain('Found 3 file(s)'); // fileA.txt, FileB.TXT, a.mhgcodeignored.txt
+      expect(result.llmContent).toContain('a.mhgcodeignored.txt');
     });
   });
 });

@@ -171,8 +171,8 @@ describe('AppContainer State Management', () => {
     vi.mock('../utils/windowTitle.js', async () => ({
       computeWindowTitle: vi.fn(
         (folderName: string) =>
-          // Default behavior: return "Gemini - {folderName}" unless CLI_TITLE is set
-          process.env['CLI_TITLE'] || `Gemini - ${folderName}`,
+          // Default behavior: return "MHG Code" unless CLI_TITLE is set
+          process.env['CLI_TITLE'] || 'MHG Code',
       ),
     }));
 
@@ -776,7 +776,7 @@ describe('AppContainer State Management', () => {
       );
       expect(titleWrites).toHaveLength(1);
       expect(titleWrites[0][0]).toBe(
-        `\x1b]2;${'Gemini - workspace'.padEnd(80, ' ')}\x07`,
+        `\x1b]2;${'MHG Code'.padEnd(80, ' ')}\x07`,
       );
       unmount();
     });

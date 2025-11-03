@@ -24,6 +24,22 @@ import { FakeContentGenerator } from './fakeContentGenerator.js';
 import { LoggingContentGenerator } from './loggingContentGenerator.js';
 
 /**
+ * Get friendly display name for Bedrock models
+ */
+function getBedrockModelDisplayName(modelId: string): string {
+  const displayNames: Record<string, string> = {
+    'openai.gpt-oss-120b-1:0': 'OpenAI GPT-OSS 120B',
+    'amazon.nova-lite-v1:0': 'Amazon Nova Lite',
+    'amazon.nova-pro-v1:0': 'Amazon Nova Pro',
+    'amazon.nova-micro-v1:0': 'Amazon Nova Micro',
+    'anthropic.claude-3-5-sonnet-20241022-v2:0': 'Claude 3.5 Sonnet V2',
+    'anthropic.claude-3-5-haiku-20241022-v1:0': 'Claude 3.5 Haiku',
+    'meta.llama3-3-70b-instruct-v1:0': 'Meta Llama 3.3 70B',
+  };
+  return displayNames[modelId] || modelId;
+}
+
+/**
  * Interface abstracting the core functionalities for generating content and counting tokens.
  */
 export interface ContentGenerator {
@@ -130,7 +146,8 @@ export function createContentGeneratorConfig(
   config: Config,
   authType: AuthType | undefined,
 ): ContentGeneratorConfig {
-  const geminiApiKey = process.env['GEMINI_API_KEY'] || undefined;
+  // MIGRATION NOTE: MHGCODE_API_KEY replaces GEMINI_API_KEY (backward compatible check)
+  const geminiApiKey = process.env['MHGCODE_API_KEY'] || process.env['GEMINI_API_KEY'] || undefined;
   const googleApiKey = process.env['GOOGLE_API_KEY'] || undefined;
   const googleCloudProject =
     process.env['GOOGLE_CLOUD_PROJECT'] ||
@@ -139,14 +156,16 @@ export function createContentGeneratorConfig(
   const googleCloudLocation = process.env['GOOGLE_CLOUD_LOCATION'] || undefined;
 
   // Ollama configuration
-  const useOllama = process.env['HIVECODE_USE_OLLAMA'] === 'true';
+  // MIGRATION NOTE: MHGCODE_USE_OLLAMA replaces HIVECODE_USE_OLLAMA (backward compatible check)
+  const useOllama = process.env['MHGCODE_USE_OLLAMA'] === 'true' || process.env['HIVECODE_USE_OLLAMA'] === 'true';
   const ollamaModel = process.env['OLLAMA_MODEL'] || 'llama3.2:1b';
   const ollamaBaseUrl =
     process.env['OLLAMA_BASE_URL'] || 'http://localhost:11434';
 
   // Bedrock configuration
-  const useBedrock = process.env['HIVECODE_USE_BEDROCK'] === 'true';
-  const bedrockModel = process.env['BEDROCK_MODEL'] || 'amazon.nova-lite-v1:0';
+  // MIGRATION NOTE: MHGCODE_USE_BEDROCK replaces HIVECODE_USE_BEDROCK (backward compatible check)
+  const useBedrock = process.env['MHGCODE_USE_BEDROCK'] === 'true' || process.env['HIVECODE_USE_BEDROCK'] === 'true';
+  const bedrockModel = process.env['BEDROCK_MODEL'] || 'openai.gpt-oss-120b-1:0';
   // AWS credentials are read directly from AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
   // by the BedrockHttpClient, so we don't need to pass them through config
   const bedrockRegion = process.env['BEDROCK_REGION'] || 'us-east-1';
@@ -252,10 +271,11 @@ export async function createContentGenerator(
 
   // AWS Bedrock integration
   if (config.authType === AuthType.USE_BEDROCK) {
-    const model = config.bedrockModel || 'amazon.nova-lite-v1:0';
+    const model = config.bedrockModel || 'openai.gpt-oss-120b-1:0';
     const region = config.bedrockRegion || 'us-east-1';
 
-    console.log(`🌟 HiveCode: Using MHG AI / AWS Bedrock (${model})`);
+    const displayName = getBedrockModelDisplayName(model);
+    console.log(`🌟 HiveCode: Using MHG AI / AWS Bedrock (${displayName})`);
 
     // BedrockContentGenerator reads AWS credentials directly from environment variables
     // AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY

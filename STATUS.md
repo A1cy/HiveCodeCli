@@ -54,7 +54,7 @@ been selected** as the foundation for HiveCode. This decision provides:
 
 1. Fork HiveCode repository to A1cy/HiveCode
 2. Rename project (gemini → hivecode)
-3. Add HiveCode configuration structure (`.hivecode/` config)
+3. Add HiveCode configuration structure (`.mhgcode/` config)
 4. Create stub modules for agents and orchestration
 5. Update all documentation (README, ARCHITECTURE)
 
@@ -246,11 +246,11 @@ Output to user
 2. Rename project
    - Package name: `gemini` → `hivecode`
    - Binary: `gemini` → `hivecode`
-   - Configuration: `.gemini/` → `.hivecode/`
+   - Configuration: `.gemini/` → `.mhgcode/`
    - Documentation: Update all references
 
 3. Add HiveCode configuration structure
-   - Config directory: `~/.hivecode/`
+   - Config directory: `~/.mhgcode/`
    - Default config template (local-first strategy)
    - Agent definitions (5 core agents)
    - Model routing rules (Ollama primary)

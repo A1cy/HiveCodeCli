@@ -376,6 +376,7 @@ export async function loadCliConfig(
   const debugMode = isDebugMode(argv);
 
   if (argv.sandbox) {
+    // MIGRATION NOTE: Keep GEMINI_SANDBOX for backward compatibility (legacy internal use)
     process.env['GEMINI_SANDBOX'] = 'true';
   }
 
@@ -578,6 +579,16 @@ export async function loadCliConfig(
     : DEFAULT_GEMINI_MODEL;
   const resolvedModel: string =
     argv.model ||
+    // Check Bedrock: settings OR environment variable
+    // MIGRATION NOTE: MHGCODE_USE_BEDROCK replaces HIVECODE_USE_BEDROCK (backward compatible check)
+    (settings.security?.auth?.selectedType === 'aws-bedrock' ||
+    process.env['MHGCODE_USE_BEDROCK'] === 'true' ||
+    process.env['HIVECODE_USE_BEDROCK'] === 'true'
+      ? settings.security?.auth?.bedrockModel || process.env['BEDROCK_MODEL']
+      : undefined) ||
+    process.env['BEDROCK_MODEL'] ||
+    // MIGRATION NOTE: MHGCODE_MODEL replaces GEMINI_MODEL (backward compatible check)
+    process.env['MHGCODE_MODEL'] ||
     process.env['GEMINI_MODEL'] ||
     settings.model?.name ||
     defaultModel;

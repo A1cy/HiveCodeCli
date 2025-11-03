@@ -193,7 +193,7 @@ curl -fsSL https://raw.githubusercontent.com/A1cy/HiveCode/main/install.sh | bas
 # 1. Check Python 3.11+ installed
 # 2. Install OpenCode.ai (curl -fsSL https://opencode.ai/install | bash)
 # 3. Verify AWS Bedrock credentials (from existing ~/.claude/settings.json)
-# 4. Create ~/.hivecode/ directory
+# 4. Create ~/.mhgcode/ directory
 # 5. Copy HiveCode orchestrator and agent files
 # 6. Add `hivecode` command to PATH
 # 7. Test OpenCode + MCP integration
@@ -380,7 +380,7 @@ HiveCode Full Architecture
 ### File Structure
 
 ```
-~/.hivecode/                        # Default installation directory
+~/.mhgcode/                        # Default installation directory
 ├── config.yaml                     # Main configuration
 ├── memory.json                     # Simple memory (MVP)
 ├── memory.db                       # SQLite memory (Phase 2+)
@@ -459,7 +459,7 @@ cd /mnt/c/A1\ Codes/HiveCode  # Your preferred path!
 
 ```bash
 # Linux/WSL/macOS
-~/.hivecode/                # User home directory
+~/.mhgcode/                # User home directory
   ├── config.yaml           # Configuration
   ├── memory.json           # Memory storage
   ├── agents/               # Agent code
@@ -467,7 +467,7 @@ cd /mnt/c/A1\ Codes/HiveCode  # Your preferred path!
   └── core/                 # Core system
 
 # Windows (if native support added in Phase 4)
-C:\Users\{username}\.hivecode\
+C:\Users\{username}\.mhgcode\
 ```
 
 **Why this location?**
@@ -503,7 +503,7 @@ curl -fsSL https://raw.githubusercontent.com/[user]/hivecode/main/install.sh | b
 
 # What install.sh does:
 # ✅ Check prerequisites (Python 3.11+, pip, curl)
-# ✅ Create ~/.hivecode/ directory structure
+# ✅ Create ~/.mhgcode/ directory structure
 # ✅ Install Python dependencies (groq, pyyaml, requests)
 # ✅ Copy HiveCode core files
 # ✅ Make hivecode command available globally
@@ -514,7 +514,7 @@ curl -fsSL https://raw.githubusercontent.com/[user]/hivecode/main/install.sh | b
 # Installation output:
 🐝 HiveCode Installation
 ✅ Python 3.11.5 found
-✅ Created ~/.hivecode/
+✅ Created ~/.mhgcode/
 ✅ Installed dependencies
 ✅ HiveCode core installed
 ✅ Command 'hivecode' available
@@ -522,7 +522,7 @@ curl -fsSL https://raw.githubusercontent.com/[user]/hivecode/main/install.sh | b
 🔑 API Key Setup:
 Please enter your Groq API key (get free at https://console.groq.com):
 > [user enters key]
-✅ API key saved to ~/.hivecode/config.yaml
+✅ API key saved to ~/.mhgcode/config.yaml
 
 🧪 Testing installation...
 ✅ Connection to Groq API successful
@@ -544,7 +544,7 @@ Please enter your Groq API key (get free at https://console.groq.com):
 
 ### Configuration File
 
-**Location**: `~/.hivecode/config.yaml`
+**Location**: `~/.mhgcode/config.yaml`
 
 ```yaml
 # HiveCode Configuration (MVP)
@@ -575,20 +575,20 @@ agents:
 # Memory Configuration
 memory:
   type: json                  # Simple JSON in MVP
-  path: "~/.hivecode/memory.json"
+  path: "~/.mhgcode/memory.json"
   max_conversations: 10       # Keep last 10
   max_size_mb: 50             # Limit to 50MB
 
 # Logging
 logging:
   level: INFO                 # DEBUG, INFO, WARNING, ERROR
-  file: "~/.hivecode/logs/hivecode.log"
+  file: "~/.mhgcode/logs/hivecode.log"
   max_size_mb: 100
   backup_count: 3
 
 # Installation
 installation:
-  path: "~/.hivecode"         # Can be overridden by HIVECODE_HOME
+  path: "~/.mhgcode"         # Can be overridden by HIVECODE_HOME
   auto_update: false          # Manual updates in MVP
 ```
 
@@ -997,7 +997,7 @@ Security features:
 ### Data Privacy
 
 **Local-First Approach**:
-- ✅ All memory stored locally in `~/.hivecode/`
+- ✅ All memory stored locally in `~/.mhgcode/`
 - ✅ No telemetry or analytics collected
 - ✅ API keys stored locally, never transmitted to HiveCode servers
 - ✅ Optional cloud APIs (user controls which providers)

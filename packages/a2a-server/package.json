@@ -1,7 +1,7 @@
 {
-  "name": "@google/gemini-cli-a2a-server",
+  "name": "@mhgcode/a2a-server",
   "version": "0.12.0-nightly.20251022.0542de95",
-  "description": "HiveCode A2A Server",
+  "description": "MHGCode A2A Server",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/A1cy/HiveCodeCli.git",
@@ -10,7 +10,7 @@
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "gemini-cli-a2a-server": "dist/a2a-server.mjs"
+    "mhgcode-a2a-server": "dist/a2a-server.mjs"
   },
   "scripts": {
     "build": "node ../../scripts/build_package.js",

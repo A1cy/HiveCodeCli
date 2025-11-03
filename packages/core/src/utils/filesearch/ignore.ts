@@ -28,7 +28,7 @@ export function loadIgnoreRules(options: LoadIgnoreRulesOptions): Ignore {
   }
 
   if (options.useGeminiignore) {
-    const geminiignorePath = path.join(options.projectRoot, '.hivecodeignore');
+    const geminiignorePath = path.join(options.projectRoot, '.mhgcodeignore');
     if (fs.existsSync(geminiignorePath)) {
       ignorer.add(fs.readFileSync(geminiignorePath, 'utf8'));
     }

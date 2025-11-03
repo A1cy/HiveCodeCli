@@ -297,7 +297,7 @@ HiveCode v1.0 Architecture
 
 **Structure**:
 ```python
-# ~/.hivecode/cli.py
+# ~/.mhgcode/cli.py
 def main():
     command = sys.argv[1]  # prime, sparc, ask
 

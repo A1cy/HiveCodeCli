@@ -251,7 +251,7 @@ ${testRootDir}${path.sep}
     it('should ignore files and folders specified in .gitignore', async () => {
       await fsPromises.writeFile(
         nodePath.join(testRootDir, '.gitignore'),
-        'ignored.txt\nnode_modules/\n.hivecode/*\n!/.hivecode/config.yaml',
+        'ignored.txt\nnode_modules/\n.mhgcode/*\n!/.mhgcode/config.yaml',
       );
       await createTestFile('file1.txt');
       await createTestFile('node_modules', 'some-package', 'index.js');
@@ -296,8 +296,8 @@ ${testRootDir}${path.sep}
   describe('with geminiignore', () => {
     it('should ignore geminiignore files by default', async () => {
       await fsPromises.writeFile(
-        nodePath.join(testRootDir, '.hivecodeignore'),
-        'ignored.txt\nnode_modules/\n.hivecode/\n!/.hivecode/config.yaml',
+        nodePath.join(testRootDir, '.mhgcodeignore'),
+        'ignored.txt\nnode_modules/\n.mhgcode/\n!/.mhgcode/config.yaml',
       );
       await createTestFile('file1.txt');
       await createTestFile('node_modules', 'some-package', 'index.js');
@@ -316,8 +316,8 @@ ${testRootDir}${path.sep}
 
     it('should not ignore files if respectGeminiIgnore is false', async () => {
       await fsPromises.writeFile(
-        nodePath.join(testRootDir, '.hivecodeignore'),
-        'ignored.txt\nnode_modules/\n.hivecode/\n!/.hivecode/config.yaml',
+        nodePath.join(testRootDir, '.mhgcodeignore'),
+        'ignored.txt\nnode_modules/\n.mhgcode/\n!/.mhgcode/config.yaml',
       );
       await createTestFile('file1.txt');
       await createTestFile('node_modules', 'some-package', 'index.js');

@@ -23,7 +23,7 @@ working HiveCode v0.1.0 based on forked HiveCode.
 
 - Binary: `gemini` → `hivecode`
 - Package: `@google/gemini-cli` → `@hivecode/cli`
-- Config: `~/.gemini/` → `~/.hivecode/`
+- Config: `~/.gemini/` → `~/.mhgcode/`
 - Add: Agent orchestration, Ollama routing, hooks, TTS
 
 ---
@@ -186,7 +186,7 @@ grep -r "gemini" packages/ --include="*.ts" --include="*.js" | head -20
 
 ### Step 3: Configuration Directory Changes
 
-Update code to use `~/.hivecode/` instead of `~/.gemini/`:
+Update code to use `~/.mhgcode/` instead of `~/.gemini/`:
 
 **Files to modify** (find with):
 
@@ -196,16 +196,16 @@ grep -r "\.gemini" packages/ --include="*.ts" | head -20
 
 **Replace**:
 
-- `~/.gemini/settings.json` → `~/.hivecode/settings.json`
-- `~/.gemini/` → `~/.hivecode/`
-- `.gemini/` → `.hivecode/`
+- `~/.gemini/settings.json` → `~/.mhgcode/settings.json`
+- `~/.gemini/` → `~/.mhgcode/`
+- `.gemini/` → `.mhgcode/`
 - `GEMINI.md` → `HIVECODE.md` (project context files)
 
 ### Step 4: Add HiveCode Configuration
 
 Create default config template:
 
-**File**: `~/.hivecode/default-config.json`
+**File**: `~/.mhgcode/default-config.json`
 
 ```json
 {
@@ -575,8 +575,8 @@ ollama pull qwen2.5-coder
 
 # 5. Clone HiveCode
 echo "📦 Cloning HiveCode..."
-git clone https://github.com/A1cy/HiveCodeCli.git ~/.hivecode-source
-cd ~/.hivecode-source
+git clone https://github.com/A1cy/HiveCodeCli.git ~/.mhgcode-source
+cd ~/.mhgcode-source
 
 # 6. Install dependencies
 echo "📦 Installing dependencies..."
@@ -617,7 +617,7 @@ echo "  hivecode sparc \"task\"    # Multi-agent workflow"
 
 - ✅ Binary renamed: `gemini` → `hivecode`
 - ✅ Package renamed: `@google/gemini-cli` → `@hivecode/cli`
-- ✅ Config directory: `~/.gemini/` → `~/.hivecode/`
+- ✅ Config directory: `~/.gemini/` → `~/.mhgcode/`
 - ✅ HiveCode configuration structure added
 - ✅ System builds and runs with new name
 

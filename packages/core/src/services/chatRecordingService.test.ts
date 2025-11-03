@@ -43,7 +43,7 @@ describe('ChatRecordingService', () => {
       storage: {
         getProjectTempDir: vi
           .fn()
-          .mockReturnValue('/test/project/root/.hivecode/tmp'),
+          .mockReturnValue('/test/project/root/.mhgcode/tmp'),
       },
       getModel: vi.fn().mockReturnValue('gemini-pro'),
       getDebugMode: vi.fn().mockReturnValue(false),
@@ -80,7 +80,7 @@ describe('ChatRecordingService', () => {
       chatRecordingService.initialize();
 
       expect(mkdirSyncSpy).toHaveBeenCalledWith(
-        '/test/project/root/.hivecode/tmp/chats',
+        '/test/project/root/.mhgcode/tmp/chats',
         { recursive: true },
       );
       expect(writeFileSyncSpy).not.toHaveBeenCalled();
@@ -99,7 +99,7 @@ describe('ChatRecordingService', () => {
         .mockImplementation(() => undefined);
 
       chatRecordingService.initialize({
-        filePath: '/test/project/root/.hivecode/tmp/chats/session.json',
+        filePath: '/test/project/root/.mhgcode/tmp/chats/session.json',
         conversation: {
           sessionId: 'old-session-id',
         } as ConversationRecord,
@@ -397,7 +397,7 @@ describe('ChatRecordingService', () => {
         .mockImplementation(() => undefined);
       chatRecordingService.deleteSession('test-session-id');
       expect(unlinkSyncSpy).toHaveBeenCalledWith(
-        '/test/project/root/.hivecode/tmp/chats/test-session-id.json',
+        '/test/project/root/.mhgcode/tmp/chats/test-session-id.json',
       );
     });
   });

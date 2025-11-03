@@ -52,7 +52,7 @@ function getOpenUrlsCommands(readmeUrl: string): string[] {
 
 // Add HiveCode specific entries to .gitignore file
 export async function updateGitignore(gitRepoRoot: string): Promise<void> {
-  const gitignoreEntries = ['.hivecode/', 'gha-creds-*.json'];
+  const gitignoreEntries = ['.mhgcode/', 'gha-creds-*.json'];
 
   const gitignorePath = path.join(gitRepoRoot, '.gitignore');
   try {

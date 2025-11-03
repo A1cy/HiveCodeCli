@@ -149,7 +149,8 @@ export class ClassifierStrategy implements RoutingStrategy {
   ): Promise<RoutingDecision | null> {
     // Skip classification for Bedrock provider - it doesn't support structured JSON output
     // Bedrock will use the default model specified in config
-    const useBedrock = process.env['HIVECODE_USE_BEDROCK'] === 'true';
+    // MIGRATION NOTE: MHGCODE_USE_BEDROCK replaces HIVECODE_USE_BEDROCK (backward compatible check)
+    const useBedrock = process.env['MHGCODE_USE_BEDROCK'] === 'true' || process.env['HIVECODE_USE_BEDROCK'] === 'true';
     if (useBedrock) {
       debugLogger.debug('[ClassifierStrategy] Skipping classification for Bedrock provider');
       return null; // Return null to fall back to default model

@@ -20,7 +20,7 @@ import { Storage } from './storage.js';
 import { GEMINI_DIR } from '../utils/paths.js';
 
 describe('Storage – getGlobalSettingsPath', () => {
-  it('returns path to ~/.hivecode/settings.json', () => {
+  it('returns path to ~/.mhgcode/settings.json', () => {
     const expected = path.join(os.homedir(), GEMINI_DIR, 'settings.json');
     expect(Storage.getGlobalSettingsPath()).toBe(expected);
   });
@@ -30,22 +30,22 @@ describe('Storage – additional helpers', () => {
   const projectRoot = '/tmp/project';
   const storage = new Storage(projectRoot);
 
-  it('getWorkspaceSettingsPath returns project/.hivecode/settings.json', () => {
+  it('getWorkspaceSettingsPath returns project/.mhgcode/settings.json', () => {
     const expected = path.join(projectRoot, GEMINI_DIR, 'settings.json');
     expect(storage.getWorkspaceSettingsPath()).toBe(expected);
   });
 
-  it('getUserCommandsDir returns ~/.hivecode/commands', () => {
+  it('getUserCommandsDir returns ~/.mhgcode/commands', () => {
     const expected = path.join(os.homedir(), GEMINI_DIR, 'commands');
     expect(Storage.getUserCommandsDir()).toBe(expected);
   });
 
-  it('getProjectCommandsDir returns project/.hivecode/commands', () => {
+  it('getProjectCommandsDir returns project/.mhgcode/commands', () => {
     const expected = path.join(projectRoot, GEMINI_DIR, 'commands');
     expect(storage.getProjectCommandsDir()).toBe(expected);
   });
 
-  it('getMcpOAuthTokensPath returns ~/.hivecode/mcp-oauth-tokens.json', () => {
+  it('getMcpOAuthTokensPath returns ~/.mhgcode/mcp-oauth-tokens.json', () => {
     const expected = path.join(
       os.homedir(),
       GEMINI_DIR,
@@ -54,7 +54,7 @@ describe('Storage – additional helpers', () => {
     expect(Storage.getMcpOAuthTokensPath()).toBe(expected);
   });
 
-  it('getGlobalBinDir returns ~/.hivecode/tmp/bin', () => {
+  it('getGlobalBinDir returns ~/.mhgcode/tmp/bin', () => {
     const expected = path.join(os.homedir(), GEMINI_DIR, 'tmp', 'bin');
     expect(Storage.getGlobalBinDir()).toBe(expected);
   });

@@ -1,13 +1,13 @@
 {
-  "name": "gemini-cli-vscode-ide-companion",
-  "displayName": "HiveCode Companion",
-  "description": "Enable HiveCode with direct access to your IDE workspace.",
+  "name": "mhgcode-vscode-ide-companion",
+  "displayName": "MHGCode Companion",
+  "description": "Enable MHGCode with direct access to your IDE workspace.",
   "version": "0.12.0-nightly.20251022.0542de95",
-  "publisher": "google",
+  "publisher": "mhg",
   "icon": "assets/icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/A1cy/HiveCodeCli.git",
+    "url": "https://github.com/A1cy/MHGCodeCli.git",
     "directory": "packages/vscode-ide-companion"
   },
   "engines": {

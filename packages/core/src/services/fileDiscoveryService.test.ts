@@ -53,8 +53,8 @@ describe('FileDiscoveryService', () => {
       expect(service.shouldIgnoreFile('node_modules/foo.js')).toBe(false);
     });
 
-    it('should load .hivecodeignore patterns even when not in a git repo', async () => {
-      await createTestFile('.hivecodeignore', 'secrets.txt');
+    it('should load .mhgcodeignore patterns even when not in a git repo', async () => {
+      await createTestFile('.mhgcodeignore', 'secrets.txt');
       const service = new FileDiscoveryService(projectRoot);
 
       expect(service.shouldIgnoreFile('secrets.txt')).toBe(true);
@@ -66,7 +66,7 @@ describe('FileDiscoveryService', () => {
     beforeEach(async () => {
       await fs.mkdir(path.join(projectRoot, '.git'));
       await createTestFile('.gitignore', 'node_modules/\n.git/\ndist');
-      await createTestFile('.hivecodeignore', 'logs/');
+      await createTestFile('.mhgcodeignore', 'logs/');
     });
 
     it('should filter out git-ignored and gemini-ignored files by default', () => {
@@ -140,7 +140,7 @@ describe('FileDiscoveryService', () => {
     beforeEach(async () => {
       await fs.mkdir(path.join(projectRoot, '.git'));
       await createTestFile('.gitignore', 'node_modules/');
-      await createTestFile('.hivecodeignore', '*.log');
+      await createTestFile('.mhgcodeignore', '*.log');
     });
 
     it('should return filtered paths and correct ignored count', () => {
@@ -177,7 +177,7 @@ describe('FileDiscoveryService', () => {
     beforeEach(async () => {
       await fs.mkdir(path.join(projectRoot, '.git'));
       await createTestFile('.gitignore', 'node_modules/');
-      await createTestFile('.hivecodeignore', '*.log');
+      await createTestFile('.mhgcodeignore', '*.log');
     });
 
     it('should return true for git-ignored files', () => {

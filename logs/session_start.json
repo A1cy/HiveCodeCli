@@ -54,5 +54,37 @@
     "hook_event_name": "SessionStart",
     "source": "startup",
     "logged_at": "2025-10-30T10:36:09.959427"
+  },
+  {
+    "session_id": "adce10dc-fea6-402f-beef-9c2b4bbf2289",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/adce10dc-fea6-402f-beef-9c2b4bbf2289.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "hook_event_name": "SessionStart",
+    "source": "startup",
+    "logged_at": "2025-10-30T11:39:42.135873"
+  },
+  {
+    "session_id": "9cf5d194-8a78-4ed3-95d1-ef720c5c1c08",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/9cf5d194-8a78-4ed3-95d1-ef720c5c1c08.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "hook_event_name": "SessionStart",
+    "source": "startup",
+    "logged_at": "2025-10-30T11:39:42.179546"
+  },
+  {
+    "session_id": "c85f629b-673e-4381-92ae-3ac3dc3f5e60",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/c85f629b-673e-4381-92ae-3ac3dc3f5e60.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "hook_event_name": "SessionStart",
+    "source": "resume",
+    "logged_at": "2025-11-02T14:30:42.382507"
+  },
+  {
+    "session_id": "c85f629b-673e-4381-92ae-3ac3dc3f5e60",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/c85f629b-673e-4381-92ae-3ac3dc3f5e60.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "hook_event_name": "SessionStart",
+    "source": "compact",
+    "logged_at": "2025-11-02T16:23:01.774387"
   }
 ]

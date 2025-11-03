@@ -452,15 +452,15 @@ describe('ReadFileTool', () => {
       expect(result.returnDisplay).toBe('');
     });
 
-    describe('with .hivecodeignore', () => {
+    describe('with .mhgcodeignore', () => {
       beforeEach(async () => {
         await fsp.writeFile(
-          path.join(tempRootDir, '.hivecodeignore'),
+          path.join(tempRootDir, '.mhgcodeignore'),
           ['foo.*', 'ignored/'].join('\n'),
         );
       });
 
-      it('should throw error if path is ignored by a .hivecodeignore pattern', async () => {
+      it('should throw error if path is ignored by a .mhgcodeignore pattern', async () => {
         const ignoredFilePath = path.join(tempRootDir, 'foo.bar');
         await fsp.writeFile(ignoredFilePath, 'content', 'utf-8');
         const params: ReadFileToolParams = {

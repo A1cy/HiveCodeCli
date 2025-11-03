@@ -70,5 +70,122 @@
     "hook_event_name": "SubagentStop",
     "stop_hook_active": false,
     "logged_at": "2025-10-30T10:41:22.004629"
+  },
+  {
+    "session_id": "e9323052-ef01-4ef2-b405-e6abbaf6e854",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/e9323052-ef01-4ef2-b405-e6abbaf6e854.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "plan",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-10-30T11:28:53.691763"
+  },
+  {
+    "session_id": "9cf5d194-8a78-4ed3-95d1-ef720c5c1c08",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/9cf5d194-8a78-4ed3-95d1-ef720c5c1c08.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "default",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-10-30T11:39:42.139444"
+  },
+  {
+    "session_id": "adce10dc-fea6-402f-beef-9c2b4bbf2289",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/adce10dc-fea6-402f-beef-9c2b4bbf2289.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "default",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-10-30T11:39:43.972007"
+  },
+  {
+    "session_id": "adce10dc-fea6-402f-beef-9c2b4bbf2289",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/adce10dc-fea6-402f-beef-9c2b4bbf2289.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "default",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-10-30T11:39:45.521079"
+  },
+  {
+    "session_id": "c85f629b-673e-4381-92ae-3ac3dc3f5e60",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/c85f629b-673e-4381-92ae-3ac3dc3f5e60.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "default",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-11-02T14:30:50.897645"
+  },
+  {
+    "session_id": "c85f629b-673e-4381-92ae-3ac3dc3f5e60",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/c85f629b-673e-4381-92ae-3ac3dc3f5e60.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "default",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-11-02T14:30:50.911218"
+  },
+  {
+    "session_id": "c85f629b-673e-4381-92ae-3ac3dc3f5e60",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/c85f629b-673e-4381-92ae-3ac3dc3f5e60.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "plan",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-11-02T14:40:07.336616"
+  },
+  {
+    "session_id": "c85f629b-673e-4381-92ae-3ac3dc3f5e60",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/c85f629b-673e-4381-92ae-3ac3dc3f5e60.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "plan",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-11-02T15:08:21.225769"
+  },
+  {
+    "session_id": "c85f629b-673e-4381-92ae-3ac3dc3f5e60",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/c85f629b-673e-4381-92ae-3ac3dc3f5e60.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-11-02T15:55:47.362674"
+  },
+  {
+    "session_id": "c85f629b-673e-4381-92ae-3ac3dc3f5e60",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/c85f629b-673e-4381-92ae-3ac3dc3f5e60.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "plan",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-11-02T16:17:23.970287"
+  },
+  {
+    "session_id": "c85f629b-673e-4381-92ae-3ac3dc3f5e60",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/c85f629b-673e-4381-92ae-3ac3dc3f5e60.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "plan",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-11-02T16:39:06.635222"
+  },
+  {
+    "session_id": "c85f629b-673e-4381-92ae-3ac3dc3f5e60",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/c85f629b-673e-4381-92ae-3ac3dc3f5e60.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-11-02T16:54:17.319645"
+  },
+  {
+    "session_id": "c85f629b-673e-4381-92ae-3ac3dc3f5e60",
+    "transcript_path": "/home/a1xai/.claude/projects/-home-a1xai-HiveCodeCli/c85f629b-673e-4381-92ae-3ac3dc3f5e60.jsonl",
+    "cwd": "/home/a1xai/HiveCodeCli",
+    "permission_mode": "bypassPermissions",
+    "hook_event_name": "SubagentStop",
+    "stop_hook_active": false,
+    "logged_at": "2025-11-03T08:47:03.218857"
   }
 ]

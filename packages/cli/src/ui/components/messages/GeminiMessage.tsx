@@ -18,6 +18,19 @@ interface GeminiMessageProps {
   terminalWidth: number;
 }
 
+// Detect Arabic characters (Unicode range U+0600 to U+06FF)
+const hasArabic = (text: string): boolean => /[\u0600-\u06FF]/.test(text);
+
+// Wrap Arabic text with RTL markers for proper right-to-left display
+const wrapRTL = (text: string): string => {
+  if (hasArabic(text)) {
+    // U+202B = Right-to-Left Embedding
+    // U+202C = Pop Directional Formatting
+    return '\u202B' + text + '\u202C';
+  }
+  return text;
+};
+
 export const GeminiMessage: React.FC<GeminiMessageProps> = ({
   text,
   isPending,
@@ -37,7 +50,7 @@ export const GeminiMessage: React.FC<GeminiMessageProps> = ({
       </Box>
       <Box flexGrow={1} flexDirection="column">
         <MarkdownDisplay
-          text={text}
+          text={wrapRTL(text)}
           isPending={isPending}
           availableTerminalHeight={availableTerminalHeight}
           terminalWidth={terminalWidth}

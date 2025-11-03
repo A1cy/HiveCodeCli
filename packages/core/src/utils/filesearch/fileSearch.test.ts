@@ -17,9 +17,9 @@ describe('FileSearch', () => {
     vi.restoreAllMocks();
   });
 
-  it('should use .hivecodeignore rules', async () => {
+  it('should use .mhgcodeignore rules', async () => {
     tmpDir = await createTmpDir({
-      '.hivecodeignore': 'dist/',
+      '.mhgcodeignore': 'dist/',
       dist: ['ignored.js'],
       src: ['not-ignored.js'],
     });
@@ -38,13 +38,13 @@ describe('FileSearch', () => {
     await fileSearch.initialize();
     const results = await fileSearch.search('');
 
-    expect(results).toEqual(['src/', '.hivecodeignore', 'src/not-ignored.js']);
+    expect(results).toEqual(['src/', '.mhgcodeignore', 'src/not-ignored.js']);
   });
 
-  it('should combine .gitignore and .hivecodeignore rules', async () => {
+  it('should combine .gitignore and .mhgcodeignore rules', async () => {
     tmpDir = await createTmpDir({
       '.gitignore': 'dist/',
-      '.hivecodeignore': 'build/',
+      '.mhgcodeignore': 'build/',
       dist: ['ignored-by-git.js'],
       build: ['ignored-by-gemini.js'],
       src: ['not-ignored.js'],
@@ -66,7 +66,7 @@ describe('FileSearch', () => {
 
     expect(results).toEqual([
       'src/',
-      '.hivecodeignore',
+      '.mhgcodeignore',
       '.gitignore',
       'src/not-ignored.js',
     ]);
